@@ -13,6 +13,23 @@ This collection of Markdown documents provides:
 
 The protocol is designed for LLM agents and human developers alike. It maintains a purely Markdown-based structure with pseudocode examples and Mermaid diagrams—no executable code.
 
+## Installation
+
+**Quick Install:**
+
+```bash
+curl -sSL https://github.com/edgarjs/dlp/raw/main/install.sh | bash
+```
+
+This downloads the latest release into a `.dlp/` folder and displays the protocol guide.
+
+Alternatively, clone the repository directly:
+
+```bash
+git clone git@github.com:edgarjs/dlp.git .dlp
+cd .dlp
+```
+
 ## How to Use This Protocol
 
 1. Start with `foundations/` to understand core principles and document format
