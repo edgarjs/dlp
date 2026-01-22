@@ -1,0 +1,62 @@
+# Compaction Plan
+
+Goal: Reduce protocol from ~50-60K tokens to ~25-35K tokens while retaining core information.
+
+---
+
+## 1. Remove Redundancy ✓
+
+- [x] Identify concepts explained in multiple places
+- [x] Replace repeated explanations with cross-references
+- [x] Keep the most detailed explanation in one canonical location
+
+## 2. Condense Prose
+
+- [ ] Shorten "why" explanations to essential points
+- [ ] Remove obvious statements
+- [ ] Tighten paragraph structure
+
+## 3. Shorter Examples
+
+- [ ] Reduce "poor vs better" examples to minimal snippets
+- [ ] Remove redundant example variations
+- [ ] Keep one clear example per concept
+
+## 4. Tables Over Prose
+
+- [ ] Convert list-based explanations to tables where appropriate
+- [ ] Use tables for comparisons instead of paragraphs
+
+## 5. Merge Documents
+
+Candidates for merging:
+
+- [ ] api-design.md + interface-contracts.md → api-contracts.md
+- [ ] unit-testing.md + integration-testing.md → testing-practices.md
+- [ ] Consider merging smaller documents within phases
+
+## 6. Condense "When to Violate" Sections
+
+- [ ] Convert to brief inline notes or single bullet points
+- [ ] Remove if covered by decision-making.md
+
+## 7. Consolidate Checklists
+
+- [ ] Create single checklists.md reference document
+- [ ] Replace embedded checklists with references
+- [ ] Keep checklists in one place for easy access
+
+## 8. Create Compact Variant (Optional)
+
+- [ ] Create a `compact/` folder with condensed versions
+- [ ] Target ~15-20K tokens for context-constrained use
+- [ ] Maintain full version for reference
+
+---
+
+## Progress
+
+Original: ~244K chars, ~34.5K words, ~50-60K tokens
+Target: ~25-35K tokens
+
+After step 1: 225,615 chars, 32,125 words (~7.5% reduction, ~47-55K tokens)

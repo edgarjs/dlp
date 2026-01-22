@@ -180,7 +180,7 @@ Code examples in this protocol use language-agnostic pseudocode. The goal is cla
 ```
 function process_order(order):
     if order.items is empty:
-        halt Error("Cannot process empty order")
+        raise Error("Cannot process empty order")
 
     total = 0
     for each item in order.items:
@@ -190,7 +190,7 @@ function process_order(order):
 ```
 
 - **Indentation** shows structure
-- **Plain English** describes operations (`for each`, `if`, `halt`)
+- **Plain English** describes operations (`for each`, `if`, `raise`)
 - **Dot notation** accesses properties (`order.items`)
 - **No type annotations** unless types are the point being made
 

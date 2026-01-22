@@ -65,9 +65,9 @@ Who checks preconditions?
 ```
 transfer_funds(from, to, amount):
   if from_account not found:
-    halt AccountNotFoundError
+    raise AccountNotFoundError
   if balance < amount:
-    halt InsufficientFundsError
+    raise InsufficientFundsError
   ... proceed with transfer
 ```
 
@@ -167,45 +167,28 @@ remove_item_from_order(order, item):
 
 ## Error Conditions
 
-Contracts specify what happens when things go wrong.
+Contracts specify what happens when things go wrong. See [error-handling.md](../development/error-handling.md) for comprehensive error handling strategies.
 
 ### Error Specification
+
+Document error conditions as part of the contract:
 
 ```
 Operation: withdraw(account, amount)
 
-Preconditions:
-- amount > 0
-- account exists
-
 Error conditions:
 - If account.balance < amount: raise InsufficientFundsError
 - If account.status is frozen: raise AccountFrozenError
-- If daily_limit exceeded: raise LimitExceededError
 
 On error:
 - Account balance unchanged
-- No transaction created
 - Error contains: reason, current_balance (for insufficient funds)
 ```
 
 ### Error vs. Precondition Violation
 
-Distinguish between:
-
-**Precondition violation** — Caller made a mistake. This is a programming error.
-
-```
-withdraw(account, -50)  — negative amount violates precondition
-Response: Assertion error or programming error exception
-```
-
-**Error condition** — Valid request that cannot be fulfilled.
-
-```
-withdraw(account, 100) when balance is 50 — valid request, insufficient funds
-Response: InsufficientFundsError with details
-```
+- **Precondition violation** — Caller made a mistake (programming error). Example: `withdraw(account, -50)` violates precondition.
+- **Error condition** — Valid request that cannot be fulfilled. Example: `withdraw(account, 100)` when balance is 50.
 
 ---
 

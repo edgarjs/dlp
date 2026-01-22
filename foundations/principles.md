@@ -221,51 +221,29 @@ When something goes wrong, detect it as early as possible and report it with eno
 - When validating inputs at system boundaries
 - When assumptions about data or state could be violated
 - When errors could cascade into harder-to-diagnose failures
-- When debugging time is more costly than slightly verbose error handling
 
 ### When to Violate
 
-- When graceful degradation is explicitly required (user-facing features that should partially work)
+- When graceful degradation is explicitly required
 - When the "failure" is actually an expected alternative path
 - When failing fast would create a poor user experience for recoverable situations
-- In exploratory or fault-tolerant contexts where partial results are valuable
 
 ### Example
 
 ```
-Situation: Function receives a user ID to process
-
 Fail slow (problematic):
-  process_user(user_id):
-    user = fetch_user(user_id)          -- returns null if not found
-    orders = fetch_orders(user.id)      -- crashes: null.id
-
-  The actual error (user not found) is obscured by a secondary error
+  user = fetch_user(user_id)          -- returns null if not found
+  orders = fetch_orders(user.id)      -- crashes: null.id
+  // The actual error (user not found) is obscured
 
 Fail fast (preferred):
-  process_user(user_id):
-    user = fetch_user(user_id)
-    if user is null:
-      raise Error("User not found: {user_id}")
-    orders = fetch_orders(user.id)
-
-  Error is detected immediately with actionable information
+  user = fetch_user(user_id)
+  if user is null:
+    raise Error("User not found: {user_id}")
+  // Error is detected immediately with actionable information
 ```
 
-### Clear Error Messages
-
-A good error message answers:
-- **What** went wrong (the immediate problem)
-- **Where** it went wrong (location in code or data)
-- **Why** it matters (what operation was being attempted)
-- **What** values were involved (for debugging)
-
-```
-Poor:   "Invalid input"
-Better: "User ID must be positive integer, received: -5"
-Best:   "Cannot fetch user profile: User ID must be positive integer,
-         received: -5 (in process_order for order #12345)"
-```
+For detailed error message design and handling strategies, see [error-handling.md](../development/error-handling.md).
 
 ---
 

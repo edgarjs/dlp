@@ -134,61 +134,29 @@ get_order returns full detail:
 
 ## Error Handling
 
-Errors are part of the interface. Design them deliberately.
-
-### Error Categories
-
-**Client errors** — The request was invalid; client needs to fix something.
-
-```
-- Invalid input (wrong format, missing required field)
-- Unauthorized (not authenticated)
-- Forbidden (authenticated but not permitted)
-- Not found (requested resource does not exist)
-- Conflict (operation cannot complete due to current state)
-```
-
-**Server errors** — Something went wrong internally; client cannot fix it.
-
-```
-- Internal error (unexpected failure)
-- Service unavailable (dependency is down)
-- Timeout (operation took too long)
-```
+Errors are part of the interface. Design them deliberately. For comprehensive error handling strategies, see [error-handling.md](../development/error-handling.md).
 
 ### Error Response Design
 
-Errors should provide enough information to understand and address the problem:
+Define a consistent error response structure:
 
 ```
-Error response structure:
-  {
-    error_type: category of error,
-    message: human-readable explanation,
-    details: additional context (optional),
-    field: which input field caused the error (for validation errors)
-  }
-
-Example:
-  {
-    error_type: "validation_error",
-    message: "Quantity must be positive",
-    field: "items[0].quantity",
-    details: { provided_value: -5 }
-  }
+{
+  error_type: category of error,
+  message: human-readable explanation,
+  details: additional context (optional),
+  field: which input field caused the error (for validation errors)
+}
 ```
 
 ### Error Consistency
 
-Use consistent error patterns across all operations:
+All API operations should:
 
-```
-All operations:
-- Return same error structure
-- Use same error type vocabulary
+- Return the same error structure
+- Use the same error type vocabulary
 - Include actionable information
-- Do not expose internal details that could be security risks
-```
+- Not expose internal details that could be security risks
 
 ---
 
@@ -199,11 +167,13 @@ APIs evolve. Plan for change.
 ### When Versioning Matters
 
 Versioning is essential when:
+
 - Consumers are external or out of your control
 - Breaking changes would disrupt active users
 - Multiple versions must coexist temporarily
 
 Versioning is optional when:
+
 - All consumers are internal and can update together
 - Breaking changes can be coordinated
 - The API is not yet stable
@@ -232,12 +202,14 @@ Accept: application/vnd.api.v2+json
 ### Managing Change
 
 **Backward-compatible changes** (safe):
+
 - Adding new optional parameters
 - Adding new fields to responses
 - Adding new operations
 - Adding new error types
 
 **Breaking changes** (require new version):
+
 - Removing fields or operations
 - Changing field types
 - Changing required parameters

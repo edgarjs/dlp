@@ -62,9 +62,9 @@ Detect errors as early as possible and stop processing immediately.
 Fail fast example:
   process_order(order):
     if order is null:
-      halt Error("Order cannot be null")
+      raise Error("Order cannot be null")
     if order.items is empty:
-      halt Error("Order must have items")
+      raise Error("Order must have items")
     // Now we know order is valid
 ```
 
@@ -105,7 +105,7 @@ Retry example:
         return fetch(url)
       catch TransientError:
         if attempt == max_attempts:
-          halt
+          raise
         wait(exponential_backoff(attempt))
 ```
 
@@ -170,7 +170,7 @@ Preserve the original error as a cause for debugging:
 
 ```
 catch DatabaseConnectionError as e:
-  halt OrderProcessingError("Cannot process order", cause=e)
+  raise OrderProcessingError("Cannot process order", cause=e)
 ```
 
 ---

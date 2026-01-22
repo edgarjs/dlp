@@ -237,25 +237,9 @@ Always consider these scenarios:
 
 ## Test Naming
 
-Test names should describe the scenario and expected outcome.
+Test names should describe the scenario and expected outcome. See [test-design.md](test-design.md) for comprehensive naming conventions and patterns.
 
-### Naming Patterns
-
-```
-Pattern: [method]_[scenario]_[expectedResult]
-  calculate_total_with_discount_returns_reduced_price
-  validate_email_with_invalid_format_returns_false
-
-Pattern: [scenario]_[expectedResult]
-  empty_cart_returns_zero_total
-  expired_token_raises_authentication_error
-
-Pattern: should [expected behavior] when [condition]
-  should return zero when cart is empty
-  should raise error when token is expired
-```
-
-### Naming Guidelines
+### Key Guidelines
 
 - **Be specific** — "test1" tells nothing; "empty_list_returns_zero" is clear
 - **Describe behavior** — What should happen, not how it is implemented

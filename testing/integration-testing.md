@@ -53,34 +53,19 @@ Integration tests are needed when:
 
 ## Real Dependencies vs. Test Doubles
 
-### When to Use Real Dependencies
+For types of test doubles (stubs, mocks, fakes), see [unit-testing.md](unit-testing.md).
 
-Use real dependencies when:
+**Use real dependencies when:**
+
 - Testing the integration itself (that is the point)
 - Testing database queries (need real database behavior)
-- Verifying configuration works
 - Test doubles would be complex to maintain
 
-### When to Use Test Doubles
+**Use test doubles when:**
 
-Use test doubles when:
-- External service is unreliable or slow
-- External service has side effects (charges money, sends emails)
+- External service is unreliable, slow, or has side effects
 - Setting up real service is impractical
 - Need to test error scenarios hard to produce with real service
-
-### Choosing the Right Approach
-
-```mermaid
-flowchart TD
-    A[Integration test needed] --> B{Is it an external service?}
-    B -->|No, internal| C[Use real component]
-    B -->|Yes, external| D{Side effects?}
-    D -->|Yes| E[Use test double]
-    D -->|No| F{Reliable and fast?}
-    F -->|Yes| G[Can use real service]
-    F -->|No| E
-```
 
 ---
 

@@ -30,19 +30,13 @@ Tests derived:
 
 ### From Edge Cases
 
-Requirements specify normal behavior; tests must also cover edges:
+Requirements specify normal behavior; tests must also cover edges. See [unit-testing.md](unit-testing.md) for a comprehensive list of edge case types (empty/null, boundaries, special values, state variations).
+
+Derive edge cases from the requirement:
 
 ```
 Requirement: Shopping cart total calculation
-
-Edge cases to test:
-  - Empty cart (no items)
-  - Single item
-  - Many items
-  - Items with zero price (free items)
-  - Items with maximum price
-  - Quantity = 1, quantity = maximum
-  - Discounts (if applicable)
+Edge cases: empty cart, single item, very large quantities, zero-price items
 ```
 
 ### Coverage Mapping
@@ -309,72 +303,16 @@ Maintainability:
 
 ## Test Anti-Patterns
 
-### Test-per-Method
+See also [unit-testing.md](unit-testing.md) for additional common testing mistakes.
 
-```
-Problem:
-  One test per method, not per behavior
-  test_calculate() tests everything calculate() does
-
-Fix:
-  Test behaviors, not methods
-  test_calculate_with_no_items_returns_zero
-  test_calculate_applies_discount
-  test_calculate_includes_tax
-```
-
-### Mystery Guest
-
-```
-Problem:
-  Test relies on data set up elsewhere (fixtures, other tests)
-  What does "user_id = 123" mean?
-
-Fix:
-  Create data explicitly in the test
-  Make dependencies obvious
-```
-
-### Eager Test
-
-```
-Problem:
-  Test verifies too many behaviors
-  Hard to know what failed
-
-Fix:
-  One behavior per test
-  Split into focused tests
-```
-
-### Implementation Testing
-
-```
-Problem:
-  Test verifies internal implementation
-  Breaks when code is refactored
-
-Fix:
-  Test through public interface
-  Verify outcomes, not internals
-```
-
-### Slow Tests
-
-```
-Problem:
-  Tests take too long to run
-  Developers skip running them
-
-Fix:
-  Keep unit tests fast (< 100ms)
-  Move slow operations to integration tests
-  Mock slow dependencies
-```
-
-### Flaky Tests
-
-Tests that intermittently pass or fail erode trust in the test suite. See [test-maintenance.md](test-maintenance.md) for diagnosis and fixes.
+| Anti-Pattern           | Problem                       | Fix                                                       |
+| ---------------------- | ----------------------------- | --------------------------------------------------------- |
+| Test-per-Method        | Tests methods, not behaviors  | Test individual behaviors: `test_calculate_with_discount` |
+| Mystery Guest          | Relies on data from elsewhere | Create data explicitly in the test                        |
+| Eager Test             | Verifies too many behaviors   | One behavior per test                                     |
+| Implementation Testing | Breaks when refactored        | Test through public interface                             |
+| Slow Tests             | Developers skip running them  | Mock slow dependencies                                    |
+| Flaky Tests            | Intermittent pass/fail        | See [test-maintenance.md](test-maintenance.md)            |
 
 ---
 
