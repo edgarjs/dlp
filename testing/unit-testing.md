@@ -97,6 +97,7 @@ test "calculates order total correctly":
 ### Arrange
 
 Set up everything needed for the test:
+
 - Create objects
 - Configure mocks
 - Prepare input data
@@ -106,6 +107,7 @@ Keep arrangement minimal—only what this specific test needs.
 ### Act
 
 Perform the single action being tested:
+
 - Call the function
 - Invoke the method
 - Trigger the behavior
@@ -115,6 +117,7 @@ Typically one line. If more, you may be testing too much.
 ### Assert
 
 Verify the expected outcome:
+
 - Check return values
 - Verify state changes
 - Confirm mock interactions (sparingly)
@@ -130,6 +133,7 @@ Unit tests need to isolate the component under test from its dependencies.
 ### When to Use Test Doubles
 
 Use test doubles when the real dependency:
+
 - Is slow (database, network)
 - Is non-deterministic (time, random)
 - Has side effects (sending emails, charging cards)
@@ -284,73 +288,13 @@ Test names should describe the scenario and expected outcome. See [test-design.m
 
 ## Common Unit Testing Mistakes
 
-### Testing Implementation
-
-```
-Poor:
-  Verify internal method calls in specific order
-  Assert on private state
-  Test that specific lines of code execute
-
-Better:
-  Verify outputs and observable behavior
-  Test through public interface
-  Allow implementation to change freely
-```
-
-### Too Much Setup
-
-```
-Poor:
-  50 lines of setup for a simple test
-  Complex object graphs just to test one method
-
-Better:
-  Minimal setup for what this test needs
-  Builder patterns or factories for complex objects
-  If setup is complex, maybe testing at wrong level
-```
-
-### Multiple Assertions per Test
-
-```
-Poor:
-  One test that checks 10 different things
-  Failure could be any of the 10; hard to diagnose
-
-Better:
-  One test per scenario
-  Clear which behavior failed
-  Exception: Multiple assertions about one logical outcome is fine
-```
-
-### Non-Deterministic Tests
-
-```
-Poor:
-  Tests that use current time
-  Tests that depend on random values
-  Tests that sometimes pass, sometimes fail
-
-Better:
-  Inject time as dependency
-  Control random seeds
-  Eliminate all non-determinism
-```
-
-### Slow Tests
-
-```
-Poor:
-  Unit tests that take seconds each
-  Tests that do network calls
-  Tests that wait for timeouts
-
-Better:
-  Mock all slow dependencies
-  Avoid any I/O in unit tests
-  Keep tests under 100ms ideally
-```
+| Mistake                | Poor                                           | Better                                        |
+| ---------------------- | ---------------------------------------------- | --------------------------------------------- |
+| Testing Implementation | Verify internal calls, assert on private state | Verify outputs, test through public interface |
+| Too Much Setup         | 50 lines of setup for one test                 | Minimal setup, use builders/factories         |
+| Multiple Assertions    | One test checks 10 things                      | One test per scenario                         |
+| Non-Deterministic      | Use current time, random values                | Inject time, control random seeds             |
+| Slow Tests             | Network calls, timeouts                        | Mock slow dependencies, keep <100ms           |
 
 ---
 
@@ -364,6 +308,7 @@ Some code may not need unit tests:
 - **Thin wrappers** — Code that just calls another API
 
 Instead, these are often better verified through:
+
 - Integration tests
 - Code review
 - Type checking

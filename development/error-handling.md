@@ -312,59 +312,9 @@ Error structure:
 
 ## Common Error Handling Mistakes
 
-**Swallowing errors** — Catching and ignoring errors silently.
-
-```
-Poor:
-  try:
-    process()
-  catch:
-    pass  // Error disappears
-
-Better:
-  try:
-    process()
-  catch as e:
-    log.error("Processing failed", e)
-    // Then decide: retry, propagate, or degrade
-```
-
-**Generic catches** — Catching all errors when you can only handle specific ones.
-
-```
-Poor:
-  try:
-    process()
-  catch Exception:  // Catches everything
-    return default_value
-
-Better:
-  try:
-    process()
-  catch NetworkTimeout:
-    return cached_value
-  // Other exceptions propagate
-```
-
-**Error codes in returns** — Using special return values instead of proper error mechanisms.
-
-```
-Poor:
-  user = get_user(id)  // Returns null or -1 for "not found"
-  if user == null: ...
-
-Better:
-  user = get_user(id)  // Raises NotFoundError
-  // Or returns explicit result type: Result<User, Error>
-```
-
-**Inconsistent handling** — Different parts of the codebase handle errors differently.
-
-```
-Problem:
-  Module A returns null for not found
-  Module B throws NotFoundError
-  Module C returns {error: "not found"}
-
-Solution: Establish conventions and follow them consistently
-```
+| Mistake                | Poor                            | Better                                     |
+| ---------------------- | ------------------------------- | ------------------------------------------ |
+| Swallowing errors      | `catch: pass`                   | Log error, then retry/propagate/degrade    |
+| Generic catches        | `catch Exception` catches all   | Catch specific types, let others propagate |
+| Error codes in returns | Return null/-1 for errors       | Raise exceptions or use Result types       |
+| Inconsistent handling  | Each module handles differently | Establish and follow conventions           |

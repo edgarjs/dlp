@@ -16,11 +16,11 @@ Goal: Reduce protocol from ~50-60K tokens to ~25-35K tokens while retaining core
 - [x] Remove obvious statements
 - [x] Tighten paragraph structure
 
-## 3. Shorter Examples
+## 3. Shorter Examples ✓
 
-- [ ] Reduce "poor vs better" examples to minimal snippets
-- [ ] Remove redundant example variations
-- [ ] Keep one clear example per concept
+- [x] Reduce "poor vs better" examples to minimal snippets
+- [x] Remove redundant example variations
+- [x] Keep one clear example per concept
 
 ## 4. Tables Over Prose
 
@@ -61,3 +61,4 @@ Target: ~25-35K tokens
 
 After step 1: 225,615 chars, 32,125 words (~7.5% reduction, ~47-55K tokens)
 After step 2: 224,023 chars, 31,886 words (~8.2% total reduction)
+After step 3: 223,068 chars, 31,698 words (~8.6% total reduction)
