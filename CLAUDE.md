@@ -1,1 +1,1 @@
-Read the README.md file to understand this project.
+Read the AGENTS.md file to understand this project.

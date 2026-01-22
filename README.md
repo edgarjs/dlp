@@ -1,4 +1,4 @@
-# Development Protocol
+# Development Lifecycle Protocol (DLP)
 
 A structured guide for building software. This protocol covers the software development lifecycle from requirements through testing, providing actionable checklists, decision trees, and guidance for each phase.
 
@@ -21,20 +21,10 @@ The protocol is designed for LLM agents and human developers alike. It maintains
 4. Each folder has a README.md with reading order and context
 5. Cross-references link related concepts—follow them as needed
 
-## Agent Operational Summary
-
-If you are an AI assistant or agent working with this protocol, strictly adhere to these operational primitives:
-
-1.  **Context First**: Before executing tasks, ingest `foundations/principles.md` and `foundations/terminology.md` to align with the project's value system.
-2.  **Phase Locking**: Identify the user's current intent and map it to a specific directory (Phase). Do not skip phases (e.g., do not write code without a design contract).
-3.  **Checklist Enforcement**: Every phase has a `README.md` or specific file with a **Checklist**. You must satisfy these items before declaring a task complete.
-4.  **Artifact Precedence**: Generate the required Markdown artifacts (Specifications, Decisions, Contracts) _before_ generating executable code.
-5.  **Concerns**: Always cross-reference `concerns/` (Security, Performance) when making design or implementation decisions.
-
 ## Structure
 
 ```
-dev-protocol/
+.dlp/
 ├── foundations/       Core principles and meta-guidance
 │   ├── principles.md        Software development principles
 │   ├── terminology.md       Glossary of terms
