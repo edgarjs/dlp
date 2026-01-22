@@ -17,11 +17,7 @@ Do not build functionality until it is actually needed. Avoid implementing featu
 - When building infrastructure for features not yet requested
 - When adding flexibility that no current requirement demands
 
-### When to Violate
-
-- When the cost of adding something later is dramatically higher than adding it now (rare in software)
-- When regulatory or contractual obligations require specific capabilities upfront
-- When a requirement is confirmed but scheduled for a later phase
+**Exceptions:** Cost of adding later is prohibitively high, regulatory requirements, or confirmed future phase.
 
 ### Example
 
@@ -62,12 +58,7 @@ Given multiple solutions that satisfy requirements, prefer the simplest one. Com
 - When writing individual functions or methods
 - When selecting dependencies or libraries
 
-### When to Violate
-
-- When the simple solution has unacceptable performance characteristics (measured, not assumed)
-- When the simple solution creates security vulnerabilities
-- When domain complexity genuinely requires a sophisticated model
-- When the "simple" solution would require extensive duplication
+**Exceptions:** Measured performance needs, security vulnerabilities, genuine domain complexity, or extensive duplication.
 
 ### Example
 
@@ -111,17 +102,7 @@ Every piece of knowledge should have a single, authoritative representation in t
 - When data transformations are duplicated across the codebase
 - When the same validation rules exist in multiple forms
 
-### When to Violate
-
-DRY is frequently misapplied. Duplication is acceptable and often preferable when:
-
-- **Code is similar but serves different purposes** — Two functions that happen to look alike today but represent different concepts should remain separate. They will likely diverge as requirements evolve.
-
-- **Coupling would be worse than duplication** — If removing duplication requires creating dependencies between unrelated modules, keep the duplication.
-
-- **The duplication is trivial** — Three lines of similar code in two places does not justify a shared abstraction. The cognitive overhead of indirection can exceed the cost of duplication.
-
-- **The abstraction is unclear** — If you cannot name the shared concept clearly, the duplication might be coincidental rather than meaningful.
+**Exceptions:** Code serves different purposes (will diverge), coupling worse than duplication, trivial duplication, or unclear abstraction.
 
 ### Example
 
@@ -169,12 +150,7 @@ Organize code so that each component addresses a single, well-defined concern wi
 - When changes to one feature consistently require changes to unrelated code
 - When testing a component requires extensive setup of unrelated systems
 
-### When to Violate
-
-- When separation would require passing excessive data between components
-- When the "concerns" are so intertwined that separation creates artificial boundaries
-- When performance requirements demand tighter coupling
-- In simple scripts or tools where the overhead of separation exceeds its benefits
+**Exceptions:** Excessive data passing between components, tightly intertwined concerns, performance requirements, or simple scripts.
 
 ### Example
 
@@ -220,11 +196,7 @@ When something goes wrong, detect it as early as possible and report it with eno
 - When assumptions about data or state could be violated
 - When errors could cascade into harder-to-diagnose failures
 
-### When to Violate
-
-- When graceful degradation is explicitly required
-- When the "failure" is actually an expected alternative path
-- When failing fast would create a poor user experience for recoverable situations
+**Exceptions:** Graceful degradation required, expected alternative paths, or recoverable user-facing situations.
 
 ### Example
 
@@ -390,12 +362,7 @@ Favor composing objects from smaller, focused components rather than building de
 - When subclasses override most of the parent's behavior
 - When you need to combine behaviors from multiple sources
 
-### When to Violate
-
-- When there is a genuine "is-a" relationship (a Dog is an Animal)
-- When a framework requires inheritance
-- When the inheritance hierarchy is shallow and stable
-- When polymorphism through inheritance simplifies the design
+**Exceptions:** True is-a relationships, framework requirements, shallow stable hierarchies, or polymorphism simplifies design.
 
 ### Example
 
@@ -452,12 +419,7 @@ A method should only talk to its immediate friends, not to strangers. More speci
 - When testing requires extensive mocking of nested objects
 - When understanding code requires tracing through multiple objects
 
-### When to Violate
-
-- Fluent interfaces designed for chaining (builders, streams)
-- Data structures where traversal is the point (trees, graphs)
-- When strict adherence creates excessive wrapper methods
-- In simple scripts where the cost of indirection exceeds benefits
+**Exceptions:** Fluent interfaces, traversal data structures, or excessive wrapper methods.
 
 ### Example
 

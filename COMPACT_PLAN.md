@@ -35,10 +35,10 @@ Merged:
 - [x] unit-testing.md + integration-testing.md → testing-practices.md
 - [x] Updated README files with new references
 
-## 6. Condense "When to Violate" Sections
+## 6. Condense "When to Violate" Sections ✓
 
-- [ ] Convert to brief inline notes or single bullet points
-- [ ] Remove if covered by decision-making.md
+- [x] Convert to brief inline notes or single bullet points
+- [x] Remove if covered by decision-making.md
 
 ## 7. Consolidate Checklists
 
@@ -64,3 +64,4 @@ After step 2: 224,023 chars, 31,886 words (~8.2% total reduction)
 After step 3: 223,068 chars, 31,698 words (~8.6% total reduction)
 After step 4: 222,964 chars, 31,623 words (~8.6% total reduction)
 After step 5: 209,776 chars, 29,680 words (~14.0% total reduction)
+After step 6: 208,176 chars, 29,403 words (~14.7% total reduction)
