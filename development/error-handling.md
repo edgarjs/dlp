@@ -1,6 +1,6 @@
 # Error Handling
 
-Error handling determines how software responds when things go wrong. Good error handling makes systems robust, debuggable, and user-friendly.
+How software responds when things go wrong. Good error handling makes systems robust and debuggable.
 
 ---
 
@@ -139,6 +139,7 @@ When a component encounters an error, it must decide: handle it or propagate it.
 ### When to Handle
 
 Handle errors when:
+
 - You can meaningfully recover
 - You have context to handle it appropriately
 - Propagating would lose important information
@@ -147,6 +148,7 @@ Handle errors when:
 ### When to Propagate
 
 Propagate errors when:
+
 - You cannot meaningfully recover
 - A higher level has better context to handle it
 - The error indicates a problem beyond your scope

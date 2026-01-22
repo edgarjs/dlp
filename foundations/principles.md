@@ -1,8 +1,6 @@
 # Principles
 
-These core principles guide every decision throughout the software development process. They are not rigid rules but heuristics—each has contexts where it applies strongly and contexts where it should be relaxed or violated.
-
-Understanding when to apply a principle is as important as understanding the principle itself.
+Core principles that guide development decisions. Each is a heuristic with contexts where it applies strongly and contexts where it should be relaxed.
 
 ---
 
@@ -43,6 +41,7 @@ YAGNI applied:
 ### The Cost of Violation
 
 Speculative features:
+
 - Must be maintained even if never used
 - Add complexity to testing and documentation
 - Create decision paralysis for future developers
@@ -91,6 +90,7 @@ requirements demonstrate the boolean is insufficient.
 ### Recognizing Unnecessary Complexity
 
 Signs that complexity may be unjustified:
+
 - The explanation of how something works is longer than the problem statement
 - You need diagrams to explain a single function
 - New team members consistently struggle with a component
@@ -102,7 +102,7 @@ Signs that complexity may be unjustified:
 
 ### Definition
 
-Every piece of knowledge should have a single, authoritative representation in the system. When you change something, you should only need to change it in one place.
+Every piece of knowledge should have a single, authoritative representation in the system.
 
 ### When to Apply
 
@@ -152,7 +152,7 @@ Meaningful duplication (extract):
 
 ### The Rule of Three
 
-A useful heuristic: tolerate duplication until you see the same pattern three times. By the third occurrence, you have enough information to understand what varies and what stays constant, making abstraction safer.
+Tolerate duplication until you see the same pattern three times. By the third occurrence, you understand what varies and what stays constant.
 
 ---
 
@@ -160,7 +160,7 @@ A useful heuristic: tolerate duplication until you see the same pattern three ti
 
 ### Definition
 
-Organize code so that each component addresses a single, well-defined concern. Components should have minimal knowledge of each other's internal workings.
+Organize code so that each component addresses a single, well-defined concern with minimal knowledge of other components' internals.
 
 ### When to Apply
 
@@ -204,9 +204,7 @@ Separated concerns:
     orchestrates the above, contains no domain logic itself
 ```
 
-### Finding the Right Boundaries
-
-Good separation feels natural—components have clear names, focused responsibilities, and minimal interfaces. If you struggle to name a component or its interface is sprawling, the boundaries may be wrong.
+Good separation feels natural—components have clear names, focused responsibilities, and minimal interfaces.
 
 ---
 
@@ -441,6 +439,7 @@ Composition approach:
 ### Definition
 
 A method should only talk to its immediate friends, not to strangers. More specifically, a method M of object O should only call methods of:
+
 - O itself
 - Objects passed as arguments to M
 - Objects created within M

@@ -1,20 +1,15 @@
 # Code Review
 
-Code review is a collaborative process where developers examine each other's code. Reviews catch bugs, improve code quality, and spread knowledge across the team.
+Reviews catch bugs, improve quality, and spread knowledge across the team.
 
 ---
 
 ## Why Review Code
 
-Code review provides multiple benefits:
-
-**Quality** — A second pair of eyes catches bugs, oversights, and improvements.
-
-**Knowledge sharing** — Reviewers learn about changes; authors learn from feedback.
-
-**Consistency** — Reviews help maintain coding standards across the codebase.
-
-**Collective ownership** — The team, not individuals, owns the code.
+- **Quality** — A second pair of eyes catches bugs and oversights
+- **Knowledge sharing** — Reviewers learn about changes; authors learn from feedback
+- **Consistency** — Maintains coding standards across the codebase
+- **Collective ownership** — The team owns the code
 
 ---
 
@@ -151,21 +146,25 @@ Examples:
 Categorize feedback by importance:
 
 **Critical/Blocker** — Must be fixed before merging.
+
 - Bugs that will cause failures
 - Security vulnerabilities
 - Violations of critical requirements
 
 **Major** — Should be fixed but author can decide.
+
 - Significant code quality issues
 - Design concerns
 - Missing error handling
 
 **Minor/Suggestion** — Nice to fix but optional.
+
 - Style improvements
 - Alternative approaches
 - Minor optimizations
 
 **Nitpick** — Trivial issues.
+
 - Typos
 - Formatting inconsistencies
 - Personal preferences

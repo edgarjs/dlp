@@ -1,25 +1,12 @@
 # Coding Standards
 
-Coding standards establish conventions for consistent, readable code. When everyone follows the same conventions, code becomes predictable and easier to maintain.
-
----
-
-## Why Standards Matter
-
-Standards address questions before they become debates:
-
-- How do we name things?
-- How do we organize files?
-- When do we comment?
-- How complex is too complex?
-
-Without standards, every developer invents their own answers. The codebase becomes a patchwork of styles, harder to read and maintain.
+Conventions for consistent, readable code. When everyone follows the same conventions, code becomes predictable.
 
 ---
 
 ## Naming Conventions
 
-Names are the primary documentation. Good names make code self-explanatory.
+Good names make code self-explanatory.
 
 ### Naming Principles
 
@@ -220,6 +207,7 @@ Better:
 ### Comment Quality
 
 Good comments are:
+
 - **Accurate** — They describe what the code actually does
 - **Current** — They are updated when code changes
 - **Necessary** — They add information not in the code
@@ -234,6 +222,7 @@ Complex code is hard to understand, test, and maintain. Manage complexity delibe
 ### Recognizing Complexity
 
 Warning signs:
+
 - Deeply nested conditionals (if inside if inside if)
 - Functions longer than a screen
 - Many parameters to a function
@@ -283,6 +272,7 @@ After:
 ### Complexity Thresholds
 
 Consider refactoring when:
+
 - Function exceeds ~30-50 lines
 - Nesting exceeds 3-4 levels
 - Function has more than 4-5 parameters

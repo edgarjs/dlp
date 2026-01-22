@@ -1,12 +1,12 @@
 # Decision Making
 
-Software development involves constant decisions. This document provides a framework for making choices when the protocol offers options, when principles conflict, or when you face situations not explicitly covered.
+A framework for making choices when principles conflict or situations are not explicitly covered.
 
 ---
 
 ## The Nature of Decisions
 
-Most decisions in software development are not between right and wrong but between trade-offs. Understanding this reframes decision-making: the goal is not to find the perfect answer but to make a defensible choice given current information.
+Most decisions are trade-offs. The goal is making a defensible choice given current information.
 
 ### Decision Characteristics
 

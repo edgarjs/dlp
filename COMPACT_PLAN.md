@@ -10,11 +10,11 @@ Goal: Reduce protocol from ~50-60K tokens to ~25-35K tokens while retaining core
 - [x] Replace repeated explanations with cross-references
 - [x] Keep the most detailed explanation in one canonical location
 
-## 2. Condense Prose
+## 2. Condense Prose ✓
 
-- [ ] Shorten "why" explanations to essential points
-- [ ] Remove obvious statements
-- [ ] Tighten paragraph structure
+- [x] Shorten "why" explanations to essential points
+- [x] Remove obvious statements
+- [x] Tighten paragraph structure
 
 ## 3. Shorter Examples
 
@@ -60,3 +60,4 @@ Original: ~244K chars, ~34.5K words, ~50-60K tokens
 Target: ~25-35K tokens
 
 After step 1: 225,615 chars, 32,125 words (~7.5% reduction, ~47-55K tokens)
+After step 2: 224,023 chars, 31,886 words (~8.2% total reduction)

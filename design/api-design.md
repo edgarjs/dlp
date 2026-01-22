@@ -1,20 +1,15 @@
 # API Design
 
-API design defines interfaces between components. An API is a contract: it specifies what consumers can request, what providers will deliver, and how errors are communicated.
+Defines interfaces between components. An API specifies what consumers can request, what providers deliver, and how errors are communicated. Applies to all interfaces: function signatures, module boundaries, service contracts.
 
 ---
 
 ## What API Design Covers
 
-API design answers interface questions:
-
 - What operations does this component expose?
-- What inputs does each operation require?
-- What outputs does each operation produce?
+- What inputs/outputs does each operation have?
 - What errors can occur and how are they reported?
 - What guarantees does the interface make?
-
-This applies to all interfaces, not just web APIs: function signatures, module boundaries, service contracts.
 
 ---
 

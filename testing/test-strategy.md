@@ -1,6 +1,6 @@
 # Test Strategy
 
-Test strategy determines what to test, at what level, and to what extent. A good strategy maximizes confidence while minimizing effort.
+Determines what to test, at what level, and to what extent. Maximize confidence, minimize effort.
 
 ---
 
@@ -11,6 +11,7 @@ Test strategy determines what to test, at what level, and to what extent. A good
 Focus testing effort where risk is highest.
 
 **High risk:**
+
 - Core business logic
 - Security-sensitive code
 - Financial calculations
@@ -18,6 +19,7 @@ Focus testing effort where risk is highest.
 - Complex algorithms
 
 **Lower risk:**
+
 - Simple getters/setters
 - Pass-through code
 - UI cosmetics
@@ -39,13 +41,9 @@ The test pyramid guides the distribution of test types:
   --------------
 ```
 
-**Unit tests** — The foundation. Fast, isolated, numerous.
-
+**Unit tests** — Foundation. Fast, isolated, numerous.
 **Integration tests** — Verify boundaries. Slower, fewer.
-
 **End-to-end tests** — Verify full flows. Slowest, fewest.
-
-This distribution optimizes for fast feedback and maintainability.
 
 ---
 
@@ -65,12 +63,14 @@ flowchart TD
 ### When to Unit Test
 
 Unit test when:
+
 - Testing a single function or class
 - Testing pure logic with deterministic output
 - Testing edge cases and error handling
 - Fast feedback is critical
 
 Unit tests should:
+
 - Run in milliseconds
 - Have no external dependencies
 - Be completely deterministic
@@ -79,12 +79,14 @@ Unit tests should:
 ### When to Integration Test
 
 Integration test when:
+
 - Testing interaction between components
 - Testing data flow across boundaries
 - Testing behavior with real dependencies (database, APIs)
 - Unit tests would require excessive mocking
 
 Integration tests should:
+
 - Focus on the interaction, not component internals
 - Use real dependencies or realistic fakes
 - Verify contracts between components
@@ -92,11 +94,13 @@ Integration tests should:
 ### When to End-to-End Test
 
 End-to-end test when:
+
 - Testing complete user workflows
 - Testing system behavior as users experience it
 - Verifying configuration and deployment work together
 
 End-to-end tests should:
+
 - Cover critical user journeys
 - Be kept to a minimum (they are slow and brittle)
 - Verify what other tests cannot
@@ -108,18 +112,21 @@ End-to-end tests should:
 ### What to Cover
 
 **Must cover:**
+
 - All acceptance criteria from requirements
 - All specified error conditions
 - Security-sensitive operations
 - Data integrity operations
 
 **Should cover:**
+
 - Common paths through the code
 - Edge cases
 - Error handling paths
 - Integration points
 
 **May not cover:**
+
 - Trivial code (simple getters, configuration)
 - External library code (unless wrapping it)
 - Temporary debugging code
@@ -140,6 +147,7 @@ Coverage numbers are guidelines. Meaningful tests matter more than percentages.
 ### Coverage Gaps
 
 Accept some gaps:
+
 - Code that is genuinely hard to test may not be worth the effort
 - Some code changes so rarely it may not need tests
 - Some code is better verified through other means (code review, static analysis)
@@ -204,17 +212,20 @@ Test coverage plan:
 Different test levels need different environments:
 
 **Unit tests:**
+
 - No external services
 - No database
 - No network calls
 - Fast startup
 
 **Integration tests:**
+
 - Test database (local or containerized)
 - Mock or test versions of external services
 - Controlled environment
 
 **End-to-end tests:**
+
 - Complete system deployed
 - Test data setup
 - Isolation from production
@@ -222,6 +233,7 @@ Different test levels need different environments:
 ### Data Management
 
 Test data needs:
+
 - **Setup** — Create necessary data before tests
 - **Isolation** — Tests do not affect each other's data
 - **Cleanup** — Remove test data after tests
