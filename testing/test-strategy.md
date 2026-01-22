@@ -60,50 +60,15 @@ flowchart TD
     F -->|No| H[Reconsider what you're testing]
 ```
 
-### When to Unit Test
+### Test Level Comparison
 
-Unit test when:
-
-- Testing a single function or class
-- Testing pure logic with deterministic output
-- Testing edge cases and error handling
-- Fast feedback is critical
-
-Unit tests should:
-
-- Run in milliseconds
-- Have no external dependencies
-- Be completely deterministic
-- Test one thing per test
-
-### When to Integration Test
-
-Integration test when:
-
-- Testing interaction between components
-- Testing data flow across boundaries
-- Testing behavior with real dependencies (database, APIs)
-- Unit tests would require excessive mocking
-
-Integration tests should:
-
-- Focus on the interaction, not component internals
-- Use real dependencies or realistic fakes
-- Verify contracts between components
-
-### When to End-to-End Test
-
-End-to-end test when:
-
-- Testing complete user workflows
-- Testing system behavior as users experience it
-- Verifying configuration and deployment work together
-
-End-to-end tests should:
-
-- Cover critical user journeys
-- Be kept to a minimum (they are slow and brittle)
-- Verify what other tests cannot
+| Aspect           | Unit                                    | Integration                              | End-to-End              |
+| ---------------- | --------------------------------------- | ---------------------------------------- | ----------------------- |
+| **When to use**  | Single function, pure logic, edge cases | Component interaction, real dependencies | Complete user workflows |
+| **Speed**        | Milliseconds                            | Moderate                                 | Slowest                 |
+| **Dependencies** | None                                    | Real or realistic fakes                  | Full system             |
+| **Focus**        | One thing per test                      | Contracts between components             | User journeys           |
+| **Quantity**     | Many                                    | Some                                     | Few (keep minimal)      |
 
 ---
 

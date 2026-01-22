@@ -22,10 +22,10 @@ Goal: Reduce protocol from ~50-60K tokens to ~25-35K tokens while retaining core
 - [x] Remove redundant example variations
 - [x] Keep one clear example per concept
 
-## 4. Tables Over Prose
+## 4. Tables Over Prose ✓
 
-- [ ] Convert list-based explanations to tables where appropriate
-- [ ] Use tables for comparisons instead of paragraphs
+- [x] Convert list-based explanations to tables where appropriate
+- [x] Use tables for comparisons instead of paragraphs
 
 ## 5. Merge Documents
 
@@ -62,3 +62,4 @@ Target: ~25-35K tokens
 After step 1: 225,615 chars, 32,125 words (~7.5% reduction, ~47-55K tokens)
 After step 2: 224,023 chars, 31,886 words (~8.2% total reduction)
 After step 3: 223,068 chars, 31,698 words (~8.6% total reduction)
+After step 4: 222,964 chars, 31,623 words (~8.6% total reduction)
