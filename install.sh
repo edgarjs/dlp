@@ -19,13 +19,12 @@ cd "$INSTALL_DIR"
 DOWNLOAD_URL="https://github.com/${REPO}/archive/${LATEST_RELEASE}.tar.gz"
 curl -sL "$DOWNLOAD_URL" | tar xz --strip-components=1
 
+echo ""
 echo "✓ Installation complete"
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-cat README.md
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo ""
 echo "📖 CODING AGENT QUICK START"
 echo ""
 echo "Tell your agent to read .dlp/README.md and follow the instructions."
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
