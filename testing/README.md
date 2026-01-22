@@ -7,6 +7,7 @@ Verify that implementation meets requirements and design. Testing confirms that 
 Testing answers the question: "Does the software do what it should?"
 
 Without adequate testing:
+
 - Bugs reach users
 - Changes break existing functionality
 - Confidence in the system erodes
@@ -15,35 +16,35 @@ Without adequate testing:
 ## Inputs and Outputs
 
 **Inputs:**
+
 - Implemented, reviewed code
 - Requirements specification
 - Interface contracts
 - Design documentation
 
 **Outputs:**
+
 - Verified, tested code
 - Test suite for ongoing verification
 - Documented coverage and known limitations
 
 ## Contents
 
-| Document                                         | Purpose                                    |
-| ------------------------------------------------ | ------------------------------------------ |
-| [test-strategy.md](test-strategy.md)             | Planning what to test and at what level    |
-| [unit-testing.md](unit-testing.md)               | Testing individual components in isolation |
-| [integration-testing.md](integration-testing.md) | Testing component interactions             |
-| [test-design.md](test-design.md)                 | Writing effective, maintainable tests      |
-| [test-automation.md](test-automation.md)         | CI integration and test infrastructure     |
-| [test-maintenance.md](test-maintenance.md)       | Keeping tests healthy over time            |
+| Document                                     | Purpose                                 |
+| -------------------------------------------- | --------------------------------------- |
+| [test-strategy.md](test-strategy.md)         | Planning what to test and at what level |
+| [testing-practices.md](testing-practices.md) | Unit and integration testing practices  |
+| [test-design.md](test-design.md)             | Writing effective, maintainable tests   |
+| [test-automation.md](test-automation.md)     | CI integration and test infrastructure  |
+| [test-maintenance.md](test-maintenance.md)   | Keeping tests healthy over time         |
 
 ## Reading Order
 
 1. **test-strategy.md** — Understand what to test and why
-2. **unit-testing.md** — Learn unit testing practices
-3. **integration-testing.md** — Learn integration testing practices
-4. **test-design.md** — Learn to write good tests
-5. **test-automation.md** — Automate tests in CI/CD
-6. **test-maintenance.md** — Learn to maintain tests
+2. **testing-practices.md** — Learn unit and integration testing practices
+3. **test-design.md** — Learn to write good tests
+4. **test-automation.md** — Automate tests in CI/CD
+5. **test-maintenance.md** — Learn to maintain tests
 
 ## Workflow
 
@@ -73,16 +74,19 @@ Testing is ongoing—it starts during development and continues throughout the s
 Different tests serve different purposes:
 
 **Unit tests** — Verify individual components in isolation.
+
 - Fast, focused, many of them
 - Catch bugs in component logic
 - Run on every change
 
 **Integration tests** — Verify components working together.
+
 - Slower, broader scope
 - Catch issues at boundaries
 - Run regularly
 
 **End-to-end tests** — Verify complete workflows.
+
 - Slowest, full system scope
 - Catch integration issues
 - Run before releases
@@ -96,6 +100,7 @@ Coverage indicates what code is exercised by tests, not test quality.
 **Low coverage with good tests** — Critical paths tested well; others ignored.
 
 Target meaningful coverage:
+
 - Critical paths: high coverage
 - Edge cases: tested explicitly
 - Error handling: verified

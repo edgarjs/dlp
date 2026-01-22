@@ -7,6 +7,7 @@ Transform validated requirements into a technical blueprint. Design bridges the 
 Design work answers the question: "How will we structure this solution?"
 
 Without deliberate design:
+
 - Implementation becomes exploratory coding
 - Inconsistent patterns emerge across the codebase
 - Integration problems surface late
@@ -15,11 +16,13 @@ Without deliberate design:
 ## Inputs and Outputs
 
 **Inputs:**
+
 - Validated requirements specification
 - Constraints (technology, resources, timeline)
 - Existing system context (if applicable)
 
 **Outputs:**
+
 - Architecture defining components and their relationships
 - Data models for system entities
 - Interface contracts between components
@@ -27,14 +30,13 @@ Without deliberate design:
 
 ## Contents
 
-| Document                                         | Purpose                                             |
-| ------------------------------------------------ | --------------------------------------------------- |
-| [exploration.md](exploration.md)                 | Evaluating approaches before committing to one      |
-| [architecture.md](architecture.md)               | Defining high-level system structure and components |
-| [data-modeling.md](data-modeling.md)             | Designing data structures and relationships         |
-| [api-design.md](api-design.md)                   | Defining interfaces between components              |
-| [interface-contracts.md](interface-contracts.md) | Formalizing boundaries with contracts               |
-| [design-review.md](design-review.md)             | Validating design before implementation             |
+| Document                             | Purpose                                             |
+| ------------------------------------ | --------------------------------------------------- |
+| [exploration.md](exploration.md)     | Evaluating approaches before committing to one      |
+| [architecture.md](architecture.md)   | Defining high-level system structure and components |
+| [data-modeling.md](data-modeling.md) | Designing data structures and relationships         |
+| [api-contracts.md](api-contracts.md) | Defining interfaces and formalizing contracts       |
+| [design-review.md](design-review.md) | Validating design before implementation             |
 
 ## Reading Order
 
@@ -43,9 +45,8 @@ Work through these documents in sequence, though iteration is expected:
 1. **exploration.md** — Consider approaches before committing
 2. **architecture.md** — Define overall structure
 3. **data-modeling.md** — Design data representations
-4. **api-design.md** — Define component interfaces
-5. **interface-contracts.md** — Formalize contracts
-6. **design-review.md** — Validate the design
+4. **api-contracts.md** — Define component interfaces and contracts
+5. **design-review.md** — Validate the design
 
 ## Workflow
 
@@ -54,11 +55,10 @@ flowchart TD
     A[Requirements] --> B[Exploration]
     B --> C[Architecture]
     C --> D[Data Modeling]
-    D --> E[API Design]
-    E --> F[Contracts]
-    F --> G[Review]
-    G -->|Issues found| C
-    G -->|Approved| H[Ready for Development]
+    D --> E[API Contracts]
+    E --> F[Review]
+    F -->|Issues found| C
+    F -->|Approved| G[Ready for Development]
 ```
 
 Design is iterative. Decisions in later stages may require revisiting earlier stages.
@@ -76,17 +76,20 @@ Design is iterative. Decisions in later stages may require revisiting earlier st
 Match design depth to project complexity:
 
 **Minimal design** (small features, bug fixes):
+
 - Identify affected components
 - Verify approach with quick exploration
 - Proceed to implementation
 
 **Standard design** (new features, moderate complexity):
+
 - Full exploration of approaches
 - Architecture decisions documented
 - Key interfaces defined
 - Design reviewed
 
 **Extensive design** (major systems, high risk):
+
 - Comprehensive exploration with prototypes
 - Detailed architecture documentation
 - Complete interface contracts

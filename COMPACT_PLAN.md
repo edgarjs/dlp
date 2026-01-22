@@ -27,13 +27,13 @@ Goal: Reduce protocol from ~50-60K tokens to ~25-35K tokens while retaining core
 - [x] Convert list-based explanations to tables where appropriate
 - [x] Use tables for comparisons instead of paragraphs
 
-## 5. Merge Documents
+## 5. Merge Documents ✓
 
-Candidates for merging:
+Merged:
 
-- [ ] api-design.md + interface-contracts.md → api-contracts.md
-- [ ] unit-testing.md + integration-testing.md → testing-practices.md
-- [ ] Consider merging smaller documents within phases
+- [x] api-design.md + interface-contracts.md → api-contracts.md
+- [x] unit-testing.md + integration-testing.md → testing-practices.md
+- [x] Updated README files with new references
 
 ## 6. Condense "When to Violate" Sections
 
@@ -63,3 +63,4 @@ After step 1: 225,615 chars, 32,125 words (~7.5% reduction, ~47-55K tokens)
 After step 2: 224,023 chars, 31,886 words (~8.2% total reduction)
 After step 3: 223,068 chars, 31,698 words (~8.6% total reduction)
 After step 4: 222,964 chars, 31,623 words (~8.6% total reduction)
+After step 5: 209,776 chars, 29,680 words (~14.0% total reduction)

@@ -52,8 +52,7 @@ dev-protocol/
 │   ├── exploration.md       Evaluating approaches
 │   ├── architecture.md      High-level system structure
 │   ├── data-modeling.md     Designing data structures
-│   ├── api-design.md        Defining interfaces
-│   ├── interface-contracts.md  Formalizing boundaries
+│   ├── api-contracts.md     Defining interfaces and contracts
 │   └── design-review.md     Validating the design
 │
 ├── development/       Coding standards, patterns, workflow, review
@@ -68,8 +67,7 @@ dev-protocol/
 │
 ├── testing/           Strategy, unit tests, integration tests, maintenance
 │   ├── test-strategy.md     Planning what to test
-│   ├── unit-testing.md      Testing components in isolation
-│   ├── integration-testing.md  Testing component interactions
+│   ├── testing-practices.md Unit and integration testing
 │   ├── test-design.md       Writing effective tests
 │   ├── test-automation.md   CI integration, test infrastructure
 │   └── test-maintenance.md  Keeping tests healthy

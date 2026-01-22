@@ -30,7 +30,7 @@ Tests derived:
 
 ### From Edge Cases
 
-Requirements specify normal behavior; tests must also cover edges. See [unit-testing.md](unit-testing.md) for a comprehensive list of edge case types (empty/null, boundaries, special values, state variations).
+Requirements specify normal behavior; tests must also cover edges. See [testing-practices.md](testing-practices.md) for a comprehensive list of edge case types (empty/null, boundaries, special values, state variations).
 
 Derive edge cases from the requirement:
 
@@ -99,13 +99,14 @@ Convention: should_behavior_when_condition
 
 ## Test Structure
 
-Use consistent structure for readability. See [unit-testing.md](unit-testing.md) for detailed examples.
+Use consistent structure for readability. See [testing-practices.md](testing-practices.md) for detailed examples.
 
 **Arrange-Act-Assert (AAA)** — Set up, perform action, verify outcome.
 
 **Given-When-Then** — Alternative phrasing, same concept.
 
 Guidelines:
+
 - Clear separation between phases
 - Minimal arrangement (only what this test needs)
 - Single action per test
@@ -303,7 +304,7 @@ Maintainability:
 
 ## Test Anti-Patterns
 
-See also [unit-testing.md](unit-testing.md) for additional common testing mistakes.
+See also [testing-practices.md](testing-practices.md) for additional common testing mistakes.
 
 | Anti-Pattern           | Problem                       | Fix                                                       |
 | ---------------------- | ----------------------------- | --------------------------------------------------------- |
