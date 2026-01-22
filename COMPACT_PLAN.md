@@ -40,11 +40,11 @@ Merged:
 - [x] Convert to brief inline notes or single bullet points
 - [x] Remove if covered by decision-making.md
 
-## 7. Consolidate Checklists
+## 7. Consolidate Checklists ✓ (Reconsidered)
 
-- [ ] Create single checklists.md reference document
-- [ ] Replace embedded checklists with references
-- [ ] Keep checklists in one place for easy access
+Analyzed ~40 checklists. Full consolidation would hurt usability (readers would jump between files constantly). Checklists are context-specific and serve as "before proceeding" gates.
+
+**Decision:** Keep checklists in place for usability. No changes needed.
 
 ## 8. Create Compact Variant (Optional)
 
