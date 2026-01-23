@@ -9,11 +9,13 @@ Dependencies are external code your project relies on. They accelerate developme
 ### Every Dependency Is a Trade-off
 
 Dependencies provide:
+
 - Functionality you don't have to build
 - Expertise you don't have to develop
 - Maintenance burden shared with others
 
 Dependencies cost:
+
 - Another codebase to understand
 - Another source of bugs and vulnerabilities
 - Another project that might be abandoned
@@ -72,6 +74,7 @@ flowchart TD
 ### Evaluation Checklist
 
 **Necessity:**
+
 ```
 - [ ] What specific problem does this solve?
 - [ ] Could we solve it with existing dependencies?
@@ -81,6 +84,7 @@ flowchart TD
 ```
 
 **Quality:**
+
 ```
 - [ ] How many weekly downloads / stars?
 - [ ] When was the last release?
@@ -91,6 +95,7 @@ flowchart TD
 ```
 
 **Risk:**
+
 ```
 - [ ] How many dependencies does it have?
 - [ ] Are there known security vulnerabilities?
@@ -100,11 +105,71 @@ flowchart TD
 ```
 
 **Fit:**
+
 ```
 - [ ] Does the API fit our coding style?
 - [ ] What's the bundle size impact?
 - [ ] Does it support our target platforms?
 - [ ] Is it actively used by similar projects?
+```
+
+### Research Current Information
+
+**Critical: Always search for current dependency information online. Do not rely on knowledge cutoff data.**
+
+When evaluating or working with dependencies:
+
+```
+Always web search for:
+  - Current stable version number
+  - Latest release date and changelog
+  - Known vulnerabilities (CVEs)
+  - Breaking changes in recent versions
+  - Migration guides for major upgrades
+  - Current best practices for the dependency
+  - Official documentation URLs
+
+Why this matters:
+  - Dependency ecosystems change rapidly
+  - Security vulnerabilities are discovered constantly
+  - Deprecated APIs and breaking changes happen
+  - Best practices evolve
+  - Knowledge cutoff data is outdated
+```
+
+**Research workflow:**
+
+```
+1. Search for: "[package-name] latest version [current year]"
+2. Visit official package registry:
+   - npm: npmjs.com/package/[name]
+   - PyPI: pypi.org/project/[name]
+   - crates.io: crates.io/crates/[name]
+   - Go: pkg.go.dev/[import-path]
+   - Ruby gems: rubygems.org/gems/[name]
+
+3. Check official repository/documentation
+4. Search for known issues: "[package-name] issues [current year]"
+5. Check security: "[package-name] vulnerabilities CVE"
+```
+
+**Unknown technical details:**
+
+```
+If you don't know:
+  - How to configure the dependency
+  - What the current API looks like
+  - How to handle specific use cases
+  - What the performance characteristics are
+  - What the breaking changes are
+
+Then you must:
+  ✓ Search official documentation
+  ✓ Search for current usage examples
+  ✓ Read recent release notes
+  ✓ Check GitHub issues/discussions
+  ✗ Never guess or use outdated knowledge
+  ✗ Never recommend without verification
 ```
 
 ### Evaluating Maintenance Health
@@ -169,6 +234,7 @@ flowchart LR
 ### Version Pinning Strategies
 
 **Exact version (most restrictive):**
+
 ```
 "lodash": "4.17.21"
 
@@ -179,6 +245,7 @@ Use when:
 ```
 
 **Caret (compatible with version):**
+
 ```
 "lodash": "^4.17.21"
 Allows: 4.17.22, 4.18.0
@@ -191,6 +258,7 @@ Use when:
 ```
 
 **Tilde (patch updates only):**
+
 ```
 "lodash": "~4.17.21"
 Allows: 4.17.22
@@ -202,6 +270,7 @@ Use when:
 ```
 
 **Range (specific range):**
+
 ```
 "lodash": ">=4.17.0 <5.0.0"
 
@@ -224,6 +293,7 @@ rust:   Cargo.lock
 ```
 
 Lock files ensure:
+
 - Everyone uses identical versions
 - Builds are reproducible
 - Transitive dependencies are locked
@@ -472,6 +542,7 @@ Your Project
 ```
 
 View your tree:
+
 ```
 npm:    npm ls
 yarn:   yarn list
@@ -614,12 +685,14 @@ For each significant dependency:
 ## Dependencies
 
 ### Authentication: passport.js
+
 - **Why**: Mature, supports 500+ auth strategies
 - **Alternatives considered**: Auth0 (cost), custom (time)
 - **Gotchas**: Session serialization requires explicit config
 - **Update notes**: Check breaking changes in minor versions
 
 ### Date handling: date-fns
+
 - **Why**: Tree-shakeable, smaller than moment.js
 - **Alternatives considered**: moment.js (size), dayjs (fewer features)
 - **Gotchas**: Import individual functions to minimize bundle
@@ -631,9 +704,12 @@ For each significant dependency:
 ## Dependency Management Checklist
 
 ### Adding Dependencies
+
 ```
 - [ ] Documented specific need
 - [ ] Searched for existing solutions
+- [ ] Web searched for current version and information (not knowledge cutoff)
+- [ ] Researched current documentation and best practices
 - [ ] Evaluated maintenance health
 - [ ] Checked license compatibility
 - [ ] Assessed security vulnerabilities
@@ -644,6 +720,7 @@ For each significant dependency:
 ```
 
 ### Regular Maintenance
+
 ```
 - [ ] Audit for security vulnerabilities (weekly)
 - [ ] Check for outdated packages (monthly)
@@ -654,9 +731,12 @@ For each significant dependency:
 ```
 
 ### Updating Dependencies
+
 ```
-- [ ] Read changelog/release notes
+- [ ] Web search for latest version and release information
+- [ ] Read current changelog/release notes (not cached knowledge)
 - [ ] Check for breaking changes
+- [ ] Research migration steps if needed
 - [ ] Run full test suite
 - [ ] Test affected features
 - [ ] Update lockfile
@@ -664,6 +744,7 @@ For each significant dependency:
 ```
 
 ### Removing Dependencies
+
 ```
 - [ ] Verify no longer used
 - [ ] Search entire codebase
