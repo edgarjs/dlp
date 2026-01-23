@@ -15,48 +15,36 @@ The protocol is designed for LLM agents and human developers alike. It maintains
 
 ## Installation
 
-### Global Installation (Recommended)
+### Global Installation
 
-Install once globally, use in all projects:
+Install once, reference from any project:
 
 ```bash
-# Install to ~/.dlp
 curl -sSL https://github.com/edgarjs/dlp/raw/main/install.sh | bash
-
-# Add to PATH (add to ~/.zshrc or ~/.bashrc)
-export PATH="$HOME/.dlp/bin:$PATH"
-
-# Initialize in your project (creates/updates AGENTS.md)
-cd your-project
-dlp init
 ```
 
-This installs the protocol to `~/.dlp/` and creates a CLI tool for managing it.
+Then add this to your project's `AGENTS.md`:
 
-**CLI Commands:**
-
-```bash
-dlp version    # Show installed version
-dlp update     # Update protocol to latest version
-dlp init       # Setup current project to use DLP
-dlp path       # Show installation path
-dlp help       # Show all commands
+```markdown
+Read the Development Lifecycle Protocol from: ~/.dlp
 ```
+
+To update, re-run the install command.
 
 ### Local Installation
 
-For project-specific installations:
+Install directly into your project:
 
 ```bash
-# Install to current directory's .dlp/ folder
 curl -sSL https://github.com/edgarjs/dlp/raw/main/install.sh | bash -s -- --local
 ```
+
+This creates `.dlp/` in your project and updates `AGENTS.md` automatically.
 
 Or clone directly:
 
 ```bash
 git clone git@github.com:edgarjs/dlp.git .dlp
-cd .dlp
 ```
 
 ## How to Use This Protocol
