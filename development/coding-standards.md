@@ -113,6 +113,7 @@ Standard file structure:
 
 ```
 Poor: process_order() that validates, saves, sends email, and logs
+Poor: get_user() that also checks if it's their birthday (mixing retrieval and logic)
 
 Better:
   validate_order()

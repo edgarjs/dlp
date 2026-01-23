@@ -41,6 +41,7 @@ Each commit is a potential release point.
 ### How Small
 
 Commits should be small enough to:
+
 - Review in a few minutes
 - Understand at a glance
 - Revert without losing unrelated work
@@ -49,6 +50,7 @@ Commits should be small enough to:
 ### How Large
 
 Commits should be large enough to:
+
 - Represent a complete thought
 - Build and pass tests
 - Make sense in isolation
@@ -97,12 +99,14 @@ flowchart TD
 ```
 
 Commit when:
+
 - A logical unit of work is complete
 - The code builds successfully
 - Tests pass
 - You can write a clear commit message describing what changed
 
 Do not commit:
+
 - At arbitrary stopping points (end of day, lunch break)
 - With broken builds
 - With failing tests
@@ -229,6 +233,8 @@ Either works; be consistent within a project.
 
 ```
 - [ ] Changes match the intended scope (no accidental changes)
+- [ ] No sensitive files (.env, credentials, secrets, API keys)
+- [ ] .gitignore is configured for the project type
 - [ ] Code builds successfully
 - [ ] Tests pass
 - [ ] No debugging code left in (console.log, print statements)
@@ -245,10 +251,62 @@ git diff --staged
 ```
 
 Check for:
+
 - Unintended changes
+- Sensitive files (.env, .env.local, credentials.json, _.key, _.pem)
+- API keys, passwords, or secrets in code
 - Debug code
 - Temporary workarounds that should be removed
 - Incomplete changes
+
+---
+
+## Protecting Sensitive Information
+
+**Critical Rule: Never commit secrets, credentials, or sensitive configuration to version control.**
+
+### What Not to Commit
+
+```
+Never commit:
+  ✗ .env, .env.local, .env.production files
+  ✗ API keys, access tokens, passwords
+  ✗ Private keys (.key, .pem, id_rsa)
+  ✗ Credentials files (credentials.json, secrets.yaml)
+  ✗ Database connection strings with passwords
+  ✗ OAuth client secrets
+  ✗ Signed certificates
+  ✗ Any file containing sensitive data
+```
+
+### Using .gitignore
+
+Every project must have a `.gitignore` file configured for its technology stack.
+
+**Template .gitignore Files**
+
+Use established templates for your stack:
+
+```
+Node.js:    github.com/github/gitignore/blob/main/Node.gitignore
+Python:     github.com/github/gitignore/blob/main/Python.gitignore
+Ruby:       github.com/github/gitignore/blob/main/Ruby.gitignore
+Rust:       github.com/github/gitignore/blob/main/Rust.gitignore
+Go:         github.com/github/gitignore/blob/main/Go.gitignore
+
+Or use: gitignore.io to generate combined templates
+```
+
+### Environment Variable Management
+
+```
+Good practices:
+  ✓ Store secrets in .env files (ignored by git)
+  ✓ Provide .env.example with dummy values
+  ✓ Document required environment variables
+  ✓ Use environment variable validation on startup
+  ✓ Use secret management tools (Vault, AWS Secrets Manager)
+```
 
 ---
 
@@ -268,12 +326,14 @@ Before pushing, you can:
 ### Commit History Quality
 
 Good history:
+
 - Each commit is understandable in isolation
 - Bisect works (any commit can be built and tested)
 - Related changes are grouped
 - History tells the story of how the code evolved
 
 Poor history:
+
 - "WIP" commits mixed with real changes
 - "Fix typo" commits scattered throughout
 - Broken commits followed by fixes
@@ -315,6 +375,8 @@ If you have messy local history:
 ```
 Committing:
 - [ ] Change is a single, logical unit
+- [ ] No sensitive files or secrets included
+- [ ] .gitignore properly configured
 - [ ] Code builds
 - [ ] Tests pass
 - [ ] Diff reviewed for unintended changes
