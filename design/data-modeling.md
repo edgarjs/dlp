@@ -61,8 +61,8 @@ Description:
 A request to purchase products, placed by a user.
 
 Attributes:
-- id: unique identifier
-- user_id: reference to the ordering user
+- id: UUID (primary key)
+- user_id: UUID (reference to the ordering user)
 - status: current state (pending, confirmed, shipped, delivered, cancelled)
 - total_amount: sum of all items
 - created_at: when the order was placed
@@ -76,6 +76,70 @@ Constraints:
 - Must have at least one order item
 - Total amount must equal sum of item amounts
 - Status transitions follow defined state machine
+```
+
+---
+
+## Primary Keys
+
+Every entity needs a unique identifier—its primary key.
+
+### UUID vs. Auto-Incrementing Integers
+
+**Prefer UUIDs over auto-incrementing integers** for primary keys in most cases.
+
+**UUIDs (Universally Unique Identifiers):**
+
+```
+Advantages:
+  ✓ Globally unique without coordination
+  ✓ Can be generated client-side or server-side
+  ✓ Safe to expose in URLs without leaking info
+  ✓ No sequential enumeration vulnerability
+  ✓ Easier for distributed systems and sharding
+  ✓ No collisions when merging data from different sources
+
+Disadvantages:
+  ⚠ Larger storage (16 bytes vs 4-8 bytes)
+  ⚠ Less human-readable
+  ⚠ Slightly slower index operations (use UUIDv7 to avoid)
+  ⚠ Not naturally sortable by creation time (use UUIDv7 if needed)
+```
+
+### UUID Formats
+
+```
+UUIDv4 (random):
+  550e8400-e29b-41d4-a716-446655440000
+  Standard choice, cryptographically random
+
+UUIDv7 (time-ordered):
+  018e8400-e29b-71d4-a716-446655440000
+  Sortable by creation time, better for database indexing
+  Preferred for new systems
+
+Example entity with UUID:
+  Entity: User
+  Attributes:
+    - id: UUID (primary key, UUIDv7)
+    - email: string (unique)
+    - created_at: timestamp
+```
+
+### Implementation Notes
+
+```
+Most databases support UUIDs natively:
+  PostgreSQL: uuid type, gen_random_uuid()
+  MySQL 8.0+:  uuid type (binary(16)), UUID()
+  SQLite:      text or blob, generate in application
+  MongoDB:     ObjectId (similar concept, 12 bytes)
+
+Application libraries:
+  JavaScript:  crypto.randomUUID() (built-in)
+  Python:      uuid.uuid4(), uuid.uuid7()
+  Rust:        uuid crate
+  Go:          google/uuid package
 ```
 
 ---
@@ -238,11 +302,13 @@ Better: Model based on domain concepts
 Normalization reduces redundancy but adds complexity:
 
 **Normalize when:**
+
 - Data integrity is critical
 - Updates to shared data must be consistent
 - Storage efficiency matters
 
 **Denormalize when:**
+
 - Read performance is critical
 - Data is read far more than written
 - Integrity can be maintained through other means
@@ -268,6 +334,7 @@ Trade-off: Denormalized is faster to read but harder to update
 ```
 - [ ] All entities from requirements are identified
 - [ ] Each entity has clear identity and purpose
+- [ ] Primary keys defined (prefer UUIDs for user-facing entities)
 - [ ] Attributes are assigned to appropriate entities
 - [ ] Relationships between entities are defined
 - [ ] Relationship cardinality is specified
