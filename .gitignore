@@ -1,0 +1,4 @@
+# DLP CLI and installation artifacts
+bin/
+.backup-*/
+.dlp-version

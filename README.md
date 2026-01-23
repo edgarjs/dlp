@@ -15,15 +15,44 @@ The protocol is designed for LLM agents and human developers alike. It maintains
 
 ## Installation
 
-**Quick Install:**
+### Global Installation (Recommended)
+
+Install once globally, use in all projects:
 
 ```bash
+# Install to ~/.dlp
 curl -sSL https://github.com/edgarjs/dlp/raw/main/install.sh | bash
+
+# Add to PATH (add to ~/.zshrc or ~/.bashrc)
+export PATH="$HOME/.dlp/bin:$PATH"
+
+# Initialize in your project (creates/updates AGENTS.md)
+cd your-project
+dlp init
 ```
 
-This downloads the latest release into a `.dlp/` folder and displays the protocol guide.
+This installs the protocol to `~/.dlp/` and creates a CLI tool for managing it.
 
-Alternatively, clone the repository directly:
+**CLI Commands:**
+
+```bash
+dlp version    # Show installed version
+dlp update     # Update protocol to latest version
+dlp init       # Setup current project to use DLP
+dlp path       # Show installation path
+dlp help       # Show all commands
+```
+
+### Local Installation
+
+For project-specific installations:
+
+```bash
+# Install to current directory's .dlp/ folder
+curl -sSL https://github.com/edgarjs/dlp/raw/main/install.sh | bash -s -- --local
+```
+
+Or clone directly:
 
 ```bash
 git clone git@github.com:edgarjs/dlp.git .dlp
