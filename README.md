@@ -15,37 +15,21 @@ The protocol is designed for LLM agents and human developers alike. It maintains
 
 ## Installation
 
-### Global Installation
-
-Install once, reference from any project:
+Run this command inside your project's root directory:
 
 ```bash
 curl -sSL https://github.com/edgarjs/dlp/raw/main/install.sh | bash
 ```
 
-Then add this to your project's `AGENTS.md`:
+This will install the DLP at `$HOME/.dlp` and create or modify the `AGENTS.md`, `CLAUDE.md` and `GEMINI.md` files of your project, to reference the DLP installation at your home directory.
 
-```markdown
-Read the Development Lifecycle Protocol from: ~/.dlp
-```
-
-To update, re-run the install command.
-
-### Local Installation
-
-Install directly into your project:
+If you prefer to keep a copy of the DLP at the project level, you can use the `--local` flag:
 
 ```bash
 curl -sSL https://github.com/edgarjs/dlp/raw/main/install.sh | bash -s -- --local
 ```
 
-This creates `.dlp/` in your project and updates `AGENTS.md` automatically.
-
-Or clone directly:
-
-```bash
-git clone git@github.com:edgarjs/dlp.git .dlp
-```
+This creates `.dlp/` in your project and updates agents files automatically.
 
 ## How to Use This Protocol
 
@@ -102,12 +86,6 @@ git clone git@github.com:edgarjs/dlp.git .dlp
     ├── accessibility.md     Ensuring usability for all users
     └── observability.md     Understanding system state through monitoring
 ```
-
-## Reading Order
-
-**For a new project:** foundations → requirements → design → development → testing
-
-**For specific tasks:** Jump to the relevant phase, reference foundations as needed
 
 ## Scope
 
