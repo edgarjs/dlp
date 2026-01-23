@@ -44,4 +44,84 @@ Strictly adhere to these operational primitives:
 
 ---
 
+## Task Execution Protocol
+
+Before beginning work, establish workflow preferences and maintain protocol alignment:
+
+### 1. Documentation Output Location
+
+**Before generating any documentation artifacts**, ask the user:
+
+> "Where would you like me to write documentation outputs (specifications, design docs, plans)?"
+
+Common patterns:
+
+- `docs/` directory
+- `docs/plans/` for implementation plans
+- `docs/specs/` for specifications
+- `docs/design/` for design documents
+- Project root for README updates
+
+Document the preference and use it consistently throughout the session.
+
+### 2. Autonomy Preference
+
+**At the start of a multi-step task**, ask the user:
+
+> "Would you prefer I work autonomously through all steps, or pause after each completed step for your review?"
+
+**Autonomous mode:**
+
+- Execute all planned steps sequentially
+- Only stop for critical decisions or blockers
+- Provide summary after completion
+
+**Step-by-step mode:**
+
+- Complete one logical step
+- Report completion and results
+- Wait for explicit approval before next step
+
+Document the preference and follow it throughout the task.
+
+### 3. Protocol Review Cycle
+
+**Before starting each new major step** (moving between phases, starting a new feature, addressing new requirements):
+
+1. Re-read the relevant DLP phase README
+2. Review any protocol updates or new guidance
+3. Update your plan if protocol insights reveal gaps or better approaches
+4. Verify current step aligns with protocol best practices
+
+```
+Example workflow:
+  Task: Implement user authentication
+
+  Step 1: Requirements
+    → Read requirements/README.md
+    → Gather requirements using protocol guidance
+    → Document in agreed location
+
+  Step 2: Design
+    → Re-read design/README.md (don't assume from memory)
+    → Design data models, APIs per protocol
+    → Update plan if design insights change approach
+    → Document design
+
+  Step 3: Implementation
+    → Re-read development/README.md
+    → Review coding-standards.md and patterns.md
+    → Implement following protocol
+    → Update plan if implementation reveals issues
+```
+
+**Why review each time:**
+
+- Protocols contain nuanced guidance easily forgotten
+- Each phase has specific checklists and requirements
+- Earlier steps may reveal need to adjust later steps
+- Fresh reading prevents autopilot mistakes
+
+---
+
 [rlm]: https://alexzhang13.github.io/blog/2025/rlm/
