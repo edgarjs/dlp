@@ -3,9 +3,9 @@
 # Development Lifecycle Protocol (DLP) Installer
 # https://github.com/edgarjs/dlp
 #
-# Usage:
-#   curl -sSL https://github.com/edgarjs/dlp/raw/main/install.sh | bash           # global
-#   curl -sSL https://github.com/edgarjs/dlp/raw/main/install.sh | bash -s -- -l  # local
+# Options:
+#   -l, --local       Install to .dlp/ in current directory
+#   -r, --ref <ref>   Install specific commit SHA, branch, or tag
 #
 
 set -e
@@ -13,13 +13,20 @@ set -e
 REPO="edgarjs/dlp"
 INSTALL_DIR="$HOME/.dlp"
 LOCAL=false
+REF=""
 
 while [ $# -gt 0 ]; do
   case "$1" in
     -l|--local) LOCAL=true; INSTALL_DIR=".dlp" ;;
+    -r|--ref)
+      shift
+      [ -z "$1" ] && { echo "Error: --ref requires a value"; exit 1; }
+      REF="$1"
+      ;;
     -h|--help)
-      echo "Usage: install.sh [-l|--local]"
-      echo "  -l, --local  Install to .dlp/ in current directory"
+      echo "Usage: install.sh [-l|--local] [-r|--ref <ref>]"
+      echo "  -l, --local       Install to .dlp/ in current directory"
+      echo "  -r, --ref <ref>   Install specific commit SHA, branch, or tag"
       exit 0
       ;;
     *) echo "Unknown option: $1"; exit 1 ;;
@@ -29,13 +36,18 @@ done
 
 command -v curl >/dev/null || { echo "Error: curl is required"; exit 1; }
 
-RELEASE=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name"' | cut -d'"' -f4)
-[ -z "$RELEASE" ] && { echo "Error: Could not fetch latest release"; exit 1; }
+# Use provided ref or fetch latest release
+if [ -n "$REF" ]; then
+  VERSION="$REF"
+else
+  VERSION=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name"' | cut -d'"' -f4)
+  [ -z "$VERSION" ] && { echo "Error: Could not fetch latest release"; exit 1; }
+fi
 
-echo "Installing DLP ${RELEASE} to ${INSTALL_DIR}..."
+echo "Installing DLP ${VERSION} to ${INSTALL_DIR}..."
 mkdir -p "$INSTALL_DIR"
-curl -fsSL "https://github.com/${REPO}/archive/${RELEASE}.tar.gz" | tar xz --strip-components=1 -C "$INSTALL_DIR"
-echo "$RELEASE" > "$INSTALL_DIR/.dlp-version"
+curl -fsSL "https://github.com/${REPO}/archive/${VERSION}.tar.gz" | tar xz --strip-components=1 -C "$INSTALL_DIR"
+echo "$VERSION" > "$INSTALL_DIR/.dlp-version"
 
 INSTRUCTIONS="## Development Lifecycle Protocol (DLP)
 
