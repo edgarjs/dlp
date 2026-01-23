@@ -62,6 +62,101 @@ After implementing a function:
   - Do existing tests still pass?
 ```
 
+### Automate Repetitive Tasks
+
+If you find yourself performing the same task twice, automate it with a script.
+
+```
+Signs you need automation:
+  - Running the same command sequence repeatedly
+  - Manually copying/transforming data between systems
+  - Performing the same setup steps for each feature
+  - Executing the same verification steps after changes
+  - Applying the same code transformation to multiple files
+```
+
+**The automation rule:**
+
+```
+First time:  Do it manually, document the steps
+Second time: Write a script AND use it immediately (no third time)
+```
+
+**When you catch yourself doing the same task twice:**
+
+```
+1. Stop and recognize the pattern
+   "I'm about to run these same commands again..."
+
+2. Write the script
+   Create .sh, .py, or appropriate script
+   Add clear comments and usage instructions
+   Make it project-specific, not one-off
+
+3. Document it
+   Add to project README or docs/scripts.md
+   Explain what it does, when to use it
+   Document any prerequisites
+
+4. Use the script for this occurrence
+   Run the script instead of manual steps
+   Verify it works correctly
+   Refine if needed
+
+From now on: Always use the script, never do it manually again
+```
+
+**What to automate:**
+
+```
+Good candidates:
+  ✓ Build and test sequences
+  ✓ Database setup and seeding
+  ✓ Environment configuration
+  ✓ Code generation from templates
+  ✓ Deployment preparation
+  ✓ Data migration or transformation
+  ✓ Verification and validation checks
+
+Poor candidates:
+  ✗ One-time operations
+  ✗ Tasks that change significantly each time
+  ✗ Tasks requiring human judgment
+  ✗ Complex operations better served by proper tooling
+```
+
+**Script quality guidelines:**
+
+```
+Scripts should:
+  - Have clear names describing their purpose
+  - Include usage documentation at the top
+  - Check prerequisites before running
+  - Provide clear error messages
+  - Be idempotent when possible
+  - Exit with appropriate status codes
+
+Example script header:
+  #!/bin/bash
+  # Setup test database with seed data
+  # Usage: ./setup-test-db.sh
+  # Prerequisites: PostgreSQL running, .env file configured
+```
+
+**Benefits:**
+
+```
+Automation provides:
+  - Consistency (same steps every time)
+  - Speed (seconds vs minutes)
+  - Documentation (script shows exact steps)
+  - Error reduction (no skipped steps)
+  - Onboarding (new team members use scripts)
+  - Focus (automation handles tedious tasks)
+```
+
+**Remember:** Automation is not about writing perfect, generalized tools. It's about eliminating repetitive manual work with simple, project-specific scripts.
+
 ---
 
 ## Implementation Order
@@ -255,6 +350,7 @@ If blocked for more than [threshold]:
 - [ ] Following coding standards
 - [ ] Handling errors appropriately
 - [ ] Verifying as you go
+- [ ] Automating repetitive tasks (script on second occurrence)
 - [ ] Committing atomic changes
 ```
 
