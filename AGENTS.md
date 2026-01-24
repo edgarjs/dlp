@@ -25,6 +25,8 @@
 
 6.  **Concerns**: Always cross-reference `concerns/` (Security, Performance) when making design or implementation decisions.
 
+7.  **Dependency Version Gate**: When adding or updating dependencies, you MUST verify and use the latest stable version from the official package registry. See `development/dependency-management.md` for the enforcement checklist. Document any intentional deviation with explicit justification.
+
 ---
 
 ## Recursive Loading Strategy

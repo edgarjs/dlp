@@ -41,6 +41,62 @@ flowchart TD
 
 ---
 
+## Version Enforcement
+
+> [!IMPORTANT]
+> **MANDATORY: Always use the latest stable version when adding dependencies.**
+
+When adding any dependency, you MUST verify and use the current latest stable version from the official package registry. This is non-negotiable.
+
+### Enforcement Checklist
+
+Before adding any dependency, complete this checklist:
+
+```
+- [ ] Searched official registry for latest stable version
+- [ ] Confirmed version being installed matches latest stable
+- [ ] If using older version, documented explicit justification below
+```
+
+### When Older Versions Are Acceptable
+
+Rare exceptions require explicit documentation:
+
+```
+Acceptable reasons for older version:
+  - Breaking changes in latest incompatible with project constraints
+  - Known critical bug in latest with no workaround
+  - Dependency on another package that requires specific version
+
+Required documentation:
+  - Which version is being used
+  - What the latest stable version is
+  - Why the older version is necessary
+  - Plan to upgrade when possible
+```
+
+### Version Verification Workflow
+
+```
+1. Search official registry:
+   - npm: npmjs.com/package/[name]
+   - PyPI: pypi.org/project/[name]
+   - crates.io: crates.io/crates/[name]
+   - Go: pkg.go.dev/[import-path]
+   - Ruby: rubygems.org/gems/[name]
+
+2. Note the current latest stable version
+
+3. Install that exact version:
+   npm install package@latest
+   pip install package  # defaults to latest
+   cargo add package    # defaults to latest
+
+4. Verify installed version matches expected
+```
+
+---
+
 ## Evaluating New Dependencies
 
 Before adding any dependency, evaluate it systematically.
