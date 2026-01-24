@@ -27,6 +27,20 @@
 
 7.  **Dependency Version Gate**: When adding or updating dependencies, you MUST verify and use the latest stable version from the official package registry. See `development/dependency-management.md` for the enforcement checklist. Document any intentional deviation with explicit justification.
 
+8.  **Markdown Formatting**: When writing or editing Markdown files, you MUST follow proper formatting:
+    - Use two trailing spaces at the end of lines that need a line break (soft break). Pay special attention to user stories "Given... When... Then..." format
+    - Use blank lines to separate paragraphs and sections
+    - Ensure consistent heading hierarchy
+
+9.  **Template Enforcement**: When creating documentation artifacts, you MUST use the templates found in `templates/` (DON'T copy any of the protocol documentation, only the templates specific to the artifacts):
+    - Requirements → `templates/requirements-specification.md`
+    - User Stories → `templates/user-stories.md`
+    - Design Decisions → `templates/design-decision.md`
+    - Architecture → `templates/architecture.md`
+    - Data Models → `templates/data-model.md`
+    - API Contracts → `templates/api-contract.yml` (OpenAPI 3.1 format)
+    - Test Strategy → `templates/test-strategy.md`
+
 ---
 
 ## Recursive Loading Strategy

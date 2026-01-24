@@ -2,6 +2,8 @@
 
 Defines interfaces between components. An API specifies what consumers can request, what providers deliver, and what guarantees are made. Contracts formalize these agreements with preconditions, postconditions, and invariants.
 
+> **Required Format:** API contracts MUST be documented using OpenAPI 3.1 specification (YAML format). Use the template at `templates/api-contract.yml` as a starting point. OpenAPI provides machine-readable contracts that enable automated validation, documentation generation, and client SDK generation.
+
 ---
 
 ## Designing Operations

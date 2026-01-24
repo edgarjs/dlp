@@ -80,11 +80,20 @@ This creates `.dlp/` in your project and updates agents files automatically.
 │   ├── test-automation.md   CI integration, test infrastructure
 │   └── test-maintenance.md  Keeping tests healthy
 │
-└── concerns/          Cross-cutting concerns (apply to all phases)
-    ├── security.md          Protecting systems from threats
-    ├── performance.md       Optimizing efficiency and responsiveness
-    ├── accessibility.md     Ensuring usability for all users
-    └── observability.md     Understanding system state through monitoring
+├── concerns/          Cross-cutting concerns (apply to all phases)
+│   ├── security.md          Protecting systems from threats
+│   ├── performance.md       Optimizing efficiency and responsiveness
+│   ├── accessibility.md     Ensuring usability for all users
+│   └── observability.md     Understanding system state through monitoring
+│
+└── templates/         Ready-to-use templates for output artifacts
+    ├── requirements-specification.md  Requirements document template
+    ├── user-stories.md                User stories template
+    ├── design-decision.md             Design decision record template
+    ├── architecture.md                Architecture document template
+    ├── data-model.md                  Data model template
+    ├── api-contract.yml               OpenAPI 3.1 specification template
+    └── test-strategy.md               Test strategy template
 ```
 
 ## Scope

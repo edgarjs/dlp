@@ -11,7 +11,7 @@
 set -e
 
 REPO="edgarjs/dlp"
-INSTALL_DIR="$HOME/.dlp"
+INSTALL_DIR="~/.dlp"
 LOCAL=false
 REF=""
 
