@@ -141,29 +141,34 @@ Edge cases often determine software quality. Specification must address them exp
 ### Categories of Edge Cases
 
 **Empty states**
+
 - First user in the system
 - Search with no results
 - List with no items
 - User with no activity
 
 **Boundary conditions**
+
 - Maximum allowed values
 - Minimum allowed values
 - Exactly at limits
 
 **Invalid input**
+
 - Wrong data type
 - Missing required fields
 - Malformed data
 - Values outside allowed range
 
 **Timing and sequence**
+
 - Simultaneous actions
 - Out-of-order operations
 - Interrupted operations
 - Timeout scenarios
 
 **Resource limits**
+
 - Large file uploads
 - Many concurrent users
 - Full storage
@@ -193,27 +198,32 @@ Non-functional requirements (NFRs) specify qualities the system must have, not b
 ### Common NFR Categories
 
 **Performance**
+
 - Response time limits
 - Throughput requirements
 - Resource usage constraints
 
 **Security**
+
 - Authentication requirements
 - Authorization rules
 - Data protection needs
 - Audit requirements
 
 **Reliability**
+
 - Uptime expectations
 - Recovery time objectives
 - Data durability requirements
 
 **Scalability**
+
 - Expected user/load growth
 - Capacity requirements
 - Degradation behavior under load
 
 **Usability**
+
 - Accessibility requirements
 - Supported devices/browsers
 - Internationalization needs
@@ -297,442 +307,156 @@ Organize specifications for clarity and navigation:
 - [ ] Traceable to gathered requirements
 ```
 
----
-
 ## Real-World Examples
 
-The following examples demonstrate complete requirement specifications for common features.
+The following examples demonstrate specification structure. For complete templates, see `templates/`.
 
-### Example 1: Password Reset Feature
+### Example 1: Password Reset Feature (Complete)
+
+This example shows full specification depth for a security-critical feature.
 
 **User Flow:**
 
 ```mermaid
 flowchart TD
-    A[User clicks Forgot Password] --> B[Enter email address]
+    A[User clicks Forgot Password] --> B[Enter email]
     B --> C{Email registered?}
-    C -->|Yes| D[Generate reset token]
+    C -->|Yes| D[Generate token + Send email]
     C -->|No| E[Show generic message]
-    D --> F[Send email with link]
-    F --> E
-    E --> G[User checks email]
-    G --> H[Click reset link]
-    H --> I{Link valid?}
-    I -->|No| J[Show error + request new link]
-    I -->|Yes| K[Enter new password]
-    K --> L{Password valid?}
-    L -->|No| M[Show requirements]
-    M --> K
-    L -->|Yes| N[Update password]
-    N --> O[Invalidate sessions]
-    O --> P[Redirect to login]
+    D --> E
+    E --> F[User clicks link]
+    F --> G{Link valid?}
+    G -->|No| H[Show error]
+    G -->|Yes| I[Set new password]
+    I --> J[Invalidate sessions + Redirect]
 ```
 
 ```markdown
-# Password Reset Feature Specification
-
-## Overview
-Allow users to securely reset their password when they forget it.
+# Password Reset Specification
 
 ## Functional Requirements
 
 ### FR-1: Request Password Reset
-**Description:** Users can request a password reset link via email.
+
+**Description:** Users request reset link via email.
 
 **Acceptance Criteria:**
-- Given a user on the login page
-  When they click "Forgot Password"
-  Then they see a form requesting their email address
 
-- Given a valid registered email
-  When submitted
-  Then a reset link is sent within 60 seconds
-  And user sees "If this email exists, a reset link has been sent"
-
-- Given an unregistered email
-  When submitted
-  Then no email is sent
-  And user sees the same message (prevents email enumeration)
+- Given registered email → send reset link within 60 seconds
+- Given unregistered email → show same message (prevent enumeration)
 
 **Edge Cases:**
-- Empty email field: Show validation error
-- Invalid email format: Show validation error
-- User requests multiple times: Invalidate previous links, send new one
-- Email service unavailable: Log error, show "try again later" message
+
+- Empty/invalid email: validation error
+- Multiple requests: invalidate previous links
+- Email service down: log error, show retry message
 
 ### FR-2: Reset Link Validation
-**Description:** System validates reset links before allowing password change.
 
-**Acceptance Criteria:**
-- Reset links expire after 1 hour
-- Reset links are single-use (invalidated after successful reset)
-- Reset links contain cryptographically random token (min 32 bytes)
-- Invalid/expired links show clear error with option to request new link
+- Links expire after 1 hour
+- Single-use (invalidated after reset)
+- Cryptographically random token (min 32 bytes)
 
 ### FR-3: Set New Password
-**Description:** Users can set a new password via valid reset link.
 
 **Acceptance Criteria:**
-- Given a valid reset link
-  When user clicks it
-  Then they see a form to enter new password (twice)
 
-- Password requirements:
-  - Minimum 8 characters
-  - At least one uppercase letter
-  - At least one lowercase letter
-  - At least one number
-  - Cannot match last 5 passwords
-
-- Given matching valid passwords
-  When submitted
-  Then password is updated
-  And user is redirected to login with success message
-  And all existing sessions are invalidated
-  And confirmation email is sent
+- Password: min 8 chars, mixed case, number, not in last 5
 
 **Edge Cases:**
-- Passwords don't match: Show error, don't submit
-- Password doesn't meet requirements: Show specific requirement that failed
-- Link used while filling form (by attacker): Show error on submit
+
+- Mismatched passwords: show error
+- Invalid password: show failed requirement
+- Concurrent link use: error on submit
 
 ## Non-Functional Requirements
 
-### NFR-1: Security
-- Reset tokens stored as hashed values (not plaintext)
-- Rate limit: Max 5 reset requests per email per hour
-- Rate limit: Max 10 reset attempts per IP per hour
-- All reset activity logged for security audit
+### Security
 
-### NFR-2: Performance
-- Reset email sent within 60 seconds of request
-- Link validation responds within 200ms
-
-## Dependencies
-- Email service (SendGrid) for sending reset emails
-- Existing user authentication system
-
-## Assumptions
-- Users have access to their registered email
-- Email addresses are unique per user
-```
-
-### Example 2: Shopping Cart API
-
-**Interaction Flow:**
-
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant C as Client
-    participant A as API
-    participant D as Database
-    participant I as Inventory
-
-    U->>C: Add item to cart
-    C->>A: POST /api/cart/items
-    A->>I: Check stock
-    I-->>A: Available: 10
-    A->>D: Save cart item
-    D-->>A: Saved
-    A-->>C: 200 OK (cart object)
-    C-->>U: Show updated cart
-
-    U->>C: Update quantity
-    C->>A: PATCH /api/cart/items/{id}
-    A->>I: Check stock
-    I-->>A: Available: 10
-    A->>D: Update quantity
-    D-->>A: Updated
-    A-->>C: 200 OK (cart object)
-    C-->>U: Show updated cart
-```
-
-```markdown
-# Shopping Cart API Specification
-
-## Overview
-REST API endpoints for managing user shopping carts.
-
-## API Endpoints
-
-### POST /api/cart/items
-Add item to cart.
-
-**Request:**
-| Field      | Type    | Required | Description                   |
-| ---------- | ------- | -------- | ----------------------------- |
-| product_id | string  | Yes      | Product identifier            |
-| quantity   | integer | Yes      | Quantity to add (1-99)        |
-| variant_id | string  | No       | Product variant (size, color) |
-
-**Response Success (200):**
-| Field      | Type    | Description         |
-| ---------- | ------- | ------------------- |
-| cart_id    | string  | Cart identifier     |
-| items      | array   | All items in cart   |
-| subtotal   | decimal | Cart subtotal       |
-| item_count | integer | Total items in cart |
-
-**Response Errors:**
-| Code | Condition                      | Response                                                              |
-| ---- | ------------------------------ | --------------------------------------------------------------------- |
-| 400  | Invalid quantity (< 1 or > 99) | `{"error": "quantity_invalid", "message": "Quantity must be 1-99"}`   |
-| 404  | Product not found              | `{"error": "product_not_found", "message": "Product does not exist"}` |
-| 409  | Product out of stock           | `{"error": "out_of_stock", "available": 5}`                           |
-| 422  | Variant required but missing   | `{"error": "variant_required", "variants": [...]}`                    |
-
-**Business Rules:**
-- If item already in cart, quantities are summed
-- Maximum 99 of any single item
-- Maximum 50 unique items per cart
-- Cart persists for 30 days (guest) or indefinitely (logged in)
-
-**Example:**
-Request:
-  POST /api/cart/items
-  {"product_id": "PROD-123", "quantity": 2}
-
-Response:
-  {
-    "cart_id": "cart_abc123",
-    "items": [
-      {
-        "product_id": "PROD-123",
-        "name": "Blue T-Shirt",
-        "quantity": 2,
-        "unit_price": 29.99,
-        "line_total": 59.98
-      }
-    ],
-    "subtotal": 59.98,
-    "item_count": 2
-  }
-
-### GET /api/cart
-Retrieve current cart.
-
-**Response Success (200):**
-Returns cart object (same structure as POST response).
-
-**Response Empty Cart (200):**
-  {
-    "cart_id": "cart_abc123",
-    "items": [],
-    "subtotal": 0,
-    "item_count": 0
-  }
-
-### PATCH /api/cart/items/{product_id}
-Update item quantity.
-
-**Request:**
-| Field    | Type    | Required | Description                |
-| -------- | ------- | -------- | -------------------------- |
-| quantity | integer | Yes      | New quantity (0 to remove) |
-
-**Response Errors:**
-| Code | Condition                        |
-| ---- | -------------------------------- |
-| 404  | Item not in cart                 |
-| 409  | Requested quantity exceeds stock |
-
-### DELETE /api/cart/items/{product_id}
-Remove item from cart.
-
-**Response Success (200):** Updated cart object
-**Response Error (404):** Item not in cart
-
-### DELETE /api/cart
-Clear entire cart.
-
-**Response Success (200):** Empty cart object
-
-## Non-Functional Requirements
+- Tokens stored hashed
+- Rate limit: 5 requests/email/hour, 10 attempts/IP/hour
+- All activity logged
 
 ### Performance
-- All endpoints respond within 100ms (p95)
-- Support 1000 concurrent cart operations
 
-### Availability
-- 99.9% uptime
-- Cart data replicated across regions
-
-### Data
-- Cart contents encrypted at rest
-- Guest cart linked to account on login
+- Email sent within 60 seconds
+- Link validation < 200ms
 ```
 
-### Example 3: Dashboard Reporting Feature
+### Example 2: Shopping Cart API (Skeleton)
 
-**Data Flow:**
-
-```mermaid
-flowchart LR
-    subgraph Sources
-        POS[POS System]
-        Web[Web Orders]
-        Mobile[Mobile App]
-    end
-
-    subgraph Processing
-        ETL[ETL Pipeline]
-        Cache[Redis Cache]
-    end
-
-    subgraph Dashboard
-        API[Dashboard API]
-        UI[Dashboard UI]
-    end
-
-    POS --> ETL
-    Web --> ETL
-    Mobile --> ETL
-    ETL --> Cache
-    Cache --> API
-    API --> UI
-
-    UI -->|Real-time updates| WS[WebSocket]
-    WS --> Cache
-```
+Shows API specification structure—detail level depends on API complexity.
 
 ```markdown
-# Sales Dashboard Specification
+# Shopping Cart API
 
-## Overview
-Real-time dashboard showing key sales metrics for store managers.
+## POST /api/cart/items
 
-## User Stories
-- As a store manager, I want to see today's sales at a glance
-  so that I can track daily performance
-- As a store manager, I want to compare sales to previous periods
-  so that I can identify trends
-- As a regional manager, I want to see metrics across all my stores
-  so that I can identify top and underperforming locations
+**Request:** product_id (required), quantity (1-99), variant_id (optional)
 
-## Functional Requirements
+**Success (200):** cart_id, items[], subtotal, item_count
 
-### FR-1: Dashboard Overview
-**Description:** Main dashboard displays key metrics.
+**Errors:**
+| Code | Condition |
+|------|-----------|
+| 400 | Invalid quantity |
+| 404 | Product not found |
+| 409 | Out of stock |
 
-**Metrics Displayed:**
-| Metric              | Description       | Update Frequency |
-| ------------------- | ----------------- | ---------------- |
-| Today's Revenue     | Total sales today | Real-time        |
-| Orders Today        | Number of orders  | Real-time        |
-| Average Order Value | Revenue / Orders  | Real-time        |
-| Conversion Rate     | Orders / Visitors | Every 5 minutes  |
+**Business Rules:**
 
-**Comparison Indicators:**
+- Duplicate items: sum quantities
+- Max 99 per item, 50 unique items
+- Cart persists 30 days (guest) / indefinitely (logged in)
+
+## GET /api/cart
+
+Returns cart object (empty cart returns items: [], subtotal: 0)
+
+## PATCH /api/cart/items/{id}
+
+Update quantity (0 to remove)
+
+## DELETE /api/cart/items/{id}
+
+Remove item
+
+## DELETE /api/cart
+
+Clear cart
+```
+
+### Example 3: Dashboard Feature (Skeleton)
+
+Shows UI specification structure—focus on metrics, interactions, and NFRs.
+
+```markdown
+# Sales Dashboard
+
+## Metrics Displayed
+
+| Metric          | Update Frequency |
+| --------------- | ---------------- |
+| Today's Revenue | Real-time        |
+| Orders Today    | Real-time        |
+| Avg Order Value | Real-time        |
+| Conversion Rate | 5 minutes        |
+
 - Each metric shows % change vs same day last week
-- Green arrow (↑) for positive change
-- Red arrow (↓) for negative change
-- Gray dash (—) for < 1% change
+- Visual indicators: ↑ green (positive), ↓ red (negative), — gray (<1%)
 
-**Acceptance Criteria:**
-- Dashboard loads within 2 seconds
-- Metrics update without page refresh
-- Data accurate within 30 seconds of transaction
+## Interactions
 
-### FR-2: Date Range Selection
-**Description:** Users can view metrics for different time periods.
+- Date range selector: Today, Yesterday, 7d, 30d, This Month, Custom (max 90d)
+- Sales chart: line (hourly) for single day, bar (daily) for ranges
+- Top products table: sortable, paginated (10 items, "show more")
+- Store selector: visible only to multi-store users
 
-**Options:**
-- Today (default)
-- Yesterday
-- Last 7 days
-- Last 30 days
-- This month
-- Last month
-- Custom range (max 90 days)
+## NFRs
 
-**Acceptance Criteria:**
-- Changing date range updates all dashboard components
-- Custom range validates start < end
-- Custom range limited to 90 days maximum
-
-### FR-3: Sales Chart
-**Description:** Visual chart of sales over selected period.
-
-**Chart Requirements:**
-- Line chart for single day (hourly data points)
-- Bar chart for multi-day ranges (daily data points)
-- Hover shows exact values
-- Can toggle between Revenue and Order Count views
-
-### FR-4: Top Products Table
-**Description:** Table showing best-selling products.
-
-**Columns:**
-| Column     | Description               | Sortable      |
-| ---------- | ------------------------- | ------------- |
-| Rank       | Position by revenue       | No            |
-| Product    | Name with thumbnail       | No            |
-| Units Sold | Quantity sold             | Yes           |
-| Revenue    | Total revenue             | Yes (default) |
-| % of Total | Percentage of total sales | Yes           |
-
-**Features:**
-- Shows top 10 by default
-- "Show more" loads next 10
-- Click product name to view product details
-
-### FR-5: Store Selector (Regional Managers)
-**Description:** Regional managers can filter by store.
-
-**Options:**
-- All Stores (aggregate view)
-- Individual store selection
-- Multi-select for comparing stores
-
-**Acceptance Criteria:**
-- Only visible to users with multi-store access
-- Remembers last selection per user
-- "All Stores" shows combined metrics
-
-## Wireframe
-
-The dashboard layout follows this structure:
-
-+------------------------------------------------------------------+
-|                        Sales Dashboard                            |
-+----------------+----------------+----------------+----------------+
-| Today's Revenue|    Orders      | Avg Order Value|  Conversion    |
-|    $12,345     |      156       |     $79.13     |     3.2%       |
-|     ↑ 12%      |     ↑ 8%       |      ↑ 4%      |     ↓ 2%       |
-+----------------+----------------+----------------+----------------+
-|                                 |                                 |
-|     Sales Chart (line/bar)      |      Top Products Table         |
-|                                 |                                 |
-+---------------------------------+---------------------------------+
-
-## Non-Functional Requirements
-
-### NFR-1: Performance
-- Initial load: < 2 seconds
-- Date range change: < 1 second
-- Real-time updates: < 30 second latency
-
-### NFR-2: Accessibility
-- All charts have text alternatives
-- Color not sole indicator (patterns for color-blind users)
-- Keyboard navigable
-- Screen reader compatible
-
-### NFR-3: Browser Support
-- Chrome (last 2 versions)
-- Firefox (last 2 versions)
-- Safari (last 2 versions)
-- Edge (last 2 versions)
-
-## Dependencies
-- Sales transaction database
-- Analytics tracking system
-- User permission system (for store access)
-
-## Assumptions
-- Transactions are recorded in real-time
-- Store hierarchy is maintained in user management system
+- Initial load < 2s, range change < 1s
+- Real-time latency < 30s
+- Accessible: text alternatives, keyboard nav, screen reader compatible
 ```
 
 ---

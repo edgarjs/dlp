@@ -98,23 +98,9 @@ flowchart TD
 
 ### Using Decision Trees
 
-When navigating a decision tree:
+Navigate from the entry point, evaluating each question honestly, and follow the matching path to a terminal node. If no path fits your situation, see [decision-making.md](decision-making.md).
 
-1. Start at the entry point (usually top or left)
-2. At each decision point, evaluate the question honestly
-3. Follow the path that matches your answer
-4. Reach a terminal node for the recommended approach
-5. If no path fits, you may have an unusual case—see [decision-making.md](decision-making.md)
-
-### Decision Tree Limitations
-
-Decision trees simplify reality. They:
-
-- Cannot capture every nuance
-- Assume questions have clear answers
-- May not cover edge cases
-
-When a decision tree leads to an answer that feels wrong for your context, trust your judgment but document why you diverged.
+Decision trees simplify reality—they cannot capture every nuance or edge case. When a tree leads to an answer that feels wrong for your context, trust your judgment but document why you diverged.
 
 ---
 
@@ -234,11 +220,13 @@ Some guidance is prescriptive; some is advisory.
 ### Recognizing the Difference
 
 **Mandatory language:**
+
 - "Must," "shall," "required"
 - Checklists with all items marked as necessary
 - Decision trees with single paths for given conditions
 
 **Advisory language:**
+
 - "Should," "recommended," "prefer"
 - "Consider," "may want to"
 - Multiple acceptable options presented

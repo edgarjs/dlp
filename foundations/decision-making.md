@@ -72,34 +72,14 @@ Record what you decided and why. Future developers (including yourself) will ben
 
 ## When Principles Conflict
 
-The principles in [principles.md](principles.md) sometimes pull in different directions.
+Principles sometimes tension with each other. See [Applying Principles Together](principles.md#applying-principles-together) for common tensions and resolution strategies.
 
-### Common Tensions
-
-**YAGNI vs. separation of concerns** — Good separation requires some upfront structure, but YAGNI warns against building for hypothetical futures.
-
-Resolution: Build separation for current requirements, not anticipated ones. Clean boundaries that serve today's needs are not speculation.
-
-**DRY vs. KISS** — Eliminating duplication can require complex abstractions.
-
-Resolution: Apply the rule of three. Tolerate duplication until patterns are clear. Simple duplication is better than premature abstraction.
-
-**Fail fast vs. user experience** — Strict validation can create poor experiences for recoverable situations.
-
-Resolution: Fail fast internally (between components). Be more forgiving at user-facing boundaries where graceful degradation improves experience.
-
-**KISS vs. correctness** — Sometimes the simple solution does not handle all cases correctly.
-
-Resolution: Correctness wins. But first verify that the edge cases are real requirements, not hypothetical concerns (YAGNI).
-
-### Resolution Approach
-
-When principles conflict:
+When principles conflict in your specific situation:
 
 1. Identify which principles are in tension
-2. Consider which principle matters more for this specific situation
+2. Consider which matters more for this context
 3. Apply the more relevant principle
-4. Document the tension and your resolution
+4. Document your resolution
 
 There is no universal ranking of principles. Context determines priority.
 

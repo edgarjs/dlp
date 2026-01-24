@@ -197,13 +197,7 @@ Why this matters:
 
 ```
 1. Search for: "[package-name] latest version [current year]"
-2. Visit official package registry:
-   - npm: npmjs.com/package/[name]
-   - PyPI: pypi.org/project/[name]
-   - crates.io: crates.io/crates/[name]
-   - Go: pkg.go.dev/[import-path]
-   - Ruby gems: rubygems.org/gems/[name]
-
+2. Visit official package registry (see Version Verification Workflow above)
 3. Check official repository/documentation
 4. Search for known issues: "[package-name] issues [current year]"
 5. Check security: "[package-name] vulnerabilities CVE"
