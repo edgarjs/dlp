@@ -41,6 +41,10 @@
     - API Contracts → `templates/api-contract.yml` (OpenAPI 3.1 format)
     - Test Strategy → `templates/test-strategy.md`
 
+10. **Constraint Discovery**: Before generating any implementation plan, you MUST perform a `grep_search` on the `docs/` directory using keywords related to the task to identify hidden constraints (e.g., "TypeScript", "git", "framework"). You must explicitly report the findings or lack thereof.
+
+11. **Constraint Verification**: When verifying a plan or asking for user approval, you MUST explicitly state: "I have verified constraints in `docs/` and found [list constraints] or none."
+
 ---
 
 ## Recursive Loading Strategy
