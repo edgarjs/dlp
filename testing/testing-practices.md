@@ -51,12 +51,10 @@ Use test doubles when the real dependency is slow, non-deterministic, has side e
 
 ### Usage Guidelines
 
-```
-Prefer stubs over mocks — Verifying outputs is more robust than verifying calls.
-Keep fakes simple — Complex fakes become maintenance burdens.
-Mock at boundaries — Mock external systems, not internal collaborators.
-Avoid deep mocking — If mocking requires many levels, test at a different level.
-```
+- Prefer stubs over mocks — Verifying outputs is more robust than verifying calls.
+- Keep fakes simple — Complex fakes become maintenance burdens.
+- Mock at boundaries — Mock external systems, not internal collaborators.
+- Avoid deep mocking — If mocking requires many levels, test at a different level.
 
 ---
 
@@ -121,11 +119,9 @@ Integration tests verify that components work together correctly. They catch iss
 
 ### Database Testing Guidelines
 
-```
-Setup: Create fresh schema or use transaction rollback
-Isolation: Tests should not depend on order; clean up after tests
-Speed: Minimize operations, use transactions for rollback
-```
+- Setup: Create fresh schema or use transaction rollback
+- Isolation: Tests should not depend on order; clean up after tests
+- Speed: Minimize operations, use transactions for rollback
 
 ---
 
@@ -133,17 +129,17 @@ Speed: Minimize operations, use transactions for rollback
 
 ### Testing Your APIs
 
-```
 Test:
-  - Correct responses for valid requests
-  - Error responses for invalid requests
-  - Authentication and authorization
-  - Content types, headers, status codes
+
+- Correct responses for valid requests
+- Error responses for invalid requests
+- Authentication and authorization
+- Content types, headers, status codes
 
 Approach:
-  - Use test client that makes real HTTP requests
-  - Test through HTTP layer, not by calling handlers directly
-```
+
+- Use test client that makes real HTTP requests
+- Test through HTTP layer, not by calling handlers directly
 
 ### Testing External APIs
 
@@ -159,9 +155,9 @@ Approach:
 
 Focus integration tests on component boundaries.
 
-```
 Testing boundary between OrderService and PaymentGateway:
 
+```
 test "order service handles payment timeout":
   // Arrange
   payment_gateway = create_slow_payment_gateway(timeout_after=30s)
@@ -183,17 +179,17 @@ test "order service handles payment timeout":
 
 ### Environment Setup
 
-```
 Before tests:
-  - Start required services (database, message queue)
-  - Create schemas/tables
-  - Configure connections
+
+- Start required services (database, message queue)
+- Create schemas/tables
+- Configure connections
 
 After tests:
-  - Clean up test data
-  - Release connections
-  - Stop services (if started for tests)
-```
+
+- Clean up test data
+- Release connections
+- Stop services (if started for tests)
 
 ### Test Data Management
 
@@ -208,18 +204,15 @@ After tests:
 
 ### Unit Tests
 
-```
 - [ ] Test is fast (milliseconds)
 - [ ] Test is isolated (no shared state)
 - [ ] Test is deterministic (same result every time)
 - [ ] Test is focused (one behavior)
 - [ ] Arrange-Act-Assert structure is clear
 - [ ] Happy path, edge cases, and error conditions tested
-```
 
 ### Integration Tests
 
-```
 - [ ] Test environment is configured
 - [ ] Dependencies are available (database, services)
 - [ ] Tests focus on integration, not unit logic
@@ -227,7 +220,6 @@ After tests:
 - [ ] Tests handle error scenarios
 - [ ] Tests clean up after themselves
 - [ ] Tests are reliable (no flakiness)
-```
 
 ---
 

@@ -78,21 +78,25 @@ Architecture defines how components communicate and depend on each other.
 ### Interaction Patterns
 
 **Synchronous request/response** — One component calls another and waits for a response.
+
 - Simple to understand
 - Creates tight temporal coupling
 - Failure in one affects the caller
 
 **Asynchronous messaging** — One component sends a message without waiting for response.
+
 - Looser coupling
 - More complex to implement and debug
 - Better isolation of failures
 
 **Shared data** — Components communicate through shared state.
+
 - Simple when applicable
 - Creates coupling through data structure
 - Requires careful coordination
 
 **Events** — Components emit events that others subscribe to.
+
 - Very loose coupling
 - Components do not need to know about each other
 - Harder to trace flow
@@ -101,35 +105,37 @@ Architecture defines how components communicate and depend on each other.
 
 Establish which components depend on which:
 
-```
-Principle: Dependencies point toward stability
+**Principle: Dependencies point toward stability**
 
 Stable components (change rarely):
+
 - Core domain logic
 - Fundamental data structures
 
 Volatile components (change often):
+
 - User interfaces
 - External integrations
 
 Volatile components should depend on stable components, not vice versa.
-```
 
 ### Avoiding Circular Dependencies
 
 Circular dependencies indicate poorly defined boundaries:
 
-```
 Problem:
-  Component A depends on Component B
-  Component B depends on Component A
+
+```
+Component A depends on Component B
+Component B depends on Component A
+```
 
 Solutions:
-  1. Merge A and B (they may be one component)
-  2. Extract shared functionality into Component C
-  3. Use events/callbacks to break the cycle
-  4. Introduce an interface that one implements
-```
+
+1. Merge A and B (they may be one component)
+2. Extract shared functionality into Component C
+3. Use events/callbacks to break the cycle
+4. Introduce an interface that one implements
 
 ---
 
@@ -234,18 +240,19 @@ Architecture should satisfy requirements. Verify the mapping:
 ### Architecture-Requirements Mapping
 
 For each major requirement:
+
 - Which component(s) address it?
 - Is the responsibility assignment clear?
 - Are all parts of the requirement covered?
 
 For each component:
+
 - Which requirements does it serve?
 - Is every component justified by requirements?
 - Are responsibilities properly scoped?
 
 ### Architecture Quality Checklist
 
-```
 - [ ] Each component has a clear, single responsibility
 - [ ] Component boundaries align with likely change patterns
 - [ ] Dependencies flow toward stability
@@ -256,7 +263,6 @@ For each component:
 - [ ] Failure scenarios are considered
 - [ ] Scalability requirements are addressed
 - [ ] Security boundaries are established
-```
 
 ---
 

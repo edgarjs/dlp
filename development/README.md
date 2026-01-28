@@ -2,11 +2,26 @@
 
 Transform design into working code. Development is where architecture and contracts become concrete implementation.
 
+---
+
+## Phase Summary
+
+| Aspect             | Details                                                |
+| ------------------ | ------------------------------------------------------ |
+| **Goal**           | Build the solution according to design                 |
+| **Entry Criteria** | Approved design (architecture, data models, contracts) |
+| **Exit Criteria**  | Implemented, reviewed code ready for testing           |
+| **Key Artifacts**  | Working code, documented decisions, commit history     |
+| **Templates**      | None (code is the artifact)                            |
+
+---
+
 ## Purpose
 
 Development answers the question: "How do we build what was designed?"
 
 Without disciplined development:
+
 - Code diverges from design intent
 - Inconsistent patterns create maintenance burden
 - Technical debt accumulates rapidly
@@ -15,11 +30,13 @@ Without disciplined development:
 ## Inputs and Outputs
 
 **Inputs:**
+
 - Approved design (architecture, data models, contracts)
 - Development environment and tools
 - Coding standards and conventions
 
 **Outputs:**
+
 - Implemented, reviewed code
 - Documented decisions and deviations
 - Code ready for testing
@@ -72,28 +89,44 @@ Development iterates between implementation and review until code meets standard
 ## Development Discipline
 
 **Before writing code:**
+
 - Understand the design thoroughly
 - Set up the environment correctly
 - Know the coding standards
 
 **While writing code:**
+
 - Implement one thing at a time
 - Verify as you go
 - Commit frequently with clear messages
 
 **After writing code:**
+
 - Review your own work first
 - Request and respond to code review
 - Ensure tests exist and pass
 
-## When to Proceed to Testing
+## Exit Checklist: When to Proceed to Testing
 
-Move to formal testing when:
+Complete ALL items before moving to the TESTING phase:
 
-- Implementation is complete per design
-- Code review is approved
-- Code passes automated checks (linting, static analysis)
-- Developer testing is complete
-- No known issues remain unaddressed
+- [ ] Implementation is complete per design
+- [ ] Code review is approved
+- [ ] Code passes automated checks (linting, static analysis)
+- [ ] Developer testing is complete
+- [ ] No known issues remain unaddressed
+
+If any item from the list above is incomplete, continue development work.
 
 Development continues to overlap with testing—implementations are verified as they are built.
+
+---
+
+## Concerns to Reference
+
+During development, consider:
+
+- **Security** (`concerns/security.md`) — Follow secure coding practices, validate input, encode output
+- **Performance** (`concerns/performance.md`) — Implement efficiently, avoid premature optimization
+- **Accessibility** (`concerns/accessibility.md`) — Implement accessible UI components
+- **Observability** (`concerns/observability.md`) — Add logging, metrics, and tracing

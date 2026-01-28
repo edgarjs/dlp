@@ -2,6 +2,19 @@
 
 This folder contains the core concepts and meta-guidance that underpin the entire development protocol. These documents establish shared vocabulary, principles, and frameworks that are referenced throughout all subsequent phases.
 
+---
+
+## Quick Reference
+
+| Document                                 | Purpose                                | Read When                                   |
+| ---------------------------------------- | -------------------------------------- | ------------------------------------------- |
+| [terminology.md](terminology.md)         | Glossary of terms                      | A term is unclear or used unexpectedly      |
+| [principles.md](principles.md)           | Core development principles            | Making design or implementation decisions   |
+| [document-format.md](document-format.md) | How to read checklists, decision trees | First time using the protocol               |
+| [decision-making.md](decision-making.md) | Framework for choices                  | Facing trade-offs or conflicting principles |
+
+---
+
 ## Purpose
 
 Before diving into specific phases like requirements gathering or implementation, you need a common foundation:
@@ -31,10 +44,32 @@ Read these documents in sequence before proceeding to any phase:
 
 ## How to Use This Folder
 
-These documents are reference material. You will:
+**For LLM agents:**
 
-- **Read them once** at the start to internalize the concepts
-- **Return to them** when you encounter unfamiliar terms or need to recall a principle
-- **Reference them** when making decisions to ensure consistency with the protocol's philosophy
+1. Read these documents during your first session with the protocol
+2. Reference `terminology.md` when encountering unfamiliar terms
+3. Reference `principles.md` when making decisions
+4. Reference `decision-making.md` when principles conflict
 
-Cross-references throughout the protocol will link back to these foundations when relevant concepts apply.
+**For humans:**
+
+1. Read all four documents before starting any phase
+2. Return to them as reference material throughout the project
+
+---
+
+## Key Principles Summary
+
+For quick reference, the core principles are:
+
+| Principle                        | Meaning                                                         |
+| -------------------------------- | --------------------------------------------------------------- |
+| **YAGNI**                        | Don't build functionality until actually needed                 |
+| **KISS**                         | Prefer the simplest solution that works                         |
+| **DRY**                          | Each piece of knowledge has one authoritative location          |
+| **Separation of Concerns**       | Each component addresses one well-defined concern               |
+| **Fail Fast, Fail Clearly**      | Detect and report errors early with clear messages              |
+| **Composition over Inheritance** | Compose objects from smaller parts rather than deep hierarchies |
+| **Law of Demeter**               | Only talk to immediate friends, not strangers                   |
+
+See [principles.md](principles.md) for full explanations and when to apply or violate each.

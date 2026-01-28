@@ -90,21 +90,21 @@ Every entity needs a unique identifier—its primary key.
 
 **UUIDs (Universally Unique Identifiers):**
 
-```
 Advantages:
-  ✓ Globally unique without coordination
-  ✓ Can be generated client-side or server-side
-  ✓ Safe to expose in URLs without leaking info
-  ✓ No sequential enumeration vulnerability
-  ✓ Easier for distributed systems and sharding
-  ✓ No collisions when merging data from different sources
+
+- Globally unique without coordination
+- Can be generated client-side or server-side
+- Safe to expose in URLs without leaking info
+- No sequential enumeration vulnerability
+- Easier for distributed systems and sharding
+- No collisions when merging data from different sources
 
 Disadvantages:
-  ⚠ Larger storage (16 bytes vs 4-8 bytes)
-  ⚠ Less human-readable
-  ⚠ Slightly slower index operations (use UUIDv7 to avoid)
-  ⚠ Not naturally sortable by creation time (use UUIDv7 if needed)
-```
+
+- Larger storage (16 bytes vs 4-8 bytes)
+- Less human-readable
+- Slightly slower index operations (use UUIDv7 to avoid)
+- Not naturally sortable by creation time (use UUIDv7 if needed)
 
 ### UUID Formats
 
@@ -207,39 +207,29 @@ Constraints define rules that valid data must satisfy.
 
 **Existence constraints** — What must exist?
 
-```
 - Every order must have a user
 - Every order item must have an order and a product
-```
 
 **Uniqueness constraints** — What must be unique?
 
-```
 - User email addresses must be unique
 - Only one active subscription per user
-```
 
 **Value constraints** — What values are allowed?
 
-```
 - Order quantity must be positive
 - Email must be valid format
 - Status must be one of defined values
-```
 
 **Relationship constraints** — What relationships must hold?
 
-```
 - Order total must equal sum of order items
 - A shipped order cannot be cancelled
-```
 
 **Temporal constraints** — What timing rules apply?
 
-```
 - Updated_at must be >= created_at
 - Subscription end_date must be > start_date
-```
 
 ---
 
@@ -289,12 +279,16 @@ Actions: Refund payment, restore inventory, send cancellation email
 
 Model the problem domain, not the solution:
 
-```
 Poor: Model based on UI screens
-  Screen1Data, Screen2Data, FormSubmission
+
+```
+Screen1Data, Screen2Data, FormSubmission
+```
 
 Better: Model based on domain concepts
-  User, Product, Order, Payment
+
+```
+User, Product, Order, Payment
 ```
 
 ### Normalize Thoughtfully
@@ -331,7 +325,6 @@ Trade-off: Denormalized is faster to read but harder to update
 
 ## Modeling Checklist
 
-```
 - [ ] All entities from requirements are identified
 - [ ] Each entity has clear identity and purpose
 - [ ] Primary keys defined (prefer UUIDs for user-facing entities)
@@ -343,7 +336,6 @@ Trade-off: Denormalized is faster to read but harder to update
 - [ ] Access patterns are considered
 - [ ] Normalization decisions are deliberate
 - [ ] Model supports all required operations
-```
 
 ---
 

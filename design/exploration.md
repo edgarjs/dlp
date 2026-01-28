@@ -29,6 +29,7 @@ flowchart TD
 ```
 
 Explore when:
+
 - Multiple viable approaches exist
 - The decision is costly to reverse
 - Requirements involve unfamiliar territory
@@ -36,6 +37,7 @@ Explore when:
 - Stakeholders have strong opinions that need evaluation
 
 Skip exploration when:
+
 - The approach is genuinely obvious and low-risk
 - A standard pattern clearly applies
 - Time pressure is extreme and risk is low
@@ -104,7 +106,6 @@ Not all dimensions matter equally for every decision. Identify which dimensions 
 
 Organize analysis for comparison:
 
-```
 | Dimension    | Approach A | Approach B   | Approach C         |
 | ------------ | ---------- | ------------ | ------------------ |
 | Complexity   | Low        | Medium       | High               |
@@ -113,19 +114,17 @@ Organize analysis for comparison:
 | Risk         | Low        | Medium       | High               |
 | Effort       | 2 weeks    | 4 weeks      | 8 weeks            |
 | Dependencies | None       | External API | New infrastructure |
-```
 
 ### Weighting Dimensions
 
 When dimensions conflict, determine which matter most:
 
-```
 For this decision, priorities are:
+
 1. Effort (tight timeline)
 2. Risk (production system)
 3. Performance (adequate is sufficient)
 4. Flexibility (low priority for v1)
-```
 
 ---
 
@@ -154,23 +153,27 @@ flowchart TD
 When considering existing solutions (libraries, services, frameworks):
 
 **Fit assessment:**
+
 - Does it solve the actual problem?
 - What percentage of requirements does it cover?
 - What would you need to build around it?
 
 **Quality assessment:**
+
 - Is it actively maintained?
 - Is the documentation adequate?
 - What is the community/support like?
 - What is the security posture?
 
 **Cost assessment:**
+
 - What is the learning curve?
 - What is the integration effort?
 - What are the licensing implications?
 - What is the long-term maintenance burden?
 
 **Risk assessment:**
+
 - What happens if the project is abandoned?
 - How easy is it to migrate away?
 - What is the vendor/maintainer lock-in?
@@ -205,12 +208,14 @@ Success criteria:
 ### When to Prototype
 
 Prototype when:
+
 - Feasibility is genuinely uncertain
 - The cost of prototyping is low compared to getting it wrong
 - Written analysis cannot resolve the uncertainty
 - You need to demonstrate something to stakeholders
 
 Skip prototyping when:
+
 - Experience provides sufficient confidence
 - The decision is easily reversible
 - Time pressure outweighs uncertainty
@@ -225,6 +230,7 @@ After exploration, decide and move forward.
 ### Decision Criteria
 
 Choose the approach that:
+
 - Best satisfies requirements
 - Aligns with priorities and constraints
 - Has acceptable risk profile
@@ -263,7 +269,6 @@ Date: 2024-01-15
 
 ## Exploration Checklist
 
-```
 1. [ ] Multiple approaches identified (2-4)
 2. [ ] Each approach is briefly documented
 3. [ ] Trade-off dimensions are identified
@@ -273,7 +278,6 @@ Date: 2024-01-15
 7. [ ] Unknowns are addressed (analysis or prototype)
 8. [ ] Decision is made and documented
 9. [ ] Rationale explains why this approach was chosen
-```
 
 ---
 

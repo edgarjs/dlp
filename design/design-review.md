@@ -33,42 +33,16 @@ Design review covers all design artifacts:
 
 Verify that the design addresses all requirements.
 
-### Requirements Mapping
-
-For each requirement:
-
-```
-Checklist: Requirements Coverage
-- [ ] Requirement maps to specific design elements
-- [ ] Design elements fully address the requirement
-- [ ] Edge cases mentioned in requirements are handled
-- [ ] Non-functional requirements have design support
-- [ ] Nothing is assumed that is not designed
-```
-
 ### Mapping Table
 
 Create explicit mapping:
 
-```
 | Requirement              | Design Element       | Notes            |
 | ------------------------ | -------------------- | ---------------- |
 | User can create orders   | OrderService.create  | Complete         |
 | Order has status history | Order.status_history | Complete         |
 | Orders notify on ship    | NotificationService  | Async via events |
 | Response time < 500ms    | Caching layer        | Review load test |
-```
-
-### Completeness Checklist
-
-```
-- [ ] All functional requirements map to design
-- [ ] All non-functional requirements are addressed
-- [ ] Error handling is designed for all operations
-- [ ] Security requirements have design support
-- [ ] Integration points are specified
-- [ ] Migration/upgrade path considered (if applicable)
-```
 
 ---
 
@@ -76,34 +50,12 @@ Create explicit mapping:
 
 Verify that design elements work together without contradiction.
 
-### Internal Consistency
-
-```
-Checklist: Internal Consistency
-- [ ] Component responsibilities do not overlap
-- [ ] Data models support all designed operations
-- [ ] APIs align with data model capabilities
-- [ ] Contracts are compatible across components
-- [ ] Error handling is consistent across components
-- [ ] Naming conventions are followed throughout
-```
-
-### Interface Consistency
-
-```
-Checklist: Interface Consistency
-- [ ] Similar operations have similar signatures
-- [ ] Error formats are consistent
-- [ ] Data representations match between producer and consumer
-- [ ] Contracts on both sides of an interface agree
-```
-
 ### Data Flow Consistency
 
 Trace data through the system:
 
-```
-Data flow: Order creation
+**Data flow: Order creation**
+
 1. API receives order request → validates format
 2. OrderService.create → validates business rules
 3. Creates Order entity → writes to OrderRepository
@@ -111,37 +63,16 @@ Data flow: Order creation
 5. Returns created order → API formats response
 
 Check at each step:
+
 - Data format matches expectations
 - Required fields are available
 - Transformations are defined
-```
 
 ---
 
 ## Feasibility Review
 
 Verify that the design can actually be implemented.
-
-### Technical Feasibility
-
-```
-Checklist: Technical Feasibility
-- [ ] Required technologies are available
-- [ ] Dependencies are obtainable and suitable
-- [ ] Performance requirements are achievable
-- [ ] Security requirements are implementable
-- [ ] No fundamental technical blockers exist
-```
-
-### Resource Feasibility
-
-```
-Checklist: Resource Feasibility
-- [ ] Scope fits available time
-- [ ] Required infrastructure is available
-- [ ] External dependencies are accessible
-- [ ] Third-party services are available and affordable
-```
 
 ### Risk Assessment
 
@@ -157,41 +88,6 @@ Risk: Performance under load
 Likelihood: Low (similar systems perform well)
 Impact: Medium
 Mitigation: Include load testing in test plan
-```
-
----
-
-## Quality Review
-
-Verify that the design exhibits good qualities.
-
-### Simplicity
-
-```
-Checklist: Simplicity
-- [ ] Design is as simple as requirements allow
-- [ ] No unnecessary components or abstractions
-- [ ] Complex elements are justified by requirements
-- [ ] Future flexibility is not over-engineered
-```
-
-### Maintainability
-
-```
-Checklist: Maintainability
-- [ ] Components have clear responsibilities
-- [ ] Dependencies are managed (no circular dependencies)
-- [ ] Changes can be made without extensive ripple effects
-```
-
-### Testability
-
-```
-Checklist: Testability
-- [ ] Components can be tested in isolation
-- [ ] Contracts are testable
-- [ ] Dependencies can be substituted for testing
-- [ ] Observable behavior is defined for verification
 ```
 
 ---
@@ -222,10 +118,8 @@ During review:
 
 **Blocker** — Must be resolved before implementation can start.
 
-```
-Example: No design for required authentication system
-Action: Return to design to address gap
-```
+- Example: `No design for required authentication system`
+- Action: `Return to design to address gap`
 
 **Major** — Should be resolved but work can start in unaffected areas.
 

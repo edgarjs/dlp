@@ -8,18 +8,6 @@ Setup prepares the environment for implementation. A well-organized setup preven
 
 Before writing code, ensure the development environment is ready.
 
-### Environment Checklist
-
-```
-- [ ] Development tools are installed (editors, compilers, runtimes)
-- [ ] Dependencies are installable and versions are specified
-- [ ] Configuration for local development exists
-- [ ] Can run the application locally
-- [ ] Can run tests locally
-- [ ] Version control is configured
-- [ ] Team conventions are understood
-```
-
 ### Environment Consistency
 
 Development environments should be reproducible:
@@ -39,35 +27,41 @@ Organize code predictably. Consistent structure helps developers navigate unfami
 
 **Group by cohesion** — Related files belong together.
 
-```
 Cohesive grouping (by feature):
-  orders/
-    order_service.py
-    order_repository.py
-    order_model.py
-    order_test.py
+
+```
+orders/
+  order_service.py
+  order_repository.py
+  order_model.py
+  order_test.py
+```
 
 Scattered grouping (by type):
-  services/order_service.py
-  repositories/order_repository.py
-  models/order_model.py
-  tests/order_test.py
+
+```
+services/order_service.py
+repositories/order_repository.py
+models/order_model.py
+tests/order_test.py
 ```
 
 Both approaches can work. Choose one and apply it consistently.
 
 **Reflect architecture** — Structure should mirror architectural components.
 
-```
 If architecture has:
-  - API layer
-  - Service layer
-  - Data layer
+
+- API layer
+- Service layer
+- Data layer
 
 Structure might be:
-  api/
-  services/
-  data/
+
+```
+api/
+services/
+data/
 ```
 
 **Separate concerns** — Keep different concerns in different places.
@@ -103,45 +97,26 @@ Dependencies are external code your project relies on.
 
 **Declare explicitly** — All dependencies should be listed in a manifest file.
 
-```
 Dependencies go in:
-- package.json (Node.js)
-- requirements.txt or pyproject.toml (Python)
-- Gemfile (Ruby)
-- go.mod (Go)
-- Cargo.toml (Rust)
-```
+
+- `package.json` (Node.js)
+- `requirements.txt` or `pyproject.toml` (Python)
+- `Gemfile` (Ruby)
+- `go.mod` (Go)
+- `Cargo.toml` (Rust)
 
 **Pin versions** — Specify exact versions or version ranges.
 
-```
-Exact: library==2.1.0
-Range: library>=2.1,<3.0
+- Exact: `library==2.1.0`
+- Range: `library>=2.1,<3.0`
 
-Exact pins are more reproducible but require manual updates.
+Exact pins are more reproducible but require manual updates.  
 Ranges allow automatic updates but risk breaking changes.
-```
 
 **Separate dev from production** — Development tools should not be production dependencies.
 
-```
-Production: the library you use to serve requests
-Development: the linter, test framework, build tools
-```
-
-### Dependency Evaluation
-
-Before adding a dependency:
-
-```
-Checklist: Adding a dependency
-- [ ] Is this necessary? Could we implement it simply ourselves?
-- [ ] Is it actively maintained?
-- [ ] Is the license compatible?
-- [ ] What is the security posture?
-- [ ] What are its transitive dependencies?
-- [ ] How does it affect bundle/deployment size?
-```
+- Production: the library you use to serve requests
+- Development: the linter, test framework, build tools
 
 ---
 
@@ -180,20 +155,16 @@ config/
 
 **Code-based configuration** — When configuration is code (routes, middleware).
 
-```
-Configuration loaded at startup, not scattered through codebase.
-```
+- Configuration loaded at startup, not scattered through codebase.
 
 ### Configuration Checklist
 
-```
 - [ ] All environment-specific values are externalized
 - [ ] Configuration approach is documented
 - [ ] Defaults exist for development
 - [ ] Required configuration is validated at startup
 - [ ] Secrets are handled securely (not in version control)
 - [ ] Configuration can be overridden per environment
-```
 
 ---
 
@@ -203,7 +174,6 @@ When starting a new project, establish structure early.
 
 ### Scaffold Checklist
 
-```
 - [ ] Directory structure created
 - [ ] Dependency manifest initialized
 - [ ] Configuration approach established
@@ -212,7 +182,6 @@ When starting a new project, establish structure early.
 - [ ] Version control initialized
 - [ ] README with setup instructions exists
 - [ ] CI/CD pipeline configured (if applicable)
-```
 
 ### Scaffold Approach
 
@@ -229,13 +198,8 @@ project/
 
 **Grow as needed** — Add structure when complexity requires it.
 
-```
-Don't create:
-  src/modules/feature_a/submodule_1/
-
-Until you have:
-  Multiple features that need organization
-```
+- Don't create: `src/modules/feature_a/submodule_1/`
+- Until you have: _Multiple features that need organization_
 
 ---
 
@@ -245,14 +209,12 @@ After setup, verify everything works.
 
 ### Verification Steps
 
-```
 1. Clean checkout: Clone the repository fresh
 2. Follow setup instructions: Run documented setup steps
 3. Run application: Start the application locally
 4. Run tests: Execute the test suite
 5. Make a change: Edit code, see the change reflected
 6. Commit: Verify version control works
-```
 
 If any step fails, fix the setup and update documentation.
 

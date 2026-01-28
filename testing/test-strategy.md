@@ -100,14 +100,12 @@ flowchart TD
 
 Set appropriate goals:
 
-```
-Critical paths: 90%+ coverage
-Core business logic: 80%+ coverage
-Infrastructure/glue code: 50-70% coverage
-Overall: 70-80% coverage is typically adequate
+- Critical paths: 90%+ coverage
+- Core business logic: 80%+ coverage
+- Infrastructure/glue code: 50-70% coverage
+- Overall: 70-80% coverage is typically adequate
 
 Coverage numbers are guidelines. Meaningful tests matter more than percentages.
-```
 
 ### Coverage Gaps
 
@@ -208,8 +206,8 @@ Test data needs:
 
 ## Strategy Checklist
 
-```
 Planning:
+
 - [ ] Risk areas identified
 - [ ] Test levels determined for each area
 - [ ] Coverage goals set
@@ -217,15 +215,16 @@ Planning:
 - [ ] Edge cases listed
 
 Resources:
+
 - [ ] Test environment available
 - [ ] Test data strategy defined
 - [ ] Dependencies mockable or testable
 
 Documentation:
+
 - [ ] Test plan documented
 - [ ] Coverage expectations clear
 - [ ] Intentional gaps documented
-```
 
 ---
 
@@ -235,56 +234,52 @@ Documentation:
 
 Inverted pyramid: many end-to-end tests, few unit tests.
 
-```
 Problems:
-  - Tests are slow
-  - Failures are hard to diagnose
-  - Tests are brittle
-  - Feedback loop is slow
+
+- Tests are slow
+- Failures are hard to diagnose
+- Tests are brittle
+- Feedback loop is slow
 
 Fix: Invert the pyramid. Push testing down to unit level.
-```
 
 ### Testing Everything
 
 Trying to achieve 100% coverage everywhere.
 
-```
 Problems:
-  - Diminishing returns
-  - Wasted effort on trivial code
-  - Tests become maintenance burden
-  - Coverage theater (high numbers, weak tests)
+
+- Diminishing returns
+- Wasted effort on trivial code
+- Tests become maintenance burden
+- Coverage theater (high numbers, weak tests)
 
 Fix: Focus on risk and value. Accept strategic gaps.
-```
 
 ### Testing Nothing
 
 No automated tests; relying on manual testing.
 
-```
 Problems:
-  - Regression risk
-  - Slow, expensive verification
-  - Fear of change
-  - Quality degrades over time
+
+- Regression risk
+- Slow, expensive verification
+- Fear of change
+- Quality degrades over time
 
 Fix: Start with high-risk areas. Build testing habits incrementally.
-```
 
 ### Testing Implementation
 
 Tests that verify how code works internally, not what it does.
 
-```
 Problems:
-  - Tests break when implementation changes
-  - Tests provide false confidence
-  - Refactoring becomes painful
+
+- Tests break when implementation changes
+- Tests provide false confidence
+- Refactoring becomes painful
 
 Fix: Test behavior and contracts, not internal structure.
-```
 
 ---
 

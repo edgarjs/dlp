@@ -200,17 +200,21 @@ When something goes wrong, detect it as early as possible and report it with eno
 
 ### Example
 
-```
 Fail slow (problematic):
-  user = fetch_user(user_id)          -- returns null if not found
-  orders = fetch_orders(user.id)      -- crashes: null.id
-  // The actual error (user not found) is obscured
+
+```
+user = fetch_user(user_id)          -- returns null if not found
+orders = fetch_orders(user.id)      -- crashes: null.id
+// The actual error (user not found) is obscured
+```
 
 Fail fast (preferred):
-  user = fetch_user(user_id)
-  if user is null:
-    raise Error("User not found: {user_id}")
-  // Error is detected immediately with actionable information
+
+```
+user = fetch_user(user_id)
+if user is null:
+  raise Error("User not found: {user_id}")
+// Error is detected immediately with actionable information
 ```
 
 For detailed error message design and handling strategies, see [error-handling.md](../development/error-handling.md).
@@ -225,119 +229,139 @@ SOLID is a set of five principles for object-oriented design that promote mainta
 
 A module should have one, and only one, reason to change.
 
-```
 Problem:
-  UserService:
-    - authenticate users
-    - send emails
-    - generate reports
-    - manage database connections
 
-  Changes to email formatting require touching the same class
-  that handles authentication.
+```
+UserService:
+  - authenticate users
+  - send emails
+  - generate reports
+  - manage database connections
+
+Changes to email formatting require touching the same class
+that handles authentication.
+```
 
 Solution:
-  AuthenticationService: handles login/logout
-  EmailService: handles sending emails
-  ReportGenerator: handles report creation
-  DatabaseConnection: handles DB connections
 
-  Each component changes for exactly one reason.
+```
+AuthenticationService: handles login/logout
+EmailService: handles sending emails
+ReportGenerator: handles report creation
+DatabaseConnection: handles DB connections
+
+Each component changes for exactly one reason.
 ```
 
 ### Open/Closed Principle (OCP)
 
 Software entities should be open for extension but closed for modification.
 
-```
 Problem:
-  calculate_discount(customer):
-    if customer.type == "gold":
-      return 0.20
-    if customer.type == "silver":
-      return 0.10
-    if customer.type == "bronze":
-      return 0.05
-    return 0
 
-  Adding a new customer type requires modifying existing code.
+```
+calculate_discount(customer):
+  if customer.type == "gold":
+    return 0.20
+  if customer.type == "silver":
+    return 0.10
+  if customer.type == "bronze":
+    return 0.05
+  return 0
+
+Adding a new customer type requires modifying existing code.
+```
 
 Solution:
-  Each customer type defines its own discount:
-    GoldCustomer.discount() -> 0.20
-    SilverCustomer.discount() -> 0.10
 
-  New types extend behavior without changing existing code.
+```
+Each customer type defines its own discount:
+  GoldCustomer.discount() -> 0.20
+  SilverCustomer.discount() -> 0.10
+
+New types extend behavior without changing existing code.
 ```
 
 ### Liskov Substitution Principle (LSP)
 
 Subtypes must be substitutable for their base types without altering program correctness.
 
-```
 Problem:
-  Rectangle has width and height
-  Square extends Rectangle
-  Square.set_width(w) also sets height to w
 
-  Code expecting Rectangle behavior breaks:
-    rect = get_rectangle()  // might return Square
-    rect.set_width(5)
-    rect.set_height(10)
-    assert rect.area() == 50  // fails if Square!
+```
+Rectangle has width and height
+Square extends Rectangle
+Square.set_width(w) also sets height to w
+
+Code expecting Rectangle behavior breaks:
+  rect = get_rectangle()  // might return Square
+  rect.set_width(5)
+  rect.set_height(10)
+  assert rect.area() == 50  // fails if Square!
+```
 
 Solution:
-  Don't make Square extend Rectangle. Model them as separate
-  types or use a common Shape interface that doesn't promise
-  independent width/height.
+
+```
+Don't make Square extend Rectangle. Model them as separate
+types or use a common Shape interface that doesn't promise
+independent width/height.
 ```
 
 ### Interface Segregation Principle (ISP)
 
 Clients should not be forced to depend on interfaces they do not use.
 
-```
 Problem:
-  Worker interface:
-    - work()
-    - eat()
-    - sleep()
 
-  RobotWorker must implement eat() and sleep() even though
-  robots don't eat or sleep.
+```
+Worker interface:
+  - work()
+  - eat()
+  - sleep()
+
+RobotWorker must implement eat() and sleep() even though
+robots don't eat or sleep.
+```
 
 Solution:
-  Workable interface: work()
-  Eatable interface: eat()
-  Sleepable interface: sleep()
 
-  HumanWorker implements all three
-  RobotWorker implements only Workable
+```
+Workable interface: work()
+Eatable interface: eat()
+Sleepable interface: sleep()
+
+HumanWorker implements all three
+RobotWorker implements only Workable
 ```
 
 ### Dependency Inversion Principle (DIP)
 
 High-level modules should not depend on low-level modules. Both should depend on abstractions.
 
-```
 Problem:
-  OrderProcessor directly creates MySQLDatabase
-  Changing to PostgreSQL requires changing OrderProcessor
 
-  OrderProcessor:
-    db = new MySQLDatabase()
-    db.save(order)
+```
+OrderProcessor directly creates MySQLDatabase
+Changing to PostgreSQL requires changing OrderProcessor
+
+OrderProcessor:
+  db = new MySQLDatabase()
+  db.save(order)
+```
 
 Solution:
-  OrderProcessor depends on Database interface
-  Specific database is injected
 
-  OrderProcessor:
-    constructor(database: Database)
-    database.save(order)
+```
+OrderProcessor depends on Database interface
+Specific database is injected
 
-  Can use MySQLDatabase, PostgreSQLDatabase, or TestDatabase
-  without changing OrderProcessor.
+OrderProcessor:
+  constructor(database: Database)
+  database.save(order)
+
+Can use MySQLDatabase, PostgreSQLDatabase, or TestDatabase
+without changing OrderProcessor.
 ```
 
 ### When SOLID Applies Less
@@ -366,30 +390,34 @@ Favor composing objects from smaller, focused components rather than building de
 
 ### Example
 
-```
 Inheritance approach (problematic):
-  Bird
-    ├── FlyingBird
-    │     ├── Sparrow
-    │     └── Eagle
-    └── NonFlyingBird
-          ├── Penguin
-          └── Ostrich
 
-  What about a Duck that swims and flies?
-  What about a Penguin that swims but doesn't fly?
-  Hierarchy becomes tangled.
+```
+Bird
+  ├── FlyingBird
+  │     ├── Sparrow
+  │     └── Eagle
+  └── NonFlyingBird
+        ├── Penguin
+        └── Ostrich
+
+What about a Duck that swims and flies?
+What about a Penguin that swims but doesn't fly?
+Hierarchy becomes tangled.
+```
 
 Composition approach:
-  Bird has:
-    - FlyingBehavior (CanFly or CannotFly)
-    - SwimmingBehavior (CanSwim or CannotSwim)
 
-  Duck = Bird + CanFly + CanSwim
-  Penguin = Bird + CannotFly + CanSwim
-  Sparrow = Bird + CanFly + CannotSwim
+```
+Bird has:
+  - FlyingBehavior (CanFly or CannotFly)
+  - SwimmingBehavior (CanSwim or CannotSwim)
 
-  Behaviors can be mixed freely without hierarchy constraints.
+Duck = Bird + CanFly + CanSwim
+Penguin = Bird + CannotFly + CanSwim
+Sparrow = Bird + CanFly + CannotSwim
+
+Behaviors can be mixed freely without hierarchy constraints.
 ```
 
 ### Signs You Need Composition
@@ -423,43 +451,54 @@ A method should only talk to its immediate friends, not to strangers. More speci
 
 ### Example
 
-```
 Violation (reaching through objects):
-  process_order(order):
-    street = order.customer.address.street
-    city = order.customer.address.city
-    send_package(street, city)
 
-  This method knows the internal structure of Customer and Address.
-  Changes to Address break this code.
+```
+process_order(order):
+  street = order.customer.address.street
+  city = order.customer.address.city
+  send_package(street, city)
+
+This method knows the internal structure of Customer and Address.
+Changes to Address break this code.
+```
 
 Following Law of Demeter:
-  process_order(order):
-    shipping_address = order.get_shipping_address()
-    send_package(shipping_address)
 
-  Order provides what's needed. Internal structure is hidden.
+```
+process_order(order):
+  shipping_address = order.get_shipping_address()
+  send_package(shipping_address)
+
+Order provides what's needed. Internal structure is hidden.
+```
 
 Alternative (tell, don't ask):
-  process_order(order):
-    order.ship()
 
-  Even better: tell the order to ship itself rather than
-  extracting data to do shipping externally.
+```
+process_order(order):
+  order.ship()
+
+Even better: tell the order to ship itself rather than
+extracting data to do shipping externally.
 ```
 
 ### "Tell, Don't Ask"
 
 A related principle: instead of asking an object for data and then acting on it, tell the object what you need done. This naturally follows the Law of Demeter.
 
-```
 Ask (violates):
-  if customer.account.balance >= amount:
-    customer.account.balance -= amount
+
+```
+if customer.account.balance >= amount:
+  customer.account.balance -= amount
+```
 
 Tell (follows):
-  customer.charge(amount)
-  // Customer knows how to handle its own account
+
+```
+customer.charge(amount)
+// Customer knows how to handle its own account
 ```
 
 ---

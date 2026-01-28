@@ -26,11 +26,8 @@ When facing a decision, work through these steps:
 
 State the decision precisely. Vague framing leads to vague conclusions.
 
-```
-Vague: "How should we handle errors?"
-Precise: "Should validation errors be returned as a list of all errors
-         or should we fail on the first error encountered?"
-```
+- Vague: "How should we handle errors?"
+- Precise: "Should validation errors be returned as a list of all errors or should we fail on the first error encountered?"
 
 ### 2. Identify the Constraints
 
@@ -116,13 +113,19 @@ When seeking input:
 4. Indicate your tentative preference (if any)
 5. Ask a specific question
 
-```
-Good: "For error responses, I see two options: return all validation errors
-       at once, or fail on the first error. The first is better for forms,
-       the second is simpler to implement. I'm leaning toward returning all
-       errors since this is user-facing. Does that align with expectations?"
+Good:
 
-Poor: "How should I handle errors?"
+```
+"For error responses, I see two options: return all validation errors
+at once, or fail on the first error. The first is better for forms,
+the second is simpler to implement. I'm leaning toward returning all
+errors since this is user-facing. Does that align with expectations?"
+```
+
+Poor:
+
+```
+"How should I handle errors?"
 ```
 
 ---

@@ -12,20 +12,22 @@ Tests should trace back to requirements.
 
 Each acceptance criterion suggests tests:
 
-```
 Requirement: User login
 
 Acceptance criteria:
-  - User can log in with valid email and password
-  - User sees error with invalid email
-  - User sees error with incorrect password
-  - Account locks after 5 failed attempts
+
+- User can log in with valid email and password
+- User sees error with invalid email
+- User sees error with incorrect password
+- Account locks after 5 failed attempts
 
 Tests derived:
-  test_login_with_valid_credentials_succeeds
-  test_login_with_invalid_email_shows_error
-  test_login_with_wrong_password_shows_error
-  test_account_locks_after_five_failed_attempts
+
+```
+test_login_with_valid_credentials_succeeds
+test_login_with_invalid_email_shows_error
+test_login_with_wrong_password_shows_error
+test_account_locks_after_five_failed_attempts
 ```
 
 ### From Edge Cases
@@ -34,23 +36,19 @@ Requirements specify normal behavior; tests must also cover edges. See [testing-
 
 Derive edge cases from the requirement:
 
-```
-Requirement: Shopping cart total calculation
-Edge cases: empty cart, single item, very large quantities, zero-price items
-```
+- Requirement: Shopping cart total calculation
+- Edge cases: empty cart, single item, very large quantities, zero-price items
 
 ### Coverage Mapping
 
 Track which requirements have tests:
 
-```
 | Requirement            | Test                     | Status  |
 | ---------------------- | ------------------------ | ------- |
 | Login with valid creds | test_login_succeeds      | Covered |
 | Invalid email error    | test_invalid_email_error | Covered |
 | Account lockout        | test_account_lockout     | Covered |
 | Password reset         | (not implemented yet)    | Missing |
-```
 
 ---
 
@@ -68,16 +66,20 @@ Names should describe what the test verifies.
 
 ### Naming Examples
 
-```
 Poor names:
-  test1
-  test_login
-  test_calculate
+
+```
+test1
+test_login
+test_calculate
+```
 
 Better names:
-  test_login_with_valid_credentials_returns_session_token
-  test_login_with_expired_password_requires_reset
-  test_calculate_total_with_discount_applies_percentage
+
+```
+test_login_with_valid_credentials_returns_session_token
+test_login_with_expired_password_requires_reset
+test_calculate_total_with_discount_applies_percentage
 ```
 
 ### Naming Conventions
@@ -122,44 +124,42 @@ Assertions verify expected outcomes.
 
 **Be specific** — Assert on exact values when possible.
 
-```
-Poor:  assert result is not null
-Better: assert result.id == expected_id
-        assert result.status == "active"
-```
+- Poor: `assert result is not null`
+- Better:
+  ```
+  assert result.id == expected_id
+  assert result.status == "active"
+  ```
 
 **Assert observable outcomes** — Verify what the code produces, not how.
 
-```
-Poor:  assert internal_counter == 5
-Better: assert len(result.items) == 5
-```
+- Poor: `assert internal_counter == 5`
+- Better: `assert len(result.items) == 5`
 
 **One logical assertion per test** — Multiple asserts are fine if they verify one concept.
 
-```
 Fine (one concept):
-  assert user.name == "Alice"
-  assert user.email == "alice@example.com"
-  assert user.is_active == true
-  // All verify the created user is correct
+
+```
+assert user.name == "Alice"
+assert user.email == "alice@example.com"
+assert user.is_active == true
+// All verify the created user is correct
+```
 
 Split (different concepts):
-  test_user_creation_sets_correct_name
-  test_user_creation_sends_welcome_email
+
+```
+test_user_creation_sets_correct_name
+test_user_creation_sends_welcome_email
 ```
 
 ### Assertion Messages
 
 Include messages that help diagnose failures:
 
-```
-Poor:
-  assert result == expected
-
-Better:
-  assert result == expected, "Expected order total {expected}, got {result}"
-```
+- Poor: `assert result == expected`
+- Better: `assert result == expected, "Expected order total {expected}, got {result}"`
 
 ---
 
@@ -171,37 +171,29 @@ How you create test data affects test quality.
 
 **Minimal data** — Only create what the test needs.
 
-```
-Poor:
-  Create complete user with all 20 fields filled in
-  When test only checks email validation
-
-Better:
-  Create user with only email field set
-```
+- Poor: Create complete user with all 20 fields filled in, when test only checks email validation.
+- Better: Create user with only email field set.
 
 **Obvious data** — Use values that make the test's purpose clear.
 
-```
-Poor:
-  test_age_validation with age = 25  // Why 25?
-
-Better:
-  test_under_18_rejected with age = 17  // Clearly testing boundary
+- Poor: `test_age_validation with age = 25 // Why 25?`
+- Better:
+  ```
+  test_under_18_rejected with age = 17 // Clearly testing boundary
   test_18_and_over_accepted with age = 18
-```
+  ```
 
 **Isolated data** — Each test creates its own data.
 
-```
 Poor:
-  Global test user shared across tests
-  Tests fail in certain orders
+
+- Global test user shared across tests
+- Tests fail in certain orders
 
 Better:
-  Each test creates users it needs
-  Tests are independent
-```
+
+- Each test creates users it needs
+- Tests are independent
 
 ### Test Data Patterns
 
@@ -209,9 +201,9 @@ Better:
 
 ```
 user = UserBuilder()
-  .with_email("test@example.com")
-  .with_active_status()
-  .build()
+.with_email("test@example.com")
+.with_active_status()
+.build()
 ```
 
 **Factory functions** — For common objects.
@@ -223,16 +215,16 @@ order = create_test_order(user=user, items=3)
 
 **Fixtures** — For shared read-only data.
 
-```
 Use fixtures for:
-  - Reference data (countries, currencies)
-  - Configuration
-  - Complex objects needed by many tests
+
+- Reference data (countries, currencies)
+- Configuration
+- Complex objects needed by many tests
 
 Avoid for:
-  - Data that tests modify
-  - Data that could cause test coupling
-```
+
+- Data that tests modify
+- Data that could cause test coupling
 
 ---
 
@@ -242,21 +234,25 @@ Organize tests for findability and maintainability.
 
 ### File Organization
 
-```
 Option 1: Mirror source structure
-  src/
-    users/user_service.py
-  tests/
-    users/user_service_test.py
+
+```
+src/
+  users/user_service.py
+tests/
+  users/user_service_test.py
+```
 
 Option 2: Group by feature
-  tests/
-    user_registration/
-      registration_test.py
-      validation_test.py
-    user_authentication/
-      login_test.py
-      password_reset_test.py
+
+```
+tests/
+  user_registration/
+    registration_test.py
+    validation_test.py
+  user_authentication/
+    login_test.py
+    password_reset_test.py
 ```
 
 ### Test Grouping
@@ -265,40 +261,42 @@ Group related tests:
 
 ```
 UserServiceTests:
-  test_create_user_with_valid_data
-  test_create_user_with_duplicate_email_fails
-  test_create_user_sends_welcome_email
 
-  test_update_user_changes_name
-  test_update_user_with_invalid_email_fails
+test_create_user_with_valid_data
+test_create_user_with_duplicate_email_fails
+test_create_user_sends_welcome_email
 
-  test_delete_user_removes_from_database
-  test_delete_user_cancels_pending_orders
+test_update_user_changes_name
+test_update_user_with_invalid_email_fails
+
+test_delete_user_removes_from_database
+test_delete_user_cancels_pending_orders
 ```
 
 ---
 
 ## Test Design Checklist
 
-```
 Coverage:
+
 - [ ] Requirements map to tests
 - [ ] Happy paths are tested
 - [ ] Edge cases are tested
 - [ ] Error conditions are tested
 
 Quality:
+
 - [ ] Tests are independent
 - [ ] Tests are deterministic
 - [ ] Test names describe scenarios
 - [ ] Structure is consistent (AAA or Given-When-Then)
 
 Maintainability:
+
 - [ ] Tests do not depend on implementation details
 - [ ] Test data is minimal and obvious
 - [ ] Tests are organized logically
 - [ ] Failed tests clearly indicate what broke
-```
 
 ---
 

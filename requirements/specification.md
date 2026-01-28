@@ -33,30 +33,11 @@ A requirement statement should specify:
 
 ### Good vs. Poor Statements
 
-```
-Poor: "The system should be fast"
-Problems: Vague, not testable, no criteria for "fast"
-
-Better: "Search results should appear within 2 seconds of submission"
-Improvements: Specific action, measurable constraint, testable
-```
-
-```
-Poor: "Users can manage their profile"
-Problems: "Manage" is ambiguous, unclear what operations
-
-Better: "Users can view, edit, and delete their profile information"
-Improvements: Specific operations listed, actionable
-```
-
-```
-Poor: "The system handles errors gracefully"
-Problems: "Gracefully" is subjective, not testable
-
-Better: "When a payment fails, the system displays the reason
-         and offers retry or alternative payment options"
-Improvements: Specific condition, specific response, testable
-```
+| Poor Statement                         | Problem                                        | Better Statement                                                                                       | Improvement                                      |
+| -------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
+| "The system should be fast"            | Vague, not testable, no criteria for "fast"    | "Search results should appear within 2 seconds of submission"                                          | Specific action, measurable constraint, testable |
+| "Users can manage their profile"       | "Manage" is ambiguous, unclear what operations | "Users can view, edit, and delete their profile information"                                           | Specific operations listed, actionable           |
+| "The system handles errors gracefully" | "Gracefully" is subjective, not testable       | "When a payment fails, the system displays the reason and offers retry or alternative payment options" | Specific condition, specific response, testable  |
 
 ### Avoiding Ambiguous Language
 
@@ -91,29 +72,31 @@ Acceptance criteria should be:
 
 **Given-When-Then format** — Useful for behavior-focused criteria.
 
+Requirement: "Users can reset their password"
+
+Acceptance criteria (use code blocks):
+
 ```
-Requirement: Users can reset their password
+Given a user on the login page
+When they click "Forgot password" and enter their email
+Then they receive a password reset link within 5 minutes
 
-Acceptance criteria:
-- Given a user on the login page
-  When they click "Forgot password" and enter their email
-  Then they receive a password reset link within 5 minutes
+Given a valid password reset link
+When the user sets a new password meeting complexity requirements
+Then they can log in with the new password
 
-- Given a valid password reset link
-  When the user sets a new password meeting complexity requirements
-  Then they can log in with the new password
-
-- Given an expired password reset link (older than 24 hours)
-  When the user attempts to use it
-  Then they see an error and are prompted to request a new link
+Given an expired password reset link (older than 24 hours)
+When the user attempts to use it
+Then they see an error and are prompted to request a new link
 ```
 
 **Checklist format** — Useful for feature verification.
 
-```
-Requirement: User profile page
+Requirement: "User profile page"
 
-Acceptance criteria:
+Acceptance criteria (use to-do lists):
+
+```
 - [ ] Profile displays user name, email, and profile picture
 - [ ] Edit button is visible only to the profile owner
 - [ ] Profile picture can be changed by uploading an image
@@ -176,18 +159,17 @@ Edge cases often determine software quality. Specification must address them exp
 
 ### Documenting Edge Cases
 
-For each requirement, consider and document:
+For each requirement, consider and document all edge cases.
 
-```
-Requirement: Users can upload profile pictures
+- Requirement: "Users can upload profile pictures"
 
 Edge cases:
+
 - No picture uploaded: Display default avatar
 - File too large (> 5MB): Show error, suggest compression
 - Invalid format (not JPEG/PNG): Show error, list valid formats
 - Upload interrupted: Discard partial upload, prompt retry
 - Storage quota exceeded: Show error, suggest removing old files
-```
 
 ---
 
@@ -232,24 +214,22 @@ Non-functional requirements (NFRs) specify qualities the system must have, not b
 
 NFRs must be as precise as functional requirements:
 
-```
 Poor: "The system should be secure"
 
 Better:
+
 - All passwords must be hashed using bcrypt with cost factor 12
 - Sessions expire after 30 minutes of inactivity
 - Failed login attempts are rate-limited to 5 per minute per IP
 - All data in transit uses TLS 1.2 or higher
-```
 
-```
 Poor: "The system should handle many users"
 
 Better:
+
 - System supports 10,000 concurrent users
 - Response time remains under 500ms at 80% capacity
 - System degrades gracefully: read operations continue when writes are throttled
-```
 
 ---
 
@@ -258,21 +238,17 @@ Better:
 Organize specifications for clarity and navigation:
 
 ```
+
 1. Overview
    - Purpose and scope
    - Stakeholders
    - Related documents
 
 2. Functional Requirements
-   2.1 Feature Area A
-       - Requirement A.1
-         - Description
-         - Acceptance criteria
-         - Edge cases
-       - Requirement A.2
-         ...
+   2.1 Feature Area A - Requirement A.1 - Description - Acceptance criteria - Edge cases - Requirement A.2
+   ...
    2.2 Feature Area B
-       ...
+   ...
 
 3. Non-Functional Requirements
    3.1 Performance
@@ -287,13 +263,13 @@ Organize specifications for clarity and navigation:
 
 5. Glossary
    - Terms specific to this specification
+
 ```
 
 ---
 
 ## Specification Checklist
 
-```
 - [ ] Each requirement has a unique identifier
 - [ ] Each requirement is unambiguous
 - [ ] Each requirement has acceptance criteria
@@ -305,159 +281,6 @@ Organize specifications for clarity and navigation:
 - [ ] Terminology is consistent
 - [ ] Specification is internally consistent (no contradictions)
 - [ ] Traceable to gathered requirements
-```
-
-## Real-World Examples
-
-The following examples demonstrate specification structure. For complete templates, see `templates/`.
-
-### Example 1: Password Reset Feature (Complete)
-
-This example shows full specification depth for a security-critical feature.
-
-**User Flow:**
-
-```mermaid
-flowchart TD
-    A[User clicks Forgot Password] --> B[Enter email]
-    B --> C{Email registered?}
-    C -->|Yes| D[Generate token + Send email]
-    C -->|No| E[Show generic message]
-    D --> E
-    E --> F[User clicks link]
-    F --> G{Link valid?}
-    G -->|No| H[Show error]
-    G -->|Yes| I[Set new password]
-    I --> J[Invalidate sessions + Redirect]
-```
-
-```markdown
-# Password Reset Specification
-
-## Functional Requirements
-
-### FR-1: Request Password Reset
-
-**Description:** Users request reset link via email.
-
-**Acceptance Criteria:**
-
-- Given registered email → send reset link within 60 seconds
-- Given unregistered email → show same message (prevent enumeration)
-
-**Edge Cases:**
-
-- Empty/invalid email: validation error
-- Multiple requests: invalidate previous links
-- Email service down: log error, show retry message
-
-### FR-2: Reset Link Validation
-
-- Links expire after 1 hour
-- Single-use (invalidated after reset)
-- Cryptographically random token (min 32 bytes)
-
-### FR-3: Set New Password
-
-**Acceptance Criteria:**
-
-- Password: min 8 chars, mixed case, number, not in last 5
-
-**Edge Cases:**
-
-- Mismatched passwords: show error
-- Invalid password: show failed requirement
-- Concurrent link use: error on submit
-
-## Non-Functional Requirements
-
-### Security
-
-- Tokens stored hashed
-- Rate limit: 5 requests/email/hour, 10 attempts/IP/hour
-- All activity logged
-
-### Performance
-
-- Email sent within 60 seconds
-- Link validation < 200ms
-```
-
-### Example 2: Shopping Cart API (Skeleton)
-
-Shows API specification structure—detail level depends on API complexity.
-
-```markdown
-# Shopping Cart API
-
-## POST /api/cart/items
-
-**Request:** product_id (required), quantity (1-99), variant_id (optional)
-
-**Success (200):** cart_id, items[], subtotal, item_count
-
-**Errors:**
-| Code | Condition |
-|------|-----------|
-| 400 | Invalid quantity |
-| 404 | Product not found |
-| 409 | Out of stock |
-
-**Business Rules:**
-
-- Duplicate items: sum quantities
-- Max 99 per item, 50 unique items
-- Cart persists 30 days (guest) / indefinitely (logged in)
-
-## GET /api/cart
-
-Returns cart object (empty cart returns items: [], subtotal: 0)
-
-## PATCH /api/cart/items/{id}
-
-Update quantity (0 to remove)
-
-## DELETE /api/cart/items/{id}
-
-Remove item
-
-## DELETE /api/cart
-
-Clear cart
-```
-
-### Example 3: Dashboard Feature (Skeleton)
-
-Shows UI specification structure—focus on metrics, interactions, and NFRs.
-
-```markdown
-# Sales Dashboard
-
-## Metrics Displayed
-
-| Metric          | Update Frequency |
-| --------------- | ---------------- |
-| Today's Revenue | Real-time        |
-| Orders Today    | Real-time        |
-| Avg Order Value | Real-time        |
-| Conversion Rate | 5 minutes        |
-
-- Each metric shows % change vs same day last week
-- Visual indicators: ↑ green (positive), ↓ red (negative), — gray (<1%)
-
-## Interactions
-
-- Date range selector: Today, Yesterday, 7d, 30d, This Month, Custom (max 90d)
-- Sales chart: line (hourly) for single day, bar (daily) for ranges
-- Top products table: sortable, paginated (10 items, "show more")
-- Store selector: visible only to multi-store users
-
-## NFRs
-
-- Initial load < 2s, range change < 1s
-- Real-time latency < 30s
-- Accessible: text alternatives, keyboard nav, screen reader compatible
-```
 
 ---
 

@@ -2,6 +2,20 @@
 
 Transform validated requirements into a technical blueprint. Design bridges the gap between what needs to be built and how it will be built.
 
+---
+
+## Phase Summary
+
+| Aspect             | Details                                                                                                              |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| **Goal**           | Define HOW to structure the solution                                                                                 |
+| **Entry Criteria** | Validated requirements specification                                                                                 |
+| **Exit Criteria**  | Reviewed and approved design ready for implementation                                                                |
+| **Key Artifacts**  | Architecture document, data models, API contracts, design decisions                                                  |
+| **Templates**      | `templates/architecture.md`, `templates/data-model.md`, `templates/api-contract.yml`, `templates/design-decision.md` |
+
+---
+
 ## Purpose
 
 Design work answers the question: "How will we structure this solution?"
@@ -95,15 +109,28 @@ Match design depth to project complexity:
 - Complete interface contracts
 - Formal design review with stakeholders
 
-## When to Proceed to Development
+## Exit Checklist: When to Proceed to Development
 
-Move to development when:
+Complete ALL items before moving to the DEVELOPMENT phase:
 
-- Architecture addresses all requirements
-- Data models support all use cases
-- Interfaces between components are defined
-- Design has been reviewed and approved
-- No significant risks remain unexplored
-- The team could implement from the design documents
+```
+- [ ] Architecture addresses all requirements
+- [ ] Data models support all use cases
+- [ ] Interfaces between components are defined
+- [ ] Design has been reviewed and approved
+- [ ] No significant risks remain unexplored
+- [ ] The team could implement from the design documents
+```
 
-If any of these are uncertain, continue design work.
+If any item from the list above is incomplete, continue design work.
+
+---
+
+## Concerns to Reference
+
+During design, consider:
+
+- **Security** (`concerns/security.md`) — Establish trust boundaries, design authentication/authorization, plan encryption
+- **Performance** (`concerns/performance.md`) — Design for efficiency, identify bottlenecks early
+- **Accessibility** (`concerns/accessibility.md`) — Design inclusive interfaces from the start
+- **Observability** (`concerns/observability.md`) — Plan logging, metrics, and tracing infrastructure

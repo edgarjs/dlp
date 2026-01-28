@@ -23,13 +23,12 @@ Checklists are ordered lists of items to address. They appear throughout the pro
 
 ### Reading Checklists
 
-```
 Checklist: Before committing code
+
 1. [ ] Tests pass
 2. [ ] No new warnings introduced
 3. [ ] Commit message follows convention
 4. [ ] Changes match the stated intent
-```
 
 Each item should be verified or completed. The order matters—items often build on previous items.
 
@@ -37,33 +36,21 @@ Each item should be verified or completed. The order matters—items often build
 
 **Sequential checklists** — Items must be completed in order. Later items depend on earlier ones.
 
-```
 Checklist: Setting up a new module
+
 1. [ ] Create directory structure
 2. [ ] Define public interface
 3. [ ] Implement core functionality
 4. [ ] Add tests
-```
 
 **Verification checklists** — Items can be checked in any order. All must pass.
 
-```
 Checklist: Code review readiness
+
 - [ ] Functionality matches requirements
 - [ ] Error cases are handled
 - [ ] Code is readable
 - [ ] No obvious performance issues
-```
-
-**Conditional checklists** — Some items may not apply. Skip items that do not match your context.
-
-```
-Checklist: Pre-release verification
-- [ ] All tests pass
-- [ ] Documentation is updated
-- [ ] If public API changed: migration guide exists
-- [ ] If database schema changed: migration script tested
-```
 
 ### Using Checklists
 
@@ -101,40 +88,6 @@ flowchart TD
 Navigate from the entry point, evaluating each question honestly, and follow the matching path to a terminal node. If no path fits your situation, see [decision-making.md](decision-making.md).
 
 Decision trees simplify reality—they cannot capture every nuance or edge case. When a tree leads to an answer that feels wrong for your context, trust your judgment but document why you diverged.
-
----
-
-## Templates
-
-Templates provide structured formats for capturing information consistently.
-
-### Reading Templates
-
-Templates appear as blocks with placeholders:
-
-```
-Requirement: [short identifier]
-Description: [what the system must do]
-Rationale: [why this requirement exists]
-Acceptance criteria:
-  - [testable condition 1]
-  - [testable condition 2]
-Priority: [must-have | should-have | nice-to-have]
-```
-
-Placeholders in `[brackets]` indicate where you provide information. Text outside brackets is literal structure to preserve.
-
-### Using Templates
-
-When filling a template:
-
-1. Read the entire template to understand its structure
-2. Fill placeholders with specific, concrete information
-3. Remove placeholder brackets in your final version
-4. If a field does not apply, either omit it or mark it "N/A" with brief explanation
-5. Add fields if the template lacks something important for your case
-
-Templates are starting points, not constraints. Adapt them when necessary.
 
 ---
 

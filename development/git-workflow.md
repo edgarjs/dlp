@@ -12,27 +12,21 @@ Commits are the atoms of version control history. Good commits make history usef
 
 **Atomic** — Each commit represents one logical change.
 
-```
-Poor: "Fixed bug and added feature and refactored utils"
-Better: Three separate commits:
-  1. "Fix null check in user validation"
-  2. "Add email notification on order completion"
-  3. "Extract date formatting to utility function"
-```
+- Poor: `"Fixed bug and added feature and refactored utils"`
+- Better: Three separate commits:
+  1. `"Fix null check in user validation"`
+  2. `"Add email notification on order completion"`
+  3. `"Extract date formatting to utility function"`
 
 **Complete** — The commit stands alone; the codebase works after applying it.
 
-```
-Poor: A commit that breaks the build, followed by "Fix build"
-Better: Single commit that includes both the change and the fix
-```
+- Poor: A commit that breaks the build, followed by "Fix build"
+- Better: Single commit that includes both the change and the fix
 
 **Buildable and testable** — After each commit, the code compiles and tests pass.
 
-```
-Commits should not require subsequent commits to be functional.
-Each commit is a potential release point.
-```
+- Commits should not require subsequent commits to be functional.
+- Each commit is a potential release point.
 
 ---
 
@@ -57,26 +51,20 @@ Commits should be large enough to:
 
 ### Guidelines
 
-```
-Too small:
-  - "Add opening brace"
-  - "Add variable declaration"
-  - "Add function body"
-  These should be one commit.
+Too small (these should be one commit):
 
-Too large:
-  - "Implement user authentication system"
-  This should be multiple commits:
-    - Add user model
-    - Add password hashing
-    - Add login endpoint
-    - Add session management
+- `"Add opening brace"`
+- `"Add variable declaration"`
+- `"Add function body"`
 
-Right size:
-  - "Add password hashing utility"
-  - "Add user login endpoint with validation"
-  Each is complete, testable, and reviewable.
-```
+Too large (this should be multiple commits):
+
+- `"Implement user authentication system"`
+
+Right size (each is complete, testable, and reviewable):
+
+- `"Add password hashing utility"`
+- `"Add user login endpoint with validation"`
 
 ---
 
@@ -120,68 +108,60 @@ Commit messages document what changed and why.
 
 ### Message Structure
 
-```
-Short summary (50 characters or less)
-
-Longer description if needed. Wrap at 72 characters.
-Explain what and why, not how (the code shows how).
-
+- Short summary (50 characters or less)
+- Longer description if needed. Wrap at 72 characters.
+- Explain what and why, not how (the code shows how).
 - Bullet points are fine for listing changes
 - Keep each point concise
-
-References: TICKET-123
-```
 
 ### Writing Good Messages
 
 **Start with a verb** — Describe what the commit does.
 
-```
 Good:
-  "Add user email validation"
-  "Fix null pointer in order processing"
-  "Remove deprecated authentication method"
+
+```
+"Add user email validation"
+"Fix null pointer in order processing"
+"Remove deprecated authentication method"
+```
 
 Poor:
-  "User email validation"
-  "Bug fix"
-  "Cleanup"
+
+```
+"User email validation"
+"Bug fix"
+"Cleanup"
 ```
 
 **Be specific** — Generic messages are not helpful.
 
-```
 Poor:
-  "Fix bug"
-  "Update code"
-  "Various changes"
+
+```
+"Fix bug"
+"Update code"
+"Various changes"
+```
 
 Better:
-  "Fix race condition in concurrent order creation"
-  "Update user model to include timezone field"
-  "Rename OrderProcessor to OrderService for consistency"
+
+```
+"Fix race condition in concurrent order creation"
+"Update user model to include timezone field"
+"Rename OrderProcessor to OrderService for consistency"
 ```
 
 **Explain why when not obvious** — The diff shows what changed; the message explains why.
 
-```
 Good:
-  "Use insertion sort for small arrays
-
-   Benchmarks show insertion sort outperforms quicksort for
-   arrays under 50 elements due to lower overhead. This path
-   is hit frequently in pagination code."
-```
-
-### Message Checklist
 
 ```
-- [ ] Summary is 50 characters or less
-- [ ] Summary starts with a verb
-- [ ] Summary describes what the commit does
-- [ ] Body explains why (if not obvious from summary)
-- [ ] References related tickets/issues
-- [ ] No typos or unclear language
+Use insertion sort for small arrays
+
+Benchmarks show insertion sort outperforms quicksort for
+arrays under 50 elements due to lower overhead. This path
+is hit frequently in pagination code.
 ```
 
 ---
@@ -217,30 +197,16 @@ flowchart LR
 
 Long-running branches diverge from main. Regularly integrate changes:
 
-```
 Options:
-  - Rebase onto main: Creates linear history
-  - Merge main into branch: Preserves branch history
+
+- Rebase onto main: Creates linear history
+- Merge main into branch: Preserves branch history
 
 Either works; be consistent within a project.
-```
 
 ---
 
 ## Before Committing
-
-### Pre-Commit Checklist
-
-```
-- [ ] Changes match the intended scope (no accidental changes)
-- [ ] No sensitive files (.env, credentials, secrets, API keys)
-- [ ] .gitignore is configured for the project type
-- [ ] Code builds successfully
-- [ ] Tests pass
-- [ ] No debugging code left in (console.log, print statements)
-- [ ] No commented-out code without explanation
-- [ ] Commit message is clear and follows conventions
-```
 
 ### Review Your Own Diff
 
@@ -267,17 +233,16 @@ Check for:
 
 ### What Not to Commit
 
-```
 Never commit:
-  ✗ .env, .env.local, .env.production files
-  ✗ API keys, access tokens, passwords
-  ✗ Private keys (.key, .pem, id_rsa)
-  ✗ Credentials files (credentials.json, secrets.yaml)
-  ✗ Database connection strings with passwords
-  ✗ OAuth client secrets
-  ✗ Signed certificates
-  ✗ Any file containing sensitive data
-```
+
+- ✗ .env, .env.local, .env.production files
+- ✗ API keys, access tokens, passwords
+- ✗ Private keys (.key, .pem, id_rsa)
+- ✗ Credentials files (credentials.json, secrets.yaml)
+- ✗ Database connection strings with passwords
+- ✗ OAuth client secrets
+- ✗ Signed certificates
+- ✗ Any file containing sensitive data
 
 ### Using .gitignore
 
@@ -287,26 +252,23 @@ Every project must have a `.gitignore` file configured for its technology stack.
 
 Use established templates for your stack:
 
-```
-Node.js:    github.com/github/gitignore/blob/main/Node.gitignore
-Python:     github.com/github/gitignore/blob/main/Python.gitignore
-Ruby:       github.com/github/gitignore/blob/main/Ruby.gitignore
-Rust:       github.com/github/gitignore/blob/main/Rust.gitignore
-Go:         github.com/github/gitignore/blob/main/Go.gitignore
+- Node.js: github.com/github/gitignore/blob/main/Node.gitignore
+- Python: github.com/github/gitignore/blob/main/Python.gitignore
+- Ruby: github.com/github/gitignore/blob/main/Ruby.gitignore
+- Rust: github.com/github/gitignore/blob/main/Rust.gitignore
+- Go: github.com/github/gitignore/blob/main/Go.gitignore
 
 Or use: gitignore.io to generate combined templates
-```
 
 ### Environment Variable Management
 
-```
 Good practices:
-  ✓ Store secrets in .env files (ignored by git)
-  ✓ Provide .env.example with dummy values
-  ✓ Document required environment variables
-  ✓ Use environment variable validation on startup
-  ✓ Use secret management tools (Vault, AWS Secrets Manager)
-```
+
+- ✓ Store secrets in `.env` files (ignored by git)
+- ✓ Provide `.env.example` with dummy values
+- ✓ Document required environment variables
+- ✓ Use environment variable validation on startup
+- ✓ Use secret management tools (Vault, AWS Secrets Manager)
 
 ---
 
@@ -316,12 +278,11 @@ Good practices:
 
 If you realize a commit should be split:
 
-```
 Before pushing, you can:
-  - Amend the last commit
-  - Interactive rebase to reorganize commits
-  - Reset and re-commit in better chunks
-```
+
+- Amend the last commit
+- Interactive rebase to reorganize commits
+- Reset and re-commit in better chunks
 
 ### Commit History Quality
 
@@ -354,26 +315,26 @@ Each commit should leave the codebase in a working state.
 
 ### Achieving This
 
-```
 Approach:
-  1. Plan changes before starting
-  2. Implement in small, complete steps
-  3. Verify each step before committing
-  4. Combine incomplete work before sharing
+
+1. Plan changes before starting
+2. Implement in small, complete steps
+3. Verify each step before committing
+4. Combine incomplete work before sharing
 
 If you have messy local history:
-  - Use interactive rebase to clean up
-  - Squash fixup commits
-  - Reorder commits logically
-  - This is fine BEFORE pushing
-```
+
+- Use interactive rebase to clean up
+- Squash fixup commits
+- Reorder commits logically
+- This is fine BEFORE pushing
 
 ---
 
 ## Git Workflow Checklist
 
-```
 Committing:
+
 - [ ] Change is a single, logical unit
 - [ ] No sensitive files or secrets included
 - [ ] .gitignore properly configured
@@ -383,13 +344,14 @@ Committing:
 - [ ] Commit message is clear and specific
 
 Branching:
+
 - [ ] Branch name is descriptive
 - [ ] Branch is based on current main
 - [ ] Branch is kept up to date with main
 
 Before merging:
+
 - [ ] All commits follow guidelines
 - [ ] History is clean (no WIP, fixup commits)
 - [ ] Branch is rebased/merged with current main
 - [ ] CI passes
-```

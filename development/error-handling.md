@@ -12,43 +12,39 @@ Different errors require different handling strategies.
 
 **Recoverable errors** — The operation failed but the system can continue.
 
-```
 Examples:
-  - Invalid user input
-  - Network timeout (can retry)
-  - File not found (can prompt user)
-  - Insufficient permissions
-```
+
+- Invalid user input
+- Network timeout (can retry)
+- File not found (can prompt user)
+- Insufficient permissions
 
 **Unrecoverable errors** — The system cannot continue safely.
 
-```
 Examples:
-  - Out of memory
-  - Corrupted critical data
-  - Missing essential configuration
-  - Programming errors (bugs)
-```
+
+- Out of memory
+- Corrupted critical data
+- Missing essential configuration
+- Programming errors (bugs)
 
 ### Expected vs. Unexpected
 
 **Expected errors** — Known failure modes that are part of normal operation.
 
-```
 Examples:
-  - User enters invalid email format
-  - Payment is declined
-  - Resource is temporarily unavailable
-```
+
+- User enters invalid email format
+- Payment is declined
+- Resource is temporarily unavailable
 
 **Unexpected errors** — Failures that should not happen under normal circumstances.
 
-```
 Examples:
-  - Null pointer where null should not be possible
-  - Invalid state that invariants should prevent
-  - Third-party library throws undocumented exception
-```
+
+- Null pointer where null should not be possible
+- Invalid state that invariants should prevent
+- Third-party library throws undocumented exception
 
 ---
 
@@ -58,14 +54,15 @@ Examples:
 
 Detect errors as early as possible and stop processing immediately.
 
-```
 Fail fast example:
-  process_order(order):
-    if order is null:
-      raise Error("Order cannot be null")
-    if order.items is empty:
-      raise Error("Order must have items")
-    // Now we know order is valid
+
+```
+process_order(order):
+  if order is null:
+    raise Error("Order cannot be null")
+  if order.items is empty:
+    raise Error("Order must have items")
+  // Now we know order is valid
 ```
 
 **When to use:** For precondition violations and programming errors.
@@ -76,17 +73,18 @@ Fail fast example:
 
 Continue operating with reduced functionality rather than failing completely.
 
-```
 Graceful degradation example:
-  get_user_profile(user_id):
-    profile = fetch_basic_profile(user_id)  // Required
 
-    try:
-      profile.recommendations = fetch_recommendations(user_id)
-    catch NetworkError:
-      profile.recommendations = []  // Continue without recommendations
+```
+get_user_profile(user_id):
+  profile = fetch_basic_profile(user_id)  // Required
 
-    return profile
+  try:
+    profile.recommendations = fetch_recommendations(user_id)
+  catch NetworkError:
+    profile.recommendations = []  // Continue without recommendations
+
+  return profile
 ```
 
 **When to use:** For non-critical features where partial results are better than no results.
@@ -97,16 +95,17 @@ Graceful degradation example:
 
 For transient failures, retry the operation with increasing delays.
 
-```
 Retry example:
-  fetch_with_retry(url, max_attempts=3):
-    for attempt in 1 to max_attempts:
-      try:
-        return fetch(url)
-      catch TransientError:
-        if attempt == max_attempts:
-          raise
-        wait(exponential_backoff(attempt))
+
+```
+fetch_with_retry(url, max_attempts=3):
+  for attempt in 1 to max_attempts:
+    try:
+      return fetch(url)
+    catch TransientError:
+      if attempt == max_attempts:
+        raise
+      wait(exponential_backoff(attempt))
 ```
 
 **When to use:** For network requests and transient infrastructure failures.
@@ -117,13 +116,14 @@ Retry example:
 
 Provide default values when the preferred source fails.
 
-```
 Fallback example:
-  get_configuration(key):
-    try:
-      return config_service.get(key)
-    catch ServiceUnavailable:
-      return default_values[key]  // Fallback to bundled defaults
+
+```
+get_configuration(key):
+  try:
+    return config_service.get(key)
+  catch ServiceUnavailable:
+    return default_values[key]  // Fallback to bundled defaults
 ```
 
 **When to use:** When a sensible default exists and is better than failure.
@@ -161,12 +161,13 @@ When propagating, consider transforming the error:
 Lower level throws: DatabaseConnectionError
 Higher level catches and transforms:
   "Cannot process order: database unavailable"
+```
 
 Why transform:
-  - Hide implementation details (user does not care about database)
-  - Add context (what operation failed)
-  - Convert to appropriate abstraction level
-```
+
+- Hide implementation details (user does not care about database)
+- Add context (what operation failed)
+- Convert to appropriate abstraction level
 
 Preserve the original error as a cause for debugging:
 
@@ -187,24 +188,18 @@ User error messages should be:
 
 **Helpful** — Tell users what went wrong and what to do about it.
 
-```
-Poor:  "Error 500"
-Better: "We could not process your payment. Please check your card details and try again."
-```
+- Poor: `"Error 500"`
+- Better: `"We could not process your payment. Please check your card details and try again."`
 
 **Non-technical** — Avoid jargon, stack traces, or implementation details.
 
-```
-Poor:  "NullPointerException in OrderService.java:142"
-Better: "Something went wrong. Please try again or contact support."
-```
+- Poor: `"NullPointerException in OrderService.java:142"`
+- Better: `"Something went wrong. Please try again or contact support."`
 
 **Secure** — Do not reveal information that could help attackers.
 
-```
-Poor:  "Invalid password for user admin@example.com"
-Better: "Invalid email or password"  // Does not confirm user exists
-```
+- Poor: `"Invalid password for user admin@example.com"`
+- Better: `"Invalid email or password"  // Does not confirm user exists`
 
 ### Internal Errors
 
@@ -232,8 +227,8 @@ Log: ERROR 2024-01-15 10:23:45 OrderService.process
 
 Log errors with sufficient context:
 
-```
 Logging checklist:
+
 - [ ] Timestamp
 - [ ] Severity level (error, warning, etc.)
 - [ ] Error type/code
@@ -241,7 +236,6 @@ Logging checklist:
 - [ ] Relevant identifiers (user_id, order_id, request_id)
 - [ ] Stack trace (for unexpected errors)
 - [ ] Context that led to the error
-```
 
 ### Log Levels
 
@@ -297,7 +291,6 @@ Error structure:
 
 ## Error Handling Checklist
 
-```
 - [ ] Errors are categorized (recoverable/unrecoverable, expected/unexpected)
 - [ ] Appropriate strategy is used for each category
 - [ ] Errors are handled at the right level
@@ -306,7 +299,6 @@ Error structure:
 - [ ] Internal errors are detailed and logged
 - [ ] Error types are clearly defined
 - [ ] Sensitive information is not exposed
-```
 
 ---
 

@@ -2,6 +2,19 @@
 
 Verify that implementation meets requirements and design. Testing confirms that what was built works correctly and continues to work as the system evolves.
 
+---
+
+## Phase Summary
+
+| Aspect             | Details                                          |
+| ------------------ | ------------------------------------------------ |
+| **Goal**           | Verify the solution works correctly              |
+| **Entry Criteria** | Implemented, reviewed code                       |
+| **Exit Criteria**  | Verified, tested code with passing test suite    |
+| **Key Artifacts**  | Test suite, coverage reports, test documentation |
+
+---
+
 ## Purpose
 
 Testing answers the question: "Does the software do what it should?"
@@ -108,12 +121,26 @@ Target meaningful coverage:
 
 ## When Testing is Complete
 
-Testing is adequate when:
+## Exit Checklist: When Testing is Complete
 
-- All requirements have corresponding tests
-- Critical paths are thoroughly covered
-- Edge cases and error conditions are tested
-- Tests pass consistently
-- Confidence exists that changes will not silently break functionality
+Complete ALL items to consider the project verified:
+
+- [ ] All requirements have corresponding tests
+- [ ] Critical paths are thoroughly covered
+- [ ] Edge cases and error conditions are tested
+- [ ] Tests pass consistently
+- [ ] Confidence exists that changes will not silently break functionality
+- [ ] Documentation is updated
 
 Testing is never truly complete—it evolves with the system.
+
+---
+
+## Concerns to Reference
+
+During testing, consider:
+
+- **Security** (`concerns/security.md`) — Test authentication, authorization, injection vulnerabilities
+- **Performance** (`concerns/performance.md`) — Load test critical paths, verify response times
+- **Accessibility** (`concerns/accessibility.md`) — Test with assistive technologies
+- **Observability** (`concerns/observability.md`) — Verify logging and metrics work correctly

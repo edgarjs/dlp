@@ -162,14 +162,12 @@ When assigning priority, consider:
 
 ### Prioritization Checklist
 
-```
 1. [ ] Each requirement has an assigned priority
 2. [ ] Must-have requirements are genuinely essential
 3. [ ] Should-have and nice-to-have are distinguished
 4. [ ] Deferred items are explicitly documented
 5. [ ] Stakeholders agree with prioritization
 6. [ ] Dependencies respect priority order (dependencies of must-haves are also must-haves)
-```
 
 ---
 
@@ -180,18 +178,21 @@ Scope defines what is in and what is out. Clear boundaries prevent scope creep a
 ### Documenting Scope
 
 **In scope:**
+
 - Explicit list of what will be delivered
 - Boundaries of functionality (what it will do)
 - Environments it will work in
 - Users it will serve
 
 **Out of scope:**
+
 - Explicit list of what will not be delivered
 - Related features deferred to later
 - Platforms or environments not supported
 - User types not served
 
 **Scope boundaries:**
+
 - Where this feature ends and another begins
 - Integration points with other systems
 - Handoff points to manual processes
@@ -267,7 +268,6 @@ At the end of analysis, you should have:
 
 ## Analysis Checklist
 
-```
 - [ ] All gathered requirements are processed
 - [ ] Implicit requirements are surfaced
 - [ ] Conflicts are identified and resolved
@@ -276,7 +276,6 @@ At the end of analysis, you should have:
 - [ ] Dependencies are mapped
 - [ ] High-risk items are flagged
 - [ ] Ready to proceed to specification
-```
 
 ---
 

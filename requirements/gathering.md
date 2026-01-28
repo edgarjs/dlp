@@ -120,6 +120,7 @@ flowchart TD
 ### When to Ask
 
 Ask for clarification when:
+
 - The ambiguity affects core functionality
 - Different interpretations lead to significantly different implementations
 - You have no basis for a reasonable assumption
@@ -128,6 +129,7 @@ Ask for clarification when:
 ### When to Assume
 
 Make documented assumptions when:
+
 - The stakeholder is unavailable and progress is needed
 - The ambiguity is minor and easily corrected later
 - Domain knowledge provides a reasonable default
@@ -137,12 +139,10 @@ Make documented assumptions when:
 
 When you cannot resolve ambiguity immediately:
 
-```
-ASSUMPTION: User email addresses will be unique across the system.
-Basis: Standard practice for account-based systems.
-Risk if wrong: Medium - would require schema change.
-To verify: Confirm with stakeholder before design phase.
-```
+1. ASSUMPTION: User email addresses will be unique across the system.
+2. Basis: Standard practice for account-based systems.
+3. Risk if wrong: Medium - would require schema change.
+4. To verify: Confirm with stakeholder before design phase.
 
 ---
 
@@ -150,19 +150,17 @@ To verify: Confirm with stakeholder before design phase.
 
 Use this checklist to ensure comprehensive gathering:
 
-```
-[ ] Problem statement is understood
-[ ] Success criteria are identified
-[ ] Stakeholders are identified
-[ ] Scope boundaries are discussed
-[ ] Integration points are known
-[ ] Constraints are documented
-[ ] Happy path is described
-[ ] Error scenarios are considered
-[ ] Edge cases are explored
-[ ] Assumptions are documented
-[ ] Outstanding questions are listed
-```
+- [ ] Problem statement is understood
+- [ ] Success criteria are identified
+- [ ] Stakeholders are identified
+- [ ] Scope boundaries are discussed
+- [ ] Integration points are known
+- [ ] Constraints are documented
+- [ ] Happy path is described
+- [ ] Error scenarios are considered
+- [ ] Edge cases are explored
+- [ ] Assumptions are documented
+- [ ] Outstanding questions are listed
 
 ---
 
@@ -203,6 +201,7 @@ At the end of gathering, you should be able to produce:
 ## Proceeding to Analysis
 
 Move to analysis when:
+
 - You have a clear problem statement
 - Core goals are understood
 - Scope boundaries are sketched

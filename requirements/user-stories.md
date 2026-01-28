@@ -10,6 +10,8 @@ A user story is a short, informal description of a feature told from the perspec
 
 ### The Standard Format
 
+**IMPORTANT: Use code blocks**
+
 ```
 As a [type of user]
 I want [some goal]
@@ -41,6 +43,7 @@ So that I can evaluate the store before committing my information
 ### Why the Format Matters
 
 The format enforces thinking about:
+
 - **Who** benefits (not all users are the same)
 - **What** they need (the actual capability)
 - **Why** they need it (the underlying problem being solved)
@@ -259,95 +262,89 @@ Large stories (epics) must be split into smaller, deliverable pieces. Split in w
 
 **By workflow step**
 
-```
-Epic: User can purchase a product
+Epic: "User can purchase a product"
 
 Split into:
-  - User can add product to cart
-  - User can view and modify cart
-  - User can enter shipping address
-  - User can enter payment information
-  - User can confirm and place order
-```
+
+- User can add product to cart
+- User can view and modify cart
+- User can enter shipping address
+- User can enter payment information
+- User can confirm and place order
 
 **By business rule variation**
 
-```
-Epic: Calculate shipping cost
+Epic: "Calculate shipping cost"
 
 Split into:
-  - Calculate flat-rate shipping
-  - Calculate shipping by weight
-  - Calculate expedited shipping options
-  - Apply free shipping for orders over $50
-```
+
+- Calculate flat-rate shipping
+- Calculate shipping by weight
+- Calculate expedited shipping options
+- Apply free shipping for orders over $50
 
 **By data type or variation**
 
-```
-Epic: User can import contacts
+Epic: "User can import contacts"
 
 Split into:
-  - Import contacts from CSV file
-  - Import contacts from Google
-  - Import contacts from Outlook
-```
+
+- Import contacts from CSV file
+- Import contacts from Google
+- Import contacts from Outlook
 
 **By user role**
 
-```
-Epic: Manage inventory
+Epic: "Manage inventory"
 
 Split into:
-  - Warehouse staff can update stock counts
-  - Manager can set reorder thresholds
-  - Admin can configure warehouse locations
-```
+
+- Warehouse staff can update stock counts
+- Manager can set reorder thresholds
+- Admin can configure warehouse locations
 
 **By interface**
 
-```
-Epic: User can access account on mobile
+Epic: "User can access account on mobile"
 
 Split into:
-  - View account summary on mobile web
-  - Optimized mobile checkout flow
-  - Mobile push notifications for order updates
-```
+
+- View account summary on mobile web
+- Optimized mobile checkout flow
+- Mobile push notifications for order updates
 
 **By operation (CRUD)**
 
-```
-Epic: Manage saved addresses
+Epic: "Manage saved addresses"
 
 Split into:
-  - User can add new address
-  - User can view saved addresses
-  - User can edit existing address
-  - User can delete address
-  - User can set default address
-```
+
+- User can add new address
+- User can view saved addresses
+- User can edit existing address
+- User can delete address
+- User can set default address
 
 ### Splitting Anti-Patterns
 
 Avoid splits that don't deliver value independently:
 
-```
 Bad splits (technical layers):
-  - Build database schema for orders
-  - Build API for orders
-  - Build UI for orders
 
-  None delivers value until all are complete.
+- Build database schema for orders
+- Build API for orders
+- Build UI for orders
+
+None delivers value until all are complete.
 
 Better splits (vertical slices):
-  - User can place simple order (one item, default options)
-  - User can order multiple items
-  - User can select shipping speed
-  - User can apply discount codes
 
-  Each delivers end-to-end value.
-```
+- User can place simple order (one item, default options)
+- User can order multiple items
+- User can select shipping speed
+- User can apply discount codes
+
+Each delivers end-to-end value.
 
 ---
 
@@ -402,14 +399,12 @@ And I see "Out of Stock" message
 
 For each story, ensure criteria cover:
 
-```
 - [ ] Happy path (main success scenario)
 - [ ] Empty/zero states
 - [ ] Error handling
 - [ ] Edge cases (limits, boundaries)
 - [ ] Permissions (who can/cannot)
 - [ ] Performance expectations (if relevant)
-```
 
 ---
 
@@ -417,84 +412,90 @@ For each story, ensure criteria cover:
 
 ### Writing Technical Tasks as Stories
 
-```
-Wrong:
-  "As a developer, I want to refactor the auth module
-   so that the code is cleaner"
+Wrong (this delivers no user value):
 
-  This delivers no user value.
+```
+As a developer,
+I want to refactor the auth module
+so that the code is cleaner
+```
 
 Better:
-  "As a user, I want to stay logged in for 30 days
-   so that I don't have to log in every visit"
 
-  Or: Don't make it a story. Technical work can be tasks
-  attached to real user stories or handled separately.
 ```
+As a user,
+I want to stay logged in for 30 days
+so that I don't have to log in every visit
+```
+
+Or don't make it a story. Technical work can be tasks attached to real user stories or handled separately.
 
 ### Skipping the "So That" Clause
 
 ```
 Incomplete:
-  "As a user, I want to export my data"
+"As a user, I want to export my data"
 
-  Why? Compliance? Backup? Migration? Analysis?
+Why? Compliance? Backup? Migration? Analysis?
 
 Complete:
-  "As a user, I want to export my data as CSV
-   so that I can analyze my spending in a spreadsheet"
+"As a user, I want to export my data as CSV
+so that I can analyze my spending in a spreadsheet"
 
-  The reason shapes the implementation.
+The reason shapes the implementation.
 ```
 
 ### Making Stories Too Large
 
-```
-Too large:
-  "As a user, I want to manage my account"
+Too large: "As a user, I want to manage my account"
 
-  This is an epic containing many stories.
+This is an epic containing many stories.
 
 Right-sized:
-  "As a user, I want to change my password"
-  "As a user, I want to update my email address"
-  "As a user, I want to enable two-factor authentication"
-```
+
+- "As a user, I want to change my password"
+- "As a user, I want to update my email address"
+- "As a user, I want to enable two-factor authentication"
 
 ### Writing Implementation Details
 
+Too specific (this prescribes the solution):
+
 ```
-Too specific:
-  "As a user, I want to click the blue button in the top-right
-   corner that opens a modal with a form containing..."
+"As a user, I want to click the blue button in the top-right
+corner that opens a modal with a form containing..."
+```
 
-  This prescribes the solution.
+Appropriate (let design solve how):
 
-Appropriate:
-  "As a user, I want to quickly contact support
-   so that I can get help with my order"
-
-  Let design solve how.
+```
+"As a user, I want to quickly contact support
+so that I can get help with my order"
 ```
 
 ### Forgetting Non-Happy Paths
 
-```
 Incomplete:
-  "As a user, I want to upload my resume"
 
-  What about invalid files? Too large? Wrong format? Network error?
+```
+"As a user, I want to upload my resume"
+
+What about invalid files? Too large? Wrong format? Network error?
+```
 
 Complete (with acceptance criteria):
-  "As a user, I want to upload my resume"
 
-  Criteria:
-  - Accepts PDF, DOC, DOCX formats
-  - Maximum file size: 5MB
-  - Shows progress during upload
-  - Shows error if format invalid
-  - Shows error if size exceeded
-  - Allows retry if upload fails
+```
+"As a user, I want to upload my resume"
+
+Criteria:
+
+- Accepts PDF, DOC, DOCX formats
+- Maximum file size: 5MB
+- Shows progress during upload
+- Shows error if format invalid
+- Shows error if size exceeded
+- Allows retry if upload fails
 ```
 
 ---
@@ -519,12 +520,14 @@ flowchart TD
 ### When to Use User Stories
 
 User stories work well for:
+
 - Feature development
 - User-facing functionality
 - Iterative/agile development
 - Requirements that benefit from discussion
 
 User stories work less well for:
+
 - Highly technical infrastructure work
 - Compliance requirements with precise specifications
 - Bug fixes (just describe the bug)
@@ -534,13 +537,14 @@ User stories work less well for:
 
 ## Story Writing Checklist
 
-```
 Before writing:
+
 - [ ] Identified the specific user role
 - [ ] Understood the underlying need (not just the request)
 - [ ] Confirmed this delivers user or business value
 
 The story:
+
 - [ ] Follows "As a... I want... So that..." format
 - [ ] Is independent (minimal dependencies)
 - [ ] Is small enough to complete in one iteration
@@ -548,8 +552,8 @@ The story:
 - [ ] Covers error cases and edge cases
 
 Story mapping:
+
 - [ ] Stories organized by user journey
 - [ ] Priorities clear (must-have vs. nice-to-have)
 - [ ] MVP slice identified
 - [ ] Gaps in journey identified
-```

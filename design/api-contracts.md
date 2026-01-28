@@ -2,7 +2,7 @@
 
 Defines interfaces between components. An API specifies what consumers can request, what providers deliver, and what guarantees are made. Contracts formalize these agreements with preconditions, postconditions, and invariants.
 
-> **Required Format:** API contracts MUST be documented using OpenAPI 3.1 specification (YAML format). Use the template at `templates/api-contract.yml` as a starting point. OpenAPI provides machine-readable contracts that enable automated validation, documentation generation, and client SDK generation.
+> **Required Format:** HTTP API contracts MUST be documented using OpenAPI 3.1 specification (YAML format). Use the template at `templates/api-contract.yml` as a starting point. OpenAPI provides machine-readable contracts that enable automated validation, documentation generation, and client SDK generation.
 
 ---
 
@@ -45,10 +45,9 @@ Better: get_user(id) returns user profile; get_user_orders(id) returns orders
 **Consistent patterns** — Similar operations work similarly.
 
 ```
-Consistent:
-  create_user(user_data) → user
-  create_order(order_data) → order
-  create_product(product_data) → product
+create_user(user_data) → user
+create_order(order_data) → order
+create_product(product_data) → product
 ```
 
 ---
@@ -111,16 +110,16 @@ Contracts make implicit assumptions explicit:
 
 ### Why Contracts Matter
 
-```
 Without contract:
-  Developer A assumes get_user returns null for missing users
-  Developer B assumes get_user throws an exception
-  Bug: Code breaks when these assumptions meet
+
+- Developer A assumes get_user returns null for missing users
+- Developer B assumes get_user throws an exception
+- Bug: Code breaks when these assumptions meet
 
 With contract:
-  Contract specifies: get_user returns null if user does not exist
-  Both developers code against the same expectation
-```
+
+- Contract specifies: get_user returns null if user does not exist
+- Both developers code against the same expectation
 
 ---
 
@@ -132,6 +131,7 @@ Preconditions are requirements that must be satisfied before calling an operatio
 Operation: transfer_funds(from_account, to_account, amount)
 
 Preconditions:
+
 - from_account exists and is active
 - to_account exists and is active
 - amount is positive
@@ -157,12 +157,14 @@ Postconditions are guarantees about what will be true after an operation complet
 Operation: transfer_funds(from_account, to_account, amount)
 
 Postconditions (on success):
+
 - from_account.balance decreased by amount
 - to_account.balance increased by amount
 - Total balance across both accounts unchanged
 - Transaction record created with timestamp
 
 Postconditions (on failure):
+
 - Neither account balance changed
 - No transaction record created
 - Error returned with reason
@@ -180,6 +182,7 @@ Invariants are conditions that must always be true about a component or entity.
 Entity: Order
 
 Invariants:
+
 - order.total equals sum of order_items amounts
 - order.status is one of: pending, confirmed, shipped, delivered, cancelled
 - order.created_at <= order.updated_at
@@ -241,71 +244,12 @@ Versioning is optional when all consumers are internal and can update together.
 
 ---
 
-## Documentation
-
-For each operation, document:
-
-```
-Operation: create_order
-
-Purpose: Creates a new order for a user.
-Endpoint: POST /orders
-
-Inputs:
-  user_id (required): ID of the user
-  items (required): Array of {product_id, quantity}
-  shipping_address (required): Delivery address
-  notes (optional): Special instructions
-
-Outputs:
-  Success (201): { id, status, total, created_at }
-
-Errors:
-  400 - Invalid input
-  401 - Not authenticated
-  404 - User not found
-  422 - Cannot create order
-
-Example:
-  Request: POST /orders { user_id: 123, items: [...] }
-  Response: { id: 456, status: "pending", total: 29.99 }
-```
-
----
-
-## Contract Documentation Format
-
-```
-Contract: ComponentName.operation_name
-
-Purpose: [Brief description]
-
-Signature:
-operation_name(param1: type, param2: type) -> return_type
-
-Preconditions:
-- [condition that must be true before calling]
-
-Postconditions:
-- [condition guaranteed after successful completion]
-
-Error conditions:
-- [condition]: [error type] — [what happens]
-
-Invariants preserved:
-- [invariant this operation maintains]
-```
-
----
-
 ## Guidelines
 
 **Be precise** — Vague contracts are not contracts.
 
-```
-Vague: "Updates the user"
-Precise: "Sets user.email to new_email; sets user.updated_at to current time"
-```
+- Vague: `"Updates the user"`
+- Precise: `"Sets user.email to new_email; sets user.updated_at to current time"`
 
 **Be complete** — Cover all outcomes (success, not found, errors).
 
@@ -315,8 +259,8 @@ Precise: "Sets user.email to new_email; sets user.updated_at to current time"
 
 ## Checklist
 
-```
 Operations:
+
 - [ ] All required operations are defined
 - [ ] Each operation has a clear, single purpose
 - [ ] Inputs specified with required/optional distinction
@@ -324,6 +268,7 @@ Operations:
 - [ ] Naming is consistent across operations
 
 Contracts:
+
 - [ ] Preconditions are clearly stated
 - [ ] Postconditions cover success cases
 - [ ] Error conditions are specified
@@ -331,11 +276,11 @@ Contracts:
 - [ ] Contracts are precise enough to test against
 
 Quality:
+
 - [ ] Error types and responses are specified
 - [ ] Versioning strategy determined (if applicable)
 - [ ] Documentation covers all operations
 - [ ] Security considerations addressed
-```
 
 ---
 
@@ -343,24 +288,18 @@ Quality:
 
 **Exposing internal structure** — API should reflect domain concepts, not implementation.
 
-```
-Poor: get_database_row(table, id)
-Better: get_user(id), get_order(id)
-```
+- Poor: `get_database_row(table, id)`
+- Better: `get_user(id), get_order(id)`
 
 **Inconsistent naming** — Pick conventions and stick with them.
 
-```
-Poor: getUser, create_order, RemoveProduct
-Better: get_user, create_order, remove_product
-```
+- Poor: `getUser, create_order, RemoveProduct`
+- Better: `get_user, create_order, remove_product`
 
 **Chatty interfaces** — Requiring many calls to accomplish one task.
 
-```
-Poor: get_order(id), then get_order_items(id), then get_shipping(id)
-Better: get_order(id) returns order with items and shipping
-```
+- Poor: `get_order(id), then get_order_items(id), then get_shipping(id)`
+- Better: `get_order(id) returns order with items and shipping`
 
 ---
 

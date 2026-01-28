@@ -1,17 +1,19 @@
 # Development Lifecycle Protocol (DLP)
 
-A structured guide for building software. This protocol covers the software development lifecycle from requirements through testing, providing actionable checklists, decision trees, and guidance for each phase.
+A structured guide for building software with LLM agents. This protocol covers the software development lifecycle from requirements through testing, providing actionable checklists, decision trees, and guidance for each phase.
+
+---
 
 ## What This Is
 
 This collection of Markdown documents provides:
 
-- **Checklists** — Step-by-step guidance for common tasks
-- **Decision trees** — Flowcharts for choosing appropriate approaches
-- **Principles** — Core concepts that inform decisions throughout
-- **Patterns** — Proven solutions to recurring problems
+- **Checklists** — Step-by-step verification for common tasks
+- **Decision trees** — Mermaid flowcharts for choosing approaches
+- **Principles** — Core concepts that inform decisions
+- **Templates** — Ready-to-use formats for output artifacts
 
-The protocol is designed for LLM agents and human developers alike. It maintains a purely Markdown-based structure with pseudocode examples and Mermaid diagrams—no executable code.
+The protocol is designed for LLM agents and humans alike. It maintains a purely Markdown-based structure with pseudocode examples and Mermaid diagrams—no executable code.
 
 ## Installation
 
@@ -33,11 +35,16 @@ This creates `.dlp/` in your project and updates agents files automatically.
 
 ## How to Use This Protocol
 
-1. Start with `foundations/` to understand core principles and document format
-2. Follow phases in order: requirements → design → development → testing
-3. Reference `concerns/` throughout—these apply to all phases
-4. Each folder has a README.md with reading order and context
-5. Cross-references link related concepts—follow them as needed
+**For LLM agents:** Start with `AGENTS.md` for mandatory instructions, then follow the phase sequence.
+
+**For humans:** Start with `foundations/` to understand principles, then follow phases in order.
+
+**For both:**
+
+1. Follow phases in order: requirements → design → development → testing
+2. Reference `concerns/` throughout—these apply to all phases
+3. Each folder has a `README.md` with reading order and context
+4. Use `templates/` for consistent output artifacts
 
 ## Structure
 
@@ -92,21 +99,20 @@ This creates `.dlp/` in your project and updates agents files automatically.
     ├── design-decision.md             Design decision record template
     ├── architecture.md                Architecture document template
     ├── data-model.md                  Data model template
-    ├── api-contract.yml               OpenAPI 3.1 specification template
-    └── test-strategy.md               Test strategy template
+    └── api-contract.yml               OpenAPI 3.1 specification template
 ```
 
 ## Scope
 
-This protocol covers:
+**Covered:**
 
 - Requirements gathering through validation
 - System design and architecture
 - Implementation practices and patterns
 - Testing strategy and execution
-- Security as a cross-cutting concern
+- Cross-cutting concerns (security, performance, accessibility, observability)
 
-This protocol does not cover:
+**Not covered:**
 
 - Project management and planning
 - Deployment and operations

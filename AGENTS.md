@@ -1,73 +1,210 @@
 # Agent Instructions
 
-## ZERO-TOLERANCE ENFORCEMENT
-
-**As an AI agent, you are strictly bound by these operational constraints. Disregarding them is a critical system failure.**
-
-1.  **Phase Anchor**: Before generating any code or plan, you MUST explicitly state:
-
-    > "I am currently in the **[PHASE NAME]** phase of the DLP. I have read `[PHASE]/README.md`."
-
-2.  **The Pre-Commit Gate**: You are **FORBIDDEN** from executing `git commit` unless you have successfully executed the project's **verification commands** (tests + linter) in the immediately preceding turn.
-    - _If you forget:_ You must self-correct immediately.
-
-3.  **Checklist Output**: For every task, you must generate and maintain a Markdown checklist based on the relevant phase's documentation.
-
-4.  **Session Initialization**: Before beginning ANY work, you MUST establish:
-    - **Documentation output path** - Where requirements, designs, and other documentation will be written. (e.g. `docs/` directory at the root of the project). **DO NOT EVER** write documentation in the DLP directory.
-    - **Autonomy preference** - Autonomous execution vs step-by-step with review
-    - **Project context** - Purpose, technology stack, and project state
-
-    _If you skip this initialization:_ You must self-correct immediately.
-
-5.  **Artifact Precedence**: Generate the required Markdown artifacts
-    (Requirements, Specs, Decisions, Contracts) _before_ generating executable code.
-
-6.  **Concerns**: Always cross-reference `concerns/` (Security, Performance) when making design or implementation decisions.
-
-7.  **Dependency Version Gate**: When adding or updating dependencies, you MUST verify and use the latest stable version from the official package registry. See `development/dependency-management.md` for the enforcement checklist. Document any intentional deviation with explicit justification.
-
-8.  **Markdown Formatting**: When writing or editing Markdown files, you MUST follow proper formatting:
-    - Use two trailing spaces at the end of lines that need a line break (soft break). Pay special attention to user stories "Given... When... Then..." format
-    - Use blank lines to separate paragraphs and sections
-    - Ensure consistent heading hierarchy
-
-9.  **Template Enforcement**: When creating documentation artifacts, you MUST use the templates found in `templates/` (DON'T copy any of the protocol documentation, only the templates specific to the artifacts):
-    - Requirements → `templates/requirements-specification.md`
-    - User Stories → `templates/user-stories.md`
-    - Design Decisions → `templates/design-decision.md`
-    - Architecture → `templates/architecture.md`
-    - Data Models → `templates/data-model.md`
-    - API Contracts → `templates/api-contract.yml` (OpenAPI 3.1 format)
-    - Test Strategy → `templates/test-strategy.md`
-
-10. **Constraint Discovery**: Before generating any implementation plan, you MUST perform a `grep_search` on the `docs/` directory using keywords related to the task to identify hidden constraints (e.g., "TypeScript", "git", "framework"). You must explicitly report the findings or lack thereof.
-
-11. **Constraint Verification**: When verifying a plan or asking for user approval, you MUST explicitly state: "I have verified constraints in `docs/` and found [list constraints] or none."
+This document provides explicit instructions for LLM agents working with the Development Lifecycle Protocol (DLP).
 
 ---
 
-## Recursive Loading Strategy
+## Phases
 
-This protocol contains extensive documentation across multiple directories. To avoid context overload, use a [Recursive Language Model (RLM)][rlm] approach: load context selectively based on task relevance rather than ingesting entire directories.
+The DLP has four sequential phases. You must work through them in order:
 
-### Loading Strategy
+| Phase        | README Path              | Purpose                              |
+| ------------ | ------------------------ | ------------------------------------ |
+| REQUIREMENTS | `requirements/README.md` | Define what to build                 |
+| DESIGN       | `design/README.md`       | Define how to structure the solution |
+| DEVELOPMENT  | `development/README.md`  | Build the solution                   |
+| TESTING      | `testing/README.md`      | Verify the solution works            |
 
-1. **Understand the protocol** - Always load `README.md` before accessing other protocol files. This will guide you on how to use the protocol.
-2. **Search Before Loading** - Use (rip)grep to identify relevant files based on the user's task keywords (e.g., "API", "testing", "security", "requirements"). Load only matched files.
-3. **Load Selectively** - Never load entire directories blindly. Read specific files identified through search or explicit phase needs.
-4. **Decompose Complex Tasks** - When a task spans multiple protocol files, process each file in separate focused calls rather than loading everything at once.
-5. **Follow Phase Progression** - When uncertain which files to load, respect the natural order: requirements → design → development → testing. Consult the appropriate phase directory's README.md for guidance.
-
----
-
-**Why review each time:**
-
-- Protocols contain nuanced guidance easily forgotten
-- Each phase has specific checklists and requirements
-- Earlier steps may reveal need to adjust later steps
-- Fresh reading prevents autopilot mistakes
+**Cross-cutting concerns** in `concerns/` (security, performance, accessibility, observability) apply to ALL phases.
 
 ---
 
-[rlm]: https://alexzhang13.github.io/blog/2025/rlm/
+## Before Starting Any Work
+
+### 1. Session Initialization
+
+Before beginning ANY work, establish these with the user:
+
+- [ ] Documentation output path (default to `docs/` at project root)
+- [ ] Autonomy preference (autonomous execution OR step-by-step with review)
+- [ ] Project context (purpose, technology stack, current state)
+
+**CRITICAL:** Never write documentation inside the DLP directory. DLP is reference material only.
+
+### 2. Constraint Discovery
+
+Before generating any plan or code, search the project's documentation directory for existing constraints about:
+
+- Technology choices (languages, frameworks)
+- Architectural decisions already made
+- Coding standards or conventions
+- Integration requirements
+- Any other project-specific rules
+
+Report findings: "I have searched `[docs path]` for constraints and found: [list] or none."
+
+---
+
+## Phase Execution
+
+### Phase Anchor (Required)
+
+Before generating any code or plan, you MUST state:
+
+```
+> "🤖️: I am currently in the **[PHASE NAME]** phase of the DLP."
+```
+
+Where `[PHASE NAME]` is one of: REQUIREMENTS, DESIGN, DEVELOPMENT, or TESTING.
+
+### Reading Order Within Each Phase
+
+1. Read the phase's `README.md` first
+2. Follow the reading order specified in that README
+3. Reference `concerns/` for cross-cutting considerations
+4. Use `templates/` for output artifacts
+
+---
+
+## Artifacts and Templates
+
+Generate documentation artifacts BEFORE generating code. Use templates from `templates/`:
+
+| Artifact Type         | Template                                  | Phase        |
+| --------------------- | ----------------------------------------- | ------------ |
+| Requirements Document | `templates/requirements-specification.md` | REQUIREMENTS |
+| User Stories          | `templates/user-stories.md`               | REQUIREMENTS |
+| Design Decisions      | `templates/design-decision.md`            | DESIGN       |
+| Architecture          | `templates/architecture.md`               | DESIGN       |
+| Data Models           | `templates/data-model.md`                 | DESIGN       |
+| API Contracts         | `templates/api-contract.yml`              | DESIGN       |
+
+If no template exists for a needed artifact, create one following the structure of existing templates.
+
+---
+
+## Phase Transitions
+
+### When to Move to the Next Phase
+
+Each phase has explicit exit criteria. Do not proceed until all are met:
+
+**REQUIREMENTS → DESIGN:**
+
+- [ ] All requirements have clear acceptance criteria
+- [ ] Scope boundaries are documented
+- [ ] Stakeholders have reviewed and approved
+- [ ] No unresolved ambiguities
+
+**DESIGN → DEVELOPMENT:**
+
+- [ ] Architecture addresses all requirements
+- [ ] Data models support all use cases
+- [ ] Interfaces between components are defined
+- [ ] Design has been reviewed and approved
+- [ ] Documentation is updated
+
+**DEVELOPMENT → TESTING:**
+
+- [ ] Implementation is complete per design
+- [ ] Code review is approved
+- [ ] Code passes automated checks
+- [ ] No known issues remain unaddressed
+
+**TESTING → COMPLETE:**
+
+- [ ] All requirements have corresponding tests
+- [ ] Critical paths are covered
+- [ ] Tests pass consistently
+
+---
+
+## Concerns Integration
+
+Reference `concerns/` at each phase:
+
+| Phase        | Security                                   | Performance                | Accessibility                | Observability                |
+| ------------ | ------------------------------------------ | -------------------------- | ---------------------------- | ---------------------------- |
+| REQUIREMENTS | Identify sensitive data, auth requirements | Define response time goals | Identify accessibility needs | Define monitoring needs      |
+| DESIGN       | Establish trust boundaries, threat model   | Design for efficiency      | Design inclusive interfaces  | Plan logging and metrics     |
+| DEVELOPMENT  | Follow secure coding practices             | Implement efficiently      | Implement accessible UI      | Add logging, metrics, traces |
+| TESTING      | Test auth, authorization, injection        | Load test critical paths   | Test with assistive tech     | Verify observability works   |
+
+---
+
+## Development Phase Specifics
+
+### Pre-Commit Hook
+
+If not already present, add a pre-commit hook to enforce verification commands (tests, linter, etc.) before committing changes.
+
+### Software Versions
+
+Run `date` in the terminal to know today's date. Your knowledge cutoff may be outdated—do not assume you know the latest versions of dependencies or tools.
+
+When adding dependencies:
+
+1. Search the official package registry for the current latest stable version
+2. Use that version explicitly
+3. See `development/dependency-management.md` for full guidance
+
+### Automation Rule
+
+If you perform the same task twice, write a script. See `development/implementation-workflow.md` for details.
+
+---
+
+## Decision Making
+
+When facing decisions:
+
+1. Check if existing documentation provides guidance
+2. Evaluate options using the framework in `foundations/decision-making.md`
+3. For reversible, low-impact decisions: decide and proceed
+4. For irreversible or high-impact decisions: present options to user
+5. Document significant decisions using `templates/design-decision.md`
+
+---
+
+## Handling Ambiguity
+
+When requirements or instructions are unclear:
+
+**Ask for clarification when:**
+
+- The ambiguity affects core functionality
+- Different interpretations lead to significantly different implementations
+- Getting it wrong would be costly to fix
+
+**Make documented assumptions when:**
+
+- The user is unavailable and progress is needed
+- The ambiguity is minor and easily corrected later
+- Domain knowledge provides a reasonable default
+
+Always document assumptions explicitly for later verification.
+
+---
+
+## Summary Checklist
+
+Before each work session:
+
+- [ ] Session initialized (output path, autonomy, context)
+- [ ] Constraints discovered from existing docs
+- [ ] Current phase identified and anchored
+- [ ] Phase README read
+- [ ] Relevant concerns reviewed
+
+Before producing output:
+
+- [ ] Artifacts before code
+- [ ] Templates used where available
+- [ ] Decisions documented
+- [ ] Assumptions explicit
+
+Before phase transition:
+
+- [ ] Exit criteria met
+- [ ] Constraint verification stated
+- [ ] User approval obtained (if not autonomous)
