@@ -41,10 +41,22 @@ This creates `.dlp/` in your project and updates agents files automatically.
 
 **For both:**
 
-1. Follow phases in order: requirements → design → development → testing
-2. Reference `concerns/` throughout—these apply to all phases
-3. Each folder has a `README.md` with reading order and context
-4. Use `templates/` for consistent output artifacts
+1. **Choose a work path** — Use Standard Path for features/significant changes, Minimal Path for small bug fixes
+2. Follow phases in order: requirements → design → development → testing (Standard Path)
+3. Reference `concerns/` throughout—these apply to all phases
+4. Each folder has a `README.md` with reading order and context
+5. Use `templates/` for consistent output artifacts
+
+### Work Paths
+
+Not all work requires full ceremony. The DLP supports two paths:
+
+| Path     | When to Use                      | What's Required                           |
+| -------- | -------------------------------- | ----------------------------------------- |
+| Standard | Features, significant changes    | All four phases, full documentation       |
+| Minimal  | Small bug fixes, trivial changes | Fix → Test → Commit (no design artifacts) |
+
+See `foundations/work-paths.md` for qualification criteria and workflow details.
 
 ## Structure
 

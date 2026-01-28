@@ -4,6 +4,35 @@ This document provides explicit instructions for LLM agents working with the Dev
 
 ---
 
+## Work Path Selection
+
+Before starting any task, determine the appropriate path. See `foundations/work-paths.md` for full details.
+
+### Quick Decision
+
+```mermaid
+flowchart TD
+    A[New task] --> B{Small bug fix?}
+    B -->|No| S[Use Standard Path]
+    B -->|Yes| C{All criteria met?}
+    C -->|No| S
+    C -->|Yes| M[Use Minimal Path]
+```
+
+**Minimal Path criteria** (ALL must be true):
+
+- [ ] Isolated change (one component or small set of files)
+- [ ] Root cause is known
+- [ ] Fix is obvious (no design decisions needed)
+- [ ] Low risk (no cascading failures or data loss possible)
+- [ ] Easily reversible
+- [ ] No new or modified interfaces/APIs/schemas
+- [ ] Existing test coverage or trivially added
+
+If ANY criterion is not met → **Standard Path**.
+
+---
+
 ## Phases
 
 The DLP has four sequential phases. You must work through them in order:
@@ -47,15 +76,39 @@ Report findings: "I have searched `[docs path]` for constraints and found: [list
 
 ## Phase Execution
 
-### Phase Anchor (Required)
+### Path and Phase Anchor (Required)
 
-Before generating any code or plan, you MUST state:
+Before generating any code or plan, you MUST state your path and phase:
+
+**For Standard Path:**
 
 ```
 > "🤖️: I am currently in the **[PHASE NAME]** phase of the DLP."
 ```
 
 Where `[PHASE NAME]` is one of: REQUIREMENTS, DESIGN, DEVELOPMENT, or TESTING.
+
+**For Minimal Path:**
+
+```
+> "🤖️: I am using the **MINIMAL PATH** for this bug fix."
+>
+> Qualification:
+> - Isolated: [what component/file]
+> - Root cause: [brief explanation]
+> - Fix: [one-line description]
+> - Risk: Low — [why]
+> - Reversible: Yes
+> - Interfaces: No changes
+> - Tests: [existing/will add]
+```
+
+If at any point during Minimal Path work the criteria no longer apply, escalate:
+
+```
+> "🤖️: Escalating from MINIMAL PATH to STANDARD PATH.
+> Reason: [why minimal path no longer applies]"
+```
 
 ### Reading Order Within Each Phase
 
@@ -192,8 +245,9 @@ Before each work session:
 
 - [ ] Session initialized (output path, autonomy, context)
 - [ ] Constraints discovered from existing docs
-- [ ] Current phase identified and anchored
-- [ ] Phase README read
+- [ ] **Work path selected** (Standard or Minimal)
+- [ ] Current phase/path identified and anchored
+- [ ] Phase README read (Standard Path) or qualification verified (Minimal Path)
 - [ ] Relevant concerns reviewed
 
 Before producing output:

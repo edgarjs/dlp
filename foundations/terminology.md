@@ -138,6 +138,22 @@ Confirming that the right software was built—does the specification address th
 
 A situation where improving one quality requires sacrificing another. Trade-offs are inherent in software development; the goal is to make them consciously.
 
+### Work Path
+
+A workflow track that determines the level of ceremony required for a task. The protocol defines two paths: Standard and Minimal.
+
+### Standard Path
+
+The full DLP workflow requiring all four phases (requirements, design, development, testing) and full documentation artifacts. Used for new features, significant changes, and any work requiring design decisions.
+
+### Minimal Path
+
+A condensed workflow for small, well-understood bug fixes that skips formal requirements and design phases. Minimal Path requires the change to be isolated, low-risk, easily reversible, and have a known root cause. If any qualification criterion is not met, the Standard Path must be used instead.
+
+### Escalation
+
+The process of moving from Minimal Path to Standard Path when work is discovered to be more complex than initially assessed. Escalation should occur immediately when Minimal Path criteria no longer apply.
+
 ---
 
 ## Document Concepts
