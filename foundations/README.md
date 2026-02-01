@@ -10,7 +10,6 @@ This folder contains the core concepts and meta-guidance that underpin the entir
 | ---------------------------------------- | -------------------------------------- | ------------------------------------------- |
 | [terminology.md](terminology.md)         | Glossary of terms                      | A term is unclear or used unexpectedly      |
 | [principles.md](principles.md)           | Core development principles            | Making design or implementation decisions   |
-| [document-format.md](document-format.md) | How to read checklists, decision trees | First time using the protocol               |
 | [decision-making.md](decision-making.md) | Framework for choices                  | Facing trade-offs or conflicting principles |
 | [work-paths.md](work-paths.md)           | Standard vs. Minimal paths             | Determining ceremony level for a task       |
 
@@ -22,7 +21,6 @@ Before diving into specific phases like requirements gathering or implementation
 
 - **Shared language** — Terms mean the same thing everywhere in this protocol
 - **Guiding principles** — Core beliefs that inform every decision
-- **Document literacy** — How to read and execute the protocol itself
 - **Decision frameworks** — How to make choices when facing trade-offs
 
 ## Contents
@@ -31,7 +29,6 @@ Before diving into specific phases like requirements gathering or implementation
 | ---------------------------------------- | -------------------------------------------------------------------------------------------- |
 | [principles.md](principles.md)           | Core software development principles with guidance on when to apply and when to violate them |
 | [terminology.md](terminology.md)         | Glossary of terms used throughout the protocol                                               |
-| [document-format.md](document-format.md) | How to interpret checklists, decision trees, and templates in this protocol                  |
 | [decision-making.md](decision-making.md) | Framework for making choices when multiple valid options exist                               |
 | [work-paths.md](work-paths.md)           | Defines Standard and Minimal paths based on work scope and risk                              |
 
@@ -41,9 +38,8 @@ Read these documents in sequence before proceeding to any phase:
 
 1. **terminology.md** — Establishes the vocabulary
 2. **principles.md** — Establishes the values
-3. **document-format.md** — Teaches you how to use this protocol
-4. **decision-making.md** — Prepares you for trade-off situations
-5. **work-paths.md** — Determines appropriate ceremony level
+3. **decision-making.md** — Prepares you for trade-off situations
+4. **work-paths.md** — Determines appropriate ceremony level
 
 ## How to Use This Folder
 

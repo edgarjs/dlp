@@ -65,8 +65,8 @@ See `foundations/work-paths.md` for qualification criteria and workflow details.
 ├── foundations/       Core principles and meta-guidance
 │   ├── principles.md        Software development principles
 │   ├── terminology.md       Glossary of terms
-│   ├── document-format.md   How to read this protocol
-│   └── decision-making.md   Framework for making choices
+│   ├── decision-making.md   Framework for making choices
+│   └── work-paths.md        Standard vs. Minimal work paths
 │
 ├── requirements/      Gathering, analyzing, specifying requirements
 │   ├── gathering.md         Extracting requirements from sources
