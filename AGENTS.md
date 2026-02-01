@@ -1,34 +1,35 @@
 # Agent Instructions
 
-This document provides explicit instructions for LLM agents working with the Development Lifecycle Protocol (DLP).
+This document provides instructions for LLM agents working with the Development Lifecycle Protocol (DLP). For reliable compliance, use Claude Sonnet or better.
 
----
+## Getting Started
 
-## Work Path Selection
+Your first response to any task must begin with these three items:
 
-Before starting any task, determine the appropriate path. See `foundations/work-paths.md` for full details.
+1. **Choose a work path.** Use Minimal Path only if the task is a small bug fix where: the change is isolated, root cause is known, fix is obvious, risk is low, it's reversible, no interfaces change, and tests exist or are trivial to add. Otherwise use Standard Path. If the task is too ambiguous to choose, state "Path: Needs clarification" and list your questions — then complete steps 2 and 3 after the user responds.
 
-### Quick Decision
+2. **Find constraints.** Read the project's README, AGENTS.md, and docs directory for existing technology choices, architecture decisions, and coding standards. State what you found (or "no constraints found").
 
-See the full decision tree in `foundations/work-paths.md`.
+3. **State your starting phase.** Standard Path starts at REQUIREMENTS. Minimal Path starts at DEVELOPMENT.
 
-**Minimal Path criteria** (ALL must be true):
+Example — your response should start like this:
 
-- [ ] Isolated change (one component or small set of files)
-- [ ] Root cause is known
-- [ ] Fix is obvious (no design decisions needed)
-- [ ] Low risk (no cascading failures or data loss possible)
-- [ ] Easily reversible
-- [ ] No new or modified interfaces/APIs/schemas
-- [ ] Existing test coverage or trivially added
+> **Path:** Standard — this is a new feature requiring design decisions.
+> **Constraints:** Project uses TypeScript, Express, and Prisma (from README.md).
+> **Phase:** REQUIREMENTS
+>
+> Before I proceed, a few questions:
+> - **Docs path:** Where should I save artifacts? (default: `docs/`)
+> - **Autonomy:** Should I work autonomously or pause for review at each phase?
+> - [any task-specific clarifying questions]
 
-If ANY criterion is not met → **Standard Path**.
+Always include the Path/Constraints/Phase block first, even if you also need to ask questions. Never skip the block to jump straight to questions.
 
 ---
 
 ## Phases
 
-The DLP has four sequential phases. You must work through them in order:
+The DLP has four sequential phases. Work through them in order:
 
 | Phase        | README Path              | Purpose                              |
 | ------------ | ------------------------ | ------------------------------------ |
@@ -39,76 +40,29 @@ The DLP has four sequential phases. You must work through them in order:
 
 **Cross-cutting concerns** in `concerns/` (security, performance, accessibility, observability) apply to ALL phases.
 
----
-
-## Before Starting Any Work
-
-### 1. Session Initialization
-
-Before beginning ANY work, establish these with the user:
-
-- [ ] Documentation output path (default to `docs/` at project root)
-- [ ] Autonomy preference (autonomous execution OR step-by-step with review)
-- [ ] Project context (purpose, technology stack, current state)
-
-**CRITICAL:** Never write documentation inside the DLP directory. DLP is reference material only.
-
-### 2. Constraint Discovery
-
-Before generating any plan or code, search the project's documentation directory for existing constraints about:
-
-- Technology choices (languages, frameworks)
-- Architectural decisions already made
-- Coding standards or conventions
-- Integration requirements
-- Any other project-specific rules
-
-Report findings: "I have searched `[docs path]` for constraints and found: [list] or none."
-
----
-
-## Phase Execution
-
-### Path and Phase Anchor (Required)
-
-Before generating any code or plan, you MUST state your path and phase:
-
-**For Standard Path:**
-
-```
-> "🤖️: I am currently in the **[PHASE NAME]** phase of the DLP."
-```
-
-Where `[PHASE NAME]` is one of: REQUIREMENTS, DESIGN, DEVELOPMENT, or TESTING.
-
-**For Minimal Path:**
-
-```
-> "🤖️: I am using the **MINIMAL PATH** for this bug fix."
->
-> Qualification:
-> - Isolated: [what component/file]
-> - Root cause: [brief explanation]
-> - Fix: [one-line description]
-> - Risk: Low — [why]
-> - Reversible: Yes
-> - Interfaces: No changes
-> - Tests: [existing/will add]
-```
-
-If at any point during Minimal Path work the criteria no longer apply, escalate:
-
-```
-> "🤖️: Escalating from MINIMAL PATH to STANDARD PATH.
-> Reason: [why minimal path no longer applies]"
-```
-
 ### Reading Order Within Each Phase
 
 1. Read the phase's `README.md` first
 2. Follow the reading order specified in that README
 3. Reference `concerns/` for cross-cutting considerations
 4. Use `templates/` for output artifacts
+
+---
+
+## Minimal Path
+
+When using Minimal Path, state your qualification:
+
+> **Minimal Path Qualification:**
+> - Isolated: [component/file]
+> - Root cause: [brief]
+> - Fix: [one line]
+> - Risk: Low — [why]
+> - Reversible: Yes
+> - Interfaces: No changes
+> - Tests: [existing/will add]
+
+If at any point the criteria stop applying, escalate to Standard Path and state why.
 
 ---
 
@@ -125,15 +79,11 @@ Generate documentation artifacts BEFORE generating code. Use templates from `tem
 | Data Models           | `templates/data-model.md`                 | DESIGN       |
 | API Contracts         | `templates/api-contract.yml`              | DESIGN       |
 
-If no template exists for a needed artifact, create one following the structure of existing templates.
-
 ---
 
 ## Phase Transitions
 
-### When to Move to the Next Phase
-
-Each phase has explicit exit criteria. Do not proceed until all are met:
+Each phase has exit criteria. Do not proceed until all are met:
 
 **REQUIREMENTS → DESIGN:**
 
@@ -167,14 +117,7 @@ Each phase has explicit exit criteria. Do not proceed until all are met:
 
 ## Concerns Integration
 
-Reference `concerns/` at each phase:
-
-| Phase        | Security                                   | Performance                | Accessibility                | Observability                |
-| ------------ | ------------------------------------------ | -------------------------- | ---------------------------- | ---------------------------- |
-| REQUIREMENTS | Identify sensitive data, auth requirements | Define response time goals | Identify accessibility needs | Define monitoring needs      |
-| DESIGN       | Establish trust boundaries, threat model   | Design for efficiency      | Design inclusive interfaces  | Plan logging and metrics     |
-| DEVELOPMENT  | Follow secure coding practices             | Implement efficiently      | Implement accessible UI      | Add logging, metrics, traces |
-| TESTING      | Test auth, authorization, injection        | Load test critical paths   | Test with assistive tech     | Verify observability works   |
+Before starting each phase, name which concerns apply to your task (security, performance, accessibility, observability) and read the matching file in `concerns/`. For example: "Concerns: security (auth data), observability (need request tracing)."
 
 ---
 
@@ -236,11 +179,10 @@ Always document assumptions explicitly for later verification.
 
 Before each work session:
 
-- [ ] Session initialized (output path, autonomy, context)
+- [ ] Work path selected (Standard or Minimal)
 - [ ] Constraints discovered from existing docs
-- [ ] **Work path selected** (Standard or Minimal)
-- [ ] Current phase/path identified and anchored
-- [ ] Phase README read (Standard Path) or qualification verified (Minimal Path)
+- [ ] Current phase stated
+- [ ] Phase README read
 - [ ] Relevant concerns reviewed
 
 Before producing output:
@@ -253,5 +195,4 @@ Before producing output:
 Before phase transition:
 
 - [ ] Exit criteria met
-- [ ] Constraint verification stated
 - [ ] User approval obtained (if not autonomous)
