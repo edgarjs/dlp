@@ -84,13 +84,11 @@ See `foundations/work-paths.md` for qualification criteria and workflow details.
 │
 ├── development/       Coding standards, patterns, workflow, review
 │   ├── setup.md             Environment and project setup
-│   ├── coding-standards.md  Conventions for consistent code
-│   ├── patterns.md          Common solutions to problems
 │   ├── error-handling.md    Dealing with failures
 │   ├── dependency-management.md  Evaluating and updating dependencies
 │   ├── git-workflow.md      Version control practices
 │   ├── implementation-workflow.md  The coding process
-│   └── code-review.md       Reviewing implementations
+│   └── implementation-workflow.md  The coding process
 │
 ├── testing/           Strategy, unit tests, integration tests, maintenance
 │   ├── test-strategy.md     Planning what to test

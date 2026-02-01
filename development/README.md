@@ -46,24 +46,18 @@ Without disciplined development:
 | Document                                                 | Purpose                                                     |
 | -------------------------------------------------------- | ----------------------------------------------------------- |
 | [setup.md](setup.md)                                     | Preparing the development environment and project structure |
-| [coding-standards.md](coding-standards.md)               | Conventions for consistent, readable code                   |
-| [patterns.md](patterns.md)                               | Common solutions to recurring problems                      |
 | [error-handling.md](error-handling.md)                   | Strategies for dealing with failures                        |
 | [dependency-management.md](dependency-management.md)     | Evaluating, updating, and removing dependencies             |
 | [git-workflow.md](git-workflow.md)                       | Version control practices and commit discipline             |
 | [implementation-workflow.md](implementation-workflow.md) | The process of turning design into code                     |
-| [code-review.md](code-review.md)                         | Reviewing implementations for quality                       |
 
 ## Reading Order
 
 1. **setup.md** — Before writing code
-2. **coding-standards.md** — To understand conventions
-3. **patterns.md** — To recognize common solutions
-4. **error-handling.md** — To handle failures properly
-5. **dependency-management.md** — To manage external code
-6. **git-workflow.md** — To manage changes effectively
-7. **implementation-workflow.md** — To guide the coding process
-8. **code-review.md** — To review and improve code
+2. **error-handling.md** — To handle failures properly
+3. **dependency-management.md** — To manage external code
+4. **git-workflow.md** — To manage changes effectively
+5. **implementation-workflow.md** — To guide the coding process
 
 ## Workflow
 
