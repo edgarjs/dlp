@@ -172,6 +172,26 @@ A structured format for capturing information. Templates ensure consistency and 
 
 ---
 
+## Additional Concepts
+
+### Ceremony
+
+The level of process formality applied to a task. High ceremony means full documentation, reviews, and phase transitions. Low ceremony means minimal process overhead. The DLP's work paths control ceremony level.
+
+### Flaky Test
+
+A test that produces inconsistent results—sometimes passing, sometimes failing—without any change to the code under test. Common causes include timing dependencies, shared state, and external service reliance.
+
+### Gold Plating
+
+Adding features, improvements, or polish beyond what the requirements specify. Gold plating wastes effort on unrequested work and delays delivery of what was actually asked for.
+
+### Spike
+
+A time-boxed investigation to reduce uncertainty. Spikes answer specific technical questions (e.g., "Can this library handle our use case?") and produce knowledge, not production code.
+
+---
+
 ## Usage Notes
 
 When reading the protocol:
