@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-02-01
+
+### Added
+
+- **Minimal Path** for small, isolated bug fixes — agents can skip Requirements and Design phases when the fix is straightforward
+- Concerns integration in the init block — agents now name relevant concerns (security, performance, etc.) upfront
+- Session setup questions (docs path, autonomy level) built into the init block examples
+- Minimal Path example in `AGENTS.md` showing expected output format
+- Missing terms added to terminology glossary
+
+### Changed
+
+- Simplified `AGENTS.md` to an example-driven format for better agent compliance
+- Replaced abstract instructions with concrete examples throughout
+- Moved frontier-model recommendation from `AGENTS.md` to `README.md`
+- Condensed development and document-format docs into existing phases
+
+### Removed
+
+- `document-format.md` (consolidated into existing guidance)
+- Redundant development docs that duplicated phase content
+- Work-path diagram from `AGENTS.md` (replaced by examples)
+
+### Fixed
+
+- Blocker threshold now uses concrete guidance instead of a placeholder
+- Duplicate heading in testing README
+
 ## [1.0.0-beta.4] - 2026-01-25
 
 ### Added
@@ -61,7 +89,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Install script for easy protocol adoption
 - MIT license
 
-[Unreleased]: https://github.com/edgarjs/dlp/compare/v1.0.0-beta.4...HEAD
+[Unreleased]: https://github.com/edgarjs/dlp/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/edgarjs/dlp/compare/v1.0.0-beta.4...v1.0.0
 [1.0.0-beta.4]: https://github.com/edgarjs/dlp/compare/v1.0.0-beta.3...v1.0.0-beta.4
 [1.0.0-beta.3]: https://github.com/edgarjs/dlp/compare/v1.0.0-beta.2...v1.0.0-beta.3
 [1.0.0-beta.2]: https://github.com/edgarjs/dlp/compare/v1.0.0-beta...v1.0.0-beta.2
