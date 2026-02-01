@@ -10,14 +10,7 @@ Before starting any task, determine the appropriate path. See `foundations/work-
 
 ### Quick Decision
 
-```mermaid
-flowchart TD
-    A[New task] --> B{Small bug fix?}
-    B -->|No| S[Use Standard Path]
-    B -->|Yes| C{All criteria met?}
-    C -->|No| S
-    C -->|Yes| M[Use Minimal Path]
-```
+See the full decision tree in `foundations/work-paths.md`.
 
 **Minimal Path criteria** (ALL must be true):
 
