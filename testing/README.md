@@ -119,8 +119,6 @@ Target meaningful coverage:
 - Error handling: verified
 - Trivial code: may not need tests
 
-## When Testing is Complete
-
 ## Exit Checklist: When Testing is Complete
 
 Complete ALL items to consider the project verified:
