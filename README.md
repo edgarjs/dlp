@@ -1,6 +1,6 @@
 # Development Lifecycle Protocol (DLP)
 
-A structured guide for building software with LLM agents. This protocol covers the software development lifecycle from requirements through testing, providing actionable checklists, decision trees, and guidance for each phase.
+A structured guide for building software with LLM agents. This protocol covers the software development lifecycle from requirements through testing, providing actionable checklists, decision trees, and guidance for each phase. For reliable compliance, use a frontier-class model.
 
 ---
 

@@ -1,6 +1,6 @@
 # Agent Instructions
 
-This document provides instructions for LLM agents working with the Development Lifecycle Protocol (DLP). For reliable compliance, use Claude Sonnet or better.
+This document provides instructions for LLM agents working with the Development Lifecycle Protocol (DLP).
 
 ## Getting Started
 
@@ -12,18 +12,33 @@ Your first response to any task must begin with these three items:
 
 3. **State your starting phase.** Standard Path starts at REQUIREMENTS. Minimal Path starts at DEVELOPMENT.
 
-Example — your response should start like this:
+4. **Name relevant concerns.** Pick from: security, performance, accessibility, observability. Read the matching file in `concerns/` before starting each phase.
+
+5. **Ask session setup questions.** Ask about docs path, autonomy level, and any task-specific clarifications.
+
+### Standard Path Example
+
+Your response should start like this:
 
 > **Path:** Standard — this is a new feature requiring design decisions.
 > **Constraints:** Project uses TypeScript, Express, and Prisma (from README.md).
 > **Phase:** REQUIREMENTS
+> **Concerns:** security (handles user data), observability (needs request logging)
 >
 > Before I proceed, a few questions:
+>
 > - **Docs path:** Where should I save artifacts? (default: `docs/`)
 > - **Autonomy:** Should I work autonomously or pause for review at each phase?
 > - [any task-specific clarifying questions]
 
-Always include the Path/Constraints/Phase block first, even if you also need to ask questions. Never skip the block to jump straight to questions.
+### Minimal Path Example
+
+> **Path:** Minimal — isolated bug fix with known root cause.
+> **Constraints:** Node.js, Express (from package.json).
+> **Phase:** DEVELOPMENT
+> **Concerns:** security (input validation on fix)
+
+Always include the Path/Constraints/Phase/Concerns block first, even if you also need to ask questions. Never skip the block to jump straight to questions.
 
 ---
 
@@ -54,6 +69,7 @@ The DLP has four sequential phases. Work through them in order:
 When using Minimal Path, state your qualification:
 
 > **Minimal Path Qualification:**
+>
 > - Isolated: [component/file]
 > - Root cause: [brief]
 > - Fix: [one line]
@@ -61,6 +77,7 @@ When using Minimal Path, state your qualification:
 > - Reversible: Yes
 > - Interfaces: No changes
 > - Tests: [existing/will add]
+>   **Concerns:** security (input validation on fix)
 
 If at any point the criteria stop applying, escalate to Standard Path and state why.
 
@@ -117,7 +134,7 @@ Each phase has exit criteria. Do not proceed until all are met:
 
 ## Concerns Integration
 
-Before starting each phase, name which concerns apply to your task (security, performance, accessibility, observability) and read the matching file in `concerns/`. For example: "Concerns: security (auth data), observability (need request tracing)."
+Reference `concerns/` files throughout all phases. The concerns you named in your init block should influence every phase — e.g., if you listed "security," check `concerns/security.md` before making design decisions.
 
 ---
 
@@ -196,3 +213,7 @@ Before phase transition:
 
 - [ ] Exit criteria met
 - [ ] User approval obtained (if not autonomous)
+
+---
+
+**Reminder:** Your very first output must be the **Path / Constraints / Phase / Concerns** block. Do not skip it.
