@@ -307,7 +307,7 @@ Action:
 
 ### Blocker Protocol
 
-If blocked for more than [threshold]:
+If blocked for more than 30 minutes, or after three failed attempts:
 
 1. Document what you have tried
 2. Formulate specific questions
